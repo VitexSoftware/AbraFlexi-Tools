@@ -1,7 +1,6 @@
 {
-    "name": "vitexsoftware/flexibee-testing-tools",
+    "name": "flexibee-testing-tools",
     "description": "Several FlexiBee Testing Tools.",
-    "type": "library",
     "minimum-stability": "dev",
     "license": "MIT",
     "authors": [
@@ -11,10 +10,28 @@
         }
     ],
     "bin": ["bin/fbget", "bin/fbput", "bin/fbcp"],
+    "config": {
+	"vendor-dir": "/var/lib/flexibee-testing-tools"
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "/usr/share/php/Ease",
+            "options": {
+                "symlink": true
+            }
+        },
+        {
+            "type": "path",
+            "url": "/usr/share/php/FlexiPeeHP",
+            "options": {
+                "symlink": true
+            }
+        }
+    ],
     "require": {
-        "spoje.net/flexipeehp": "dev-master",
-        "vitexsoftware/ease-framework": "dev-master",
-        "fzaninotto/faker": "^1.7"
+        "flexipeehp": "*",
+        "ease-framework": "*"
     },
     "autoload": {
         "psr-4": {

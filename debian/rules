@@ -1,0 +1,17 @@
+#!/usr/bin/make -f
+
+%:
+	dh $@
+
+override_dh_install:
+	dh_install
+	sed -i '/require/c\require  "/usr/share/flexibee-testing-tools/fbget.php";' debian/flexibee-testing-tools/usr/bin/fbget
+	sed -i '/require/c\require  "/usr/share/flexibee-testing-tools/fbput.php";' debian/flexibee-testing-tools/usr/bin/fbput
+	sed -i '/require/c\require  "/usr/share/flexibee-testing-tools/fbcp.php";' debian/flexibee-testing-tools/usr/bin/fbcp
+	sed -i "/realpath/c\$$loaderPath = \"/var/lib/flexibee-testing-tools/autoload.php\";" debian/flexibee-testing-tools/usr/share/flexibee-testing-tools/fbget.php
+	sed -i "/realpath/c\$$loaderPath = \"/var/lib/flexibee-testing-tools/autoload.php\";" debian/flexibee-testing-tools/usr/share/flexibee-testing-tools/fbput.php
+	sed -i "/realpath/c\$$loaderPath = \"/var/lib/flexibee-testing-tools/autoload.php\";" debian/flexibee-testing-tools/usr/share/flexibee-testing-tools/fbcp.php
+
+override_dh_clean:
+	dh_clean
+	rm -rfv vendor

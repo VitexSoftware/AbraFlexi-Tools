@@ -1,0 +1,4 @@
+README.md			usr/share/flexibee-testing-tools/
+src/*.php                       usr/share/flexibee-testing-tools/
+bin/*		                usr/bin/
+debian/conf/composer.json       usr/share/flexibee-testing-tools/

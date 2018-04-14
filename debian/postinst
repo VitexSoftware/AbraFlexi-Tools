@@ -1,0 +1,14 @@
+#!/bin/sh
+# postinst script for FlexiBee testing tools
+
+set -e
+
+cd /usr/share/flexibee-testing-tools
+if [ -f composer.lock ] ; then
+    rm -f composer.lock
+fi
+composer --no-dev -o install
+
+#DEBHELPER#
+
+exit 0

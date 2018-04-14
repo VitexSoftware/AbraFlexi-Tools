@@ -1,6 +1,6 @@
 #!/usr/bin/php
 <?php
-$loaderPath = __DIR__."/../../../autoload.php";
+$loaderPath =  realpath(__DIR__ . "/../../../autoload.php");
 if (file_exists($loaderPath)) {
     require $loaderPath;
 } else {

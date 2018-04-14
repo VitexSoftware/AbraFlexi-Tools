@@ -85,3 +85,21 @@ Configuration file example
 }
 ```
 Default config file location is /etc/flexibee/client.json
+
+Installation
+------------
+
+To install tools into vendor/bin please use [composer](https://getcomposer.org/):
+
+    composer require vitexsoftware/flexibee-testing-tools
+
+For Debian or Ubuntu please use [repo](http://vitexsoftware.cz/repos.php):
+
+    wget -O - http://v.s.cz/info@vitexsoftware.cz.gpg.key|sudo apt-key add -
+    echo deb http://v.s.cz/ stable main > /etc/apt/sources.list.d/vitexsoftware.list
+    aptitude update
+    aptitude install flexibee-testing-tools
+
+![Debian Installation](https://raw.githubusercontent.com/VitexSoftware/FlexiBee-TestingTools/debian-screenshot.png "Debian example")
+
+
