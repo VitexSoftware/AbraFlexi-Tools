@@ -2,7 +2,7 @@
 
 Set of commandline tools related to testing FlexiBee functionality
 
-![Project Logo](https://raw.githubusercontent.com/VitexSoftware/FlexiBee-TestingTools/master/projec-log.png)
+![Project Logo](https://raw.githubusercontent.com/VitexSoftware/FlexiBee-TestingTools/master/project-log.png)
 
 FlexiBee Get
 ------------
