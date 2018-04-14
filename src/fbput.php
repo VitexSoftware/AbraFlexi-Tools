@@ -1,10 +1,10 @@
 #!/usr/bin/php
 <?php
-$loaderPath =  __DIR__ . "/../../../autoload.php\n";
-if(file_exists($loaderPath)){
+$loaderPath = __DIR__."/../../../autoload.php";
+if (file_exists($loaderPath)) {
     require $loaderPath;
 } else {
-    require __DIR__ . '/../vendor/autoload.php';
+    require __DIR__.'/../vendor/autoload.php';
 }
 
 $shortopts = "e:i::u::";

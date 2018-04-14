@@ -1,13 +1,11 @@
 #!/usr/bin/php -q
 <?php
-
-$loaderPath =  __DIR__ . "/../../../autoload.php\n";
+$loaderPath =  realpath(__DIR__ . "/../../../autoload.php");
 if(file_exists($loaderPath)){
     require $loaderPath;
 } else {
     require __DIR__ . '/../vendor/autoload.php';
 }
-
 
 define('BACKUP_DIRECTORY', sys_get_temp_dir().DIRECTORY_SEPARATOR);
 define('EASE_APPNAME', 'FlexiBee Company Transfer');
@@ -22,8 +20,8 @@ function urlToOptions($url)
     $options['password'] = $optionsRaw['pass'];
     return $options;
 }
-if ($argc == 1) {
-    echo "flexibee-company-transfer https://user:password@flexibee.source.cz:5434/c/firma_a_s_  https://user:password@flexibee.source.cz:5434/c/firma_a_s_  \n";
+if ($argc != 2) {
+    echo "usage: fbcp https://user:password@flexibee.source.cz:5434/c/firma_a_s_  https://user:password@flexibee.source.cz:5434/c/firma_a_s_  \n";
 } else {
     $srcOptions = urlToOptions($argv[1]);
     $source     = new \FlexiPeeHP\Company($srcOptions['company'], $srcOptions);
