@@ -3,32 +3,26 @@
 require_once '../vendor/autoload.php';
 
 $shortopts = "e:i:";
-$shortopts .= "c::u::";
-$longopts  = array(
-    "evidence:",
-    "id:",
-    "config::",
-    "show-url::",
-);
+$shortopts .= "u::";
 $options   = getopt($shortopts, $longopts);
 
 if (empty($options)) {
     echo "Obtain a record data from FlexiBee\n\n";
     echo "\nUsage:\n";
-    echo "flexibeeget -e|--evidence evidence-name -i|--id rowID [-u|--show-url] [-c|--config path] [column names to show] \n\n";
+    echo "fbput -e evidence-name -iRowID [-cPath] [-u] [--colum-name=value] [--colum-name2=value2] \n\n";
     echo "example: flexibeeget -e adresar -u -i 333 kod nazev \n\n";
     echo "default config file is /etc/flexibee/client.json\n";
     exit();
 }
 
 if (isset($options['id']) || isset($options['i'])) {
-    $id = isset($options['id']) ? isset($options['id']) : $options['i'];
+    $id = isset($options['id']) ? $options['id'] : $options['i'];
 } else {
     die("row ID is requied\n");
 }
 
 if (isset($options['evidence']) || isset($options['e'])) {
-    $evidence   = isset($options['evidence']) ? isset($options['evidence']) : $options['e'];
+    $evidence   = isset($options['evidence']) ? $options['evidence'] : $options['e'];
     $infoSource = FlexiPeeHP\FlexiBeeRO::$infoDir.'/Properties.'.$evidence.'.json';
     if (file_exists($infoSource)) {
         $columnsToGet = [];
@@ -66,7 +60,7 @@ $grabber = new FlexiPeeHP\FlexiBeeRO(is_numeric($id) ? intval($id) : $id,
 if (isset($options['show-url']) || isset($options['u'])) {
     echo $grabber->getApiURL()."\n";
 } else {
-    print_r( $options );
+    print_r($options);
 }
 
 if ($grabber->lastResponseCode == 200) {
