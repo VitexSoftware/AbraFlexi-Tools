@@ -10,7 +10,7 @@
             "email": "info@vitexsoftware.cz"
         }
     ],
-    "bin": ["src/fbget.php", "src/fbput.php"],
+    "bin": ["src/fbget.php", "src/fbput.php", "src/fbcp.php"],
     "require": {
         "spoje.net/flexipeehp": "dev-master",
         "vitexsoftware/ease-framework": "dev-master",
