@@ -51,6 +51,27 @@ https://demo.flexibee.eu:5434/c/demo/adresar/333
 {"winstrom":{"@version":"1.0","success":"true","stats":{"created":"0","updated":"1","deleted":"0","skipped":"0","failed":"0"},"results":[{"id":"333","request-id":"333","ref":"
 ```
 
+FlexiBee company Copy
+---------------------
+
+Copy one FlexiBee company to another FlexiBee
+
+Usage:
+
+    fbcp https://user:password@flexibee.source.cz:5434/c/firma_a_s_  https://user:password@flexibee.source.cz:5434/c/firma_a_s_  
+
+Example:
+
+```
+fbcp https://lgn:pwd@company.flexibee.eu:5434/c/company_name https://lgn2:pwd2@vitexsoftware.flexibee.eu:5434/c/company_name
+04/14/18 13:57:18 `FlexiPeeHP\Company`  ⓘ saving backup
+04/14/18 13:57:25 `FlexiPeeHP\Company`  ❁ backup saved
+04/14/18 13:57:26 `FlexiPeeHP\Company`  ⓘ Remove company before restore
+04/14/18 13:57:27 `FlexiPeeHP\Company`  ☠ JSON Decoder: Syntax error
+04/14/18 13:57:27 `FlexiPeeHP\Company`  ⚙ ok
+04/14/18 13:57:27 `FlexiPeeHP\Company`  ❁ restore begin
+04/14/18 13:57:58 `FlexiPeeHP\Company`  ❁ backup restored
+```
 
 Configuration file example
 --------------------------
