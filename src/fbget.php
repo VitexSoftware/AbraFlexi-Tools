@@ -1,5 +1,10 @@
 <?php
-require __DIR__ . '/../vendor/autoload.php';
+$loaderPath =  __DIR__ . "/../../../autoload.php\n";
+if(file_exists($loaderPath)){
+    require $loaderPath;
+} else {
+    require __DIR__ . '/../vendor/autoload.php';
+}
 
 $shortopts = "e:i:";
 $shortopts .= "u::";
@@ -58,8 +63,6 @@ $grabber = new FlexiPeeHP\FlexiBeeRO(is_numeric($id) ? intval($id) : $id,
 
 if (isset($options['show-url']) || isset($options['u'])) {
     echo $grabber->getApiURL()."\n";
-} else {
-    print_r($options);
 }
 
 if ($grabber->lastResponseCode == 200) {
