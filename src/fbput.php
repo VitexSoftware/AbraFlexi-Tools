@@ -12,9 +12,9 @@ $longopts  = array(
 $options   = getopt($shortopts, $longopts);
 
 if (empty($options)) {
-    echo "Create an record in FlexiBee\n\n";
+    echo "Update or create an record in FlexiBee\n\n";
     echo "\nUsage:\n";
-    echo "fakeaddress -e|--evidence evidence-name -i|--id rowID [-c|--config] [column names to show] \n\n";
+    echo "fbput -e|--evidence evidence-name -i|--id rowID [-c|--config] [--column-names to put] \n\n";
     echo "example:  \n\n";
     echo "default config file is /etc/flexibee/client.json\n";
     exit();
@@ -30,24 +30,18 @@ if (isset($options['evidence']) || isset($options['e'])) {
     $evidence   = isset($options['evidence']) ? isset($options['evidence']) : $options['e'];
     $infoSource = FlexiPeeHP\FlexiBeeRO::$infoDir.'/Properties.'.$evidence.'.json';
     if (file_exists($infoSource)) {
-        $columnsToGet = [];
-        $columnsInfo  = json_decode(file_get_contents($infoSource), true);
-        unset($argv[0]);
-        foreach ($argv as $param) {
-            if (array_key_exists($param, $columnsInfo)) {
-                $columnsToGet[] = $param;
-            } else {
-                if (($param != $evidence) && ($param != $id) && ($param[0] != '-')) {
-                    die("column $param does not exist in evidence $evidence \n");
-                }
-            }
+
+        $columnsInfo = json_decode(file_get_contents($infoSource), true);
+        foreach ($columnsInfo as $columnName => $columnProperties) {
+            $columnsAvailble[] = $columnName.'::';
         }
-        if (empty($columnsToGet)) {
-            $detail = 'id';
-        } else {
-            $detail = 'custom:'.implode(',', $columnsToGet);
-        }
+
+        $columnsToPut = getopt($shortopts, $columnsAvailble);
+        unset($columnsToPut['e']);
+        unset($columnsToPut['i']);
+        unset($columnsToPut['u']);
     }
+    $columnsToPut['id'] = $id;
 } else {
     die("evidence is requied\n");
 }
@@ -59,12 +53,13 @@ if (isset($options['config']) || isset($options['c'])) {
 }
 \Ease\Shared::instanced()->loadConfig($configFile);
 
-$grabber = new FlexiPeeHP\FlexiBeeRO(is_numeric($id) ? intval($id) : $id,
-    ['evidence' => $evidence, 'detail' => $detail]);
-if ($grabber->lastResponseCode == 200) {
-    echo \json_encode($grabber->getData(), JSON_PRETTY_PRINT);
+$grabber = new FlexiPeeHP\FlexiBeeRW(null,
+    ['evidence' => $evidence, 'detail' => 'id']);
+$grabber->insertToFlexiBee($columnsToPut);
+
+echo $grabber->lastCurlResponse;
+if ($grabber->lastResponseCode == 201) {
     exit(0);
 } else {
-    echo $grabber->lastCurlResponse;
     exit(1);
 }

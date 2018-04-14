@@ -3,7 +3,7 @@
     "description": "Several FlexiBee Testing Tools.",
     "type": "library",
     "minimum-stability": "dev",
-
+    "license": "MIT",
     "authors": [
         {
             "name": "Vitex",
