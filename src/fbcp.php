@@ -1,6 +1,6 @@
 #!/usr/bin/php -q
 <?php
-require_once '../vendor/autoload.php';
+require __DIR__.'/../vendor/autoload.php';
 define('BACKUP_DIRECTORY', sys_get_temp_dir().DIRECTORY_SEPARATOR);
 define('EASE_APPNAME', 'FlexiBee Company Transfer');
 define('EASE_LOGGER', 'syslog|console');
@@ -8,7 +8,7 @@ define('EASE_LOGGER', 'syslog|console');
 function urlToOptions($url)
 {
     $optionsRaw          = parse_url($url);
-    $options['url']      = $optionsRaw['scheme'].'://'.$optionsRaw['host'].':'. $optionsRaw['port'];
+    $options['url']      = $optionsRaw['scheme'].'://'.$optionsRaw['host'].':'.$optionsRaw['port'];
     $options['company']  = str_replace('/c/', '', $optionsRaw['path']);
     $options['user']     = $optionsRaw['user'];
     $options['password'] = $optionsRaw['pass'];
