@@ -100,6 +100,12 @@ For Debian or Ubuntu please use [repo](http://vitexsoftware.cz/repos.php):
     aptitude update
     aptitude install flexibee-testing-tools
 
-![Debian Installation](https://raw.githubusercontent.com/VitexSoftware/FlexiBee-TestingTools/debian-screenshot.png "Debian example")
+![Debian Installation](https://raw.githubusercontent.com/VitexSoftware/FlexiBee-TestingTools/master/debian-screenshot.png "Debian example")
 
+Note: Debian package depends on [php-flexibee-config](https://github.com/VitexSoftware/php-flexibee-config) package
 
+Thanks to:
+----------
+
+ * [PureHTML](https://purehtml.cz/) & [Spoje.Net]( https://spoje.net/ )  for support
+ * [Abra](https://abra.eu) for [FlexiBee](https://flexibee.eu/)
