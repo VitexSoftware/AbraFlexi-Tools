@@ -1,10 +1,9 @@
-#!/usr/bin/php
 <?php
-require_once '../vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 $shortopts = "e:i:";
 $shortopts .= "u::";
-$options   = getopt($shortopts, $longopts);
+$options   = getopt($shortopts);
 
 if (empty($options)) {
     echo "Obtain a record data from FlexiBee\n\n";

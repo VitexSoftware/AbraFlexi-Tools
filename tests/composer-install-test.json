@@ -1,0 +1,11 @@
+{
+    "name": "vendor/test-fbtt",
+    "type": "project",
+    "require": {
+        "vitexsoftware/flexibee-testing-tools": "dev-master"
+    },
+    "license": "MIT",
+    "minimum-stability": "dev"
+}
+
+
