@@ -2,6 +2,7 @@
 
 Set of commandline tools related to testing FlexiBee functionality
 
+![Project Logo](https://raw.githubusercontent.com/VitexSoftware/FlexiBee-TestingTools/master/projec-log.png)
 
 FlexiBee Get
 ------------
@@ -44,7 +45,7 @@ Usage:
 
 Example:
 
-fbput.php --evidence adresar -i333 --nazev=Zmeneno"
+fbput.php --evidence adresar -i333 --nazev=Zmeneno
 
 ```
 https://demo.flexibee.eu:5434/c/demo/adresar/333
