@@ -45,7 +45,7 @@ Usage:
 
 Example:
 
-fbput.php --evidence adresar -i333 --nazev=Zmeneno
+fbput.php --evidence adresar -i333 -u --nazev=Zmeneno
 
 ```
 https://demo.flexibee.eu:5434/c/demo/adresar/333
@@ -59,7 +59,7 @@ Copy one FlexiBee company to another FlexiBee
 
 Usage:
 
-    fbcp https://user:password@flexibee.source.cz:5434/c/firma_a_s_  https://user:password@flexibee.source.cz:5434/c/firma_a_s_  
+    fbcp https://user:password@flexibee.source.cz:5434/c/firma_a_s_  https://user:password@flexibee.destination.cz:5434/c/firma_a_s_  
 
 Example:
 
@@ -85,7 +85,7 @@ Configuration file example
     "FLEXIBEE_COMPANY": "demo"
 }
 ```
-Default config file location is /etc/flexibee/client.json
+Default config file location is /etc/flexibee/client.json ( also provided by [php-flexibee-config](https://github.com/VitexSoftware/php-flexibee-config) debian package )
 
 Installation
 ------------
@@ -104,6 +104,13 @@ For Debian or Ubuntu please use [repo](http://vitexsoftware.cz/repos.php):
 ![Debian Installation](https://raw.githubusercontent.com/VitexSoftware/FlexiBee-TestingTools/master/debian-screenshot.png "Debian example")
 
 Note: Debian package depends on [php-flexibee-config](https://github.com/VitexSoftware/php-flexibee-config) package
+
+We use:
+
+  * [PHP Language](https://secure.php.net/)
+  * [FlexiPeeHP](https://github.com/Spoje-NET/FlexiPeeHP) - Library for Interaction with [FlexiBee](https://flexibee.eu/)
+  * [EaseFramework](https://github.com/VitexSoftware/EaseFramework) - Glue & Tool Set 
+
 
 Thanks to:
 ----------
