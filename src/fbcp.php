@@ -1,4 +1,3 @@
-#!/usr/bin/php -q
 <?php
 $loaderPath =  realpath(__DIR__ . "/../../../autoload.php");
 if(file_exists($loaderPath)){
@@ -20,8 +19,8 @@ function urlToOptions($url)
     $options['password'] = $optionsRaw['pass'];
     return $options;
 }
-if ($argc != 2) {
-    echo "usage: fbcp https://user:password@flexibee.source.cz:5434/c/firma_a_s_  https://user:password@flexibee.source.cz:5434/c/firma_a_s_  \n";
+if ($argc != 3) {
+    echo "usage: ".$argv[0]." https://user:password@flexibee.source.cz:5434/c/firma_a_s_  https://user:password@flexibee.source.cz:5434/c/firma_a_s_  \n";
 } else {
     $srcOptions = urlToOptions($argv[1]);
     $source     = new \FlexiPeeHP\Company($srcOptions['company'], $srcOptions);
