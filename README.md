@@ -1,6 +1,6 @@
 # FlexiBee-TestingTools
 
-Set of commandline tools related to testing FlexiBee functionality
+Set of commandline tools related for testing FlexiBee functionality
 
 ![Project Logo](https://raw.githubusercontent.com/VitexSoftware/FlexiBee-TestingTools/master/project-logo.png)
 
