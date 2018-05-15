@@ -20,14 +20,24 @@ Usage:
 Example:
 
 ```shell
-flexibeeget -e adresar -i 333 kod
+~$ fbget -v -u -c /etc/flexibee/localhost-client.json -e adresar -i 666 kod nazev
+https://localhost:5434/c/spoje_net_s_r_o_/adresar/666&detail=custom:kod,nazev
 ```
 
 ```json
-{                                                                                                                                                                              
-    "id": "333",                                                                                                                                                               
-    "kod": "F\u00da - 288",                                                                                                                                                    
-    "kontakty": []                                                                                                                                                             
+{
+    "external-ids": [
+        "ext:subreg:36699",
+        "ext:ipex:58487"
+    ],
+    "id": "666",
+    "kod": "VITEX",
+    "nazev": "V\u00edt\u011bzslav Dvo\u0159\u00e1k",
+    "kontakty": [
+        {
+            "id": "2371"
+        }
+    ]
 }
 ```
 
@@ -45,7 +55,7 @@ Usage:
 
 Example:
 
-fbput.php --evidence adresar -i333 -u --nazev=Zmeneno
+fbput.php --evidence adresar -i 333 -u --nazev=Zmeneno
 
 ```
 https://demo.flexibee.eu:5434/c/demo/adresar/333

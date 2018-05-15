@@ -1,21 +1,20 @@
-#!/usr/bin/php
 <?php
-$loaderPath =  realpath(__DIR__ . "/../../../autoload.php");
+$loaderPath = realpath(__DIR__."/../../../autoload.php");
 if (file_exists($loaderPath)) {
     require $loaderPath;
 } else {
     require __DIR__.'/../vendor/autoload.php';
 }
 
-$shortopts = "e:i::u::";
+$shortopts = "c:e:i:v:u::";
 $options   = getopt($shortopts);
 
 if (empty($options)) {
     echo "Update or create an record in FlexiBee\n\n";
     echo "\nUsage:\n";
-    echo "fbput -eevidence-name [-iRowID] [-c path] [-u] [--colum-name=value] [--colum-name2=value2] ... \n\n";
-    echo "example:  fbput.php -e adresar -u -i333 --nazev=zmeneno \n\n";
-    echo "default config file is /etc/flexibee/client.json\n";
+    echo $argv[0]." -eevidence-name [-iRowID] [-c path] [-u] [-v] [--colum-name=value] [--colum-name2=value2] ... \n\n";
+    echo "example:  ".$argv[0]." -e adresar -u -i333 --nazev=zmeneno \n\n";
+    echo "default config file is /etc/flexibee/client.json (Override it by -c)\n";
     exit();
 }
 
@@ -30,6 +29,7 @@ if (isset($options['evidence']) || isset($options['e'])) {
         }
 
         $columnsToPut = getopt($shortopts, $columnsAvailble);
+        unset($columnsToPut['v']);
         unset($columnsToPut['e']);
         unset($columnsToPut['i']);
         unset($columnsToPut['u']);
@@ -53,13 +53,17 @@ if (isset($options['config']) || isset($options['c'])) {
 $grabber = new FlexiPeeHP\FlexiBeeRW(null,
     ['evidence' => $evidence, 'detail' => 'id']);
 
+if (isset($options['v'])) {
+    $grabber->logBanner(__FILE__);
+}
+
 $grabber->insertToFlexiBee($columnsToPut);
 
 if (isset($options['show-url']) || isset($options['u'])) {
-    echo $grabber->getApiURL()."\n";
+    echo urldecode($grabber->getApiURL())."\n";
 }
 
-echo $grabber->lastCurlResponse;
+echo json_encode(json_decode($grabber->lastCurlResponse), JSON_PRETTY_PRINT);
 if ($grabber->lastResponseCode == 201) {
     exit(0);
 } else {
