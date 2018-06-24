@@ -84,6 +84,19 @@ fbcp https://lgn:pwd@company.flexibee.eu:5434/c/company_name https://lgn2:pwd2@v
 04/14/18 13:57:58 `FlexiPeeHP\Company`  ❁ backup restored
 ```
 
+Create New Company in FlexiBee
+------------------------------
+
+    fbnc  new_company_name
+    fbnc  https://user:password@flexibee.source.cz:5434/c/nova_firma_a_s_
+  
+
+Delete Company in FlexiBee
+--------------------------
+
+    fbdc company_to_delete
+    fbdc https://user:password@flexibee.source.cz:5434/c/smazat_firma_a_s_
+
 Configuration file example
 --------------------------
 
