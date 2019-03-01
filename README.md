@@ -110,6 +110,14 @@ Configuration file example
 ```
 Default config file location is /etc/flexibee/client.json ( also provided by [php-flexibee-config](https://github.com/VitexSoftware/php-flexibee-config) debian package )
 
+WebHooks Wipe
+-------------
+
+Drop all webHooks
+
+    fbwhwipe [custom config file] 
+
+
 Installation
 ------------
 

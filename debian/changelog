@@ -1,5 +1,6 @@
-flexibee-testing-tools (0.1) UNRELEASED; urgency=medium
+flexibee-testing-tools (0.4) experimpental; urgency=medium
 
-  * Initial release.
+  * Create / Delete company
+  * new WebHook wiper
 
- -- Vítězslav Dvořák <info@vitexsoftware.cz>  Sat, 14 Apr 2018 15:42:40 +0200
+ -- Vítězslav Dvořák <vitex@develoid.jinonice.czf>  Fri, 01 Mar 2019 11:21:08 +0100

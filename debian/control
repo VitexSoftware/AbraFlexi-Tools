@@ -1,16 +1,16 @@
 Source: flexibee-testing-tools
 Build-Depends: debhelper (>= 7.0.50~),po-debconf
-Standards-Version: 3.8.4
+Standards-Version: 3.9.8
 Maintainer: Vítězslav Dvořák <info@vitexsoftware.cz>
 Uploaders: Vitex <vitex@hippy.cz>
 Priority: optional
 Homepage: https://github.com/VitexSoftware/FlexiBee-TestingTools
 
 Package: flexibee-testing-tools
-Depends: ${misc:Depends},flexipeehp (>= 1.9.2),composer,php5-cli | php5.6-cli | php7.0-cli | php7.1-clis | php7.2-cli | php-cli, php-flexibee-config
+Depends: ${misc:Depends},flexipeehp (>= 1.9.2),composer,php5-cli | php5.6-cli | php7.0-cli | php7.1-cli | php7.2-cli | php7.4-cli | php-cli, php-flexibee-config
 Suggests: flexibee-server
 Architecture: all
 Section: devel
 Priority: optional
-Description: FlexiBee testing tools
- Several tools related to testing FlexiBee functionality
+Description: several FlexiBee testing tools
+ Tools related to testing FlexiBee functionality

@@ -1,4 +1,7 @@
 <?php
+/**
+ * FlexiBee delete Company
+ */
 $loaderPath = realpath(__DIR__."/../../../autoload.php");
 if (file_exists($loaderPath)) {
     require $loaderPath;
@@ -31,7 +34,7 @@ if ($argc != 2) {
             \Ease\Shared::instanced()->loadConfig($config_file);
         } else {
             \Ease\Shared::instanced()->addStatusMessage(_('Cannot read %s'),
-                $config_file, $type);
+                $config_file, 'error');
         }
         $srcOptions = ['company' => $argv[1]];
     }
