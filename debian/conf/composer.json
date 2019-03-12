@@ -30,8 +30,8 @@
         }
     ],
     "require": {
-        "spojenet_flexipeehp": "*",
-        "vitexsoftware_ease-framework": "*"
+        "deb/flexipeehp": "*",
+        "deb/ease-framework": "*"
     },
     "autoload": {
         "psr-4": {
