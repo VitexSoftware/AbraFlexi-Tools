@@ -1,5 +1,5 @@
 {
-    "name": "vitexsoftware.flexibee-testing-tools",
+    "name": "vitexsoftware_flexibee-testing-tools",
     "description": "Several FlexiBee Testing Tools.",
     "minimum-stability": "dev",
     "license": "MIT",
@@ -30,8 +30,8 @@
         }
     ],
     "require": {
-        "spojenet.flexipeehp": "*",
-        "vitexsoftware.ease-framework": "*"
+        "spojenet_flexipeehp": "*",
+        "vitexsoftware_ease-framework": "*"
     },
     "autoload": {
         "psr-4": {
