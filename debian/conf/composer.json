@@ -1,5 +1,5 @@
 {
-    "name": "vitexsoftware_flexibee-testing-tools",
+    "name": "deb/flexibee-testing-tools",
     "description": "Several FlexiBee Testing Tools.",
     "minimum-stability": "dev",
     "license": "MIT",
