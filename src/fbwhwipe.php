@@ -15,11 +15,11 @@ define('EASE_LOGGER', 'syslog|console');
 $config_file = $argc > 1 ? $argv[1] : '/etc/flexibee/client.json';
 
 if (file_exists($config_file)) {
-    \Ease\Shared::instanced()->loadConfig($config_file);
+    \Ease\Shared::instanced()->loadConfig($config_file,true);
 
     $hooker = new \FlexiPeeHP\Hooks();
     $hooks  = $hooker->getFlexiData();
-    if (!isset($hooks['message']) && is_array($hooks) && count(current($hooks))) {
+    if (!isset($hooks['message']) && is_array($hooks) && !empty(current($hooks)) && count(current($hooks))) {
         foreach ($hooks as $hookinfo) {
             if ($hooker->unregister($hookinfo['id'])) {
                 $hooker->addStatusMessage(sprintf(_('Hook %s was unregistered'),
