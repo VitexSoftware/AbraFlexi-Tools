@@ -1,3 +1,9 @@
+flexibee-testing-tools (0.8) UNRELEASED; urgency=medium
+
+  * fbwh added
+
+ -- Vítězslav Dvořák <vitex@develoid.jinonice.czf>  Tue, 18 Jun 2019 12:08:57 +0200
+
 flexibee-testing-tools (0.4) experimpental; urgency=medium
 
   * Create / Delete company
