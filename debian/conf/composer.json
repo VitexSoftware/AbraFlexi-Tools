@@ -30,19 +30,14 @@
         }
     ],
     "require": {
-        "deb/flexipeehp": "*",
-        "deb/ease-framework": "*"
-    },
-    "autoload": {
-        "psr-4": {
-            "FlexiPeeHP\\Bricks\\": "FlexiPeeHP/Bricks",
-            "FlexiPeeHP\\ui\\": "FlexiPeeHP/ui"
-        }
+        "deb/ease-core": "*",
+        "deb/flexibee": "*",
+        "fzaninotto/faker": "^1.7"
     },
     "autoload-dev": {
         "psr-4": {
-            "Test\\Ease\\": "vendor/vitexsoftware/ease-framework/tests/src/Ease",
-            "Test\\FlexiPeeHP\\": "vendor/spoje.net/flexipeehp/tests/src/FlexiPeeHP",
+            "Test\\Ease\\": "vendor/vitexsoftware/ease-core/tests/src/Ease",
+            "Test\\FlexiPeeHP\\": "vendor/spoje.net/flexibee/tests/src/FlexiPeeHP",
             "Test\\": "testing/"
         }
     },
