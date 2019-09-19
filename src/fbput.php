@@ -63,7 +63,7 @@ if (isset($options['show-url']) || isset($options['u'])) {
     echo urldecode($grabber->getApiURL())."\n";
 }
 
-echo json_encode(json_decode($grabber->lastCurlResponse), JSON_PRETTY_PRINT);
+echo \json_encode(\json_decode($grabber->lastCurlResponse), JSON_PRETTY_PRINT)."\n";
 if ($grabber->lastResponseCode == 201) {
     exit(0);
 } else {

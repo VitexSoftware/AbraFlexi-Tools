@@ -80,6 +80,6 @@ if ($grabber->lastResponseCode == 200) {
     echo \json_encode($grabber->getData(), JSON_PRETTY_PRINT);
     exit(0);
 } else {
-    echo $grabber->lastCurlResponse;
+    echo \json_encode(json_decode($grabber->lastCurlResponse), JSON_PRETTY_PRINT)."\n";
     exit(1);
 }
