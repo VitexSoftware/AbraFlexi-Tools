@@ -69,7 +69,9 @@ Copy one FlexiBee company to another FlexiBee
 
 Usage:
 
-    fbcp https://user:password@flexibee.source.cz:5434/c/firma_a_s_  https://user:password@flexibee.destination.cz:5434/c/firma_a_s_  
+    fbcp https://user:password@flexibee.source.cz:5434/c/firma_a_s_  https://user:password@flexibee.destination.cz:5434/c/firma_a_s_  [production] 
+
+Use **production** parameter to keep EET,  Auto Sending Mails and WebHooks enabled in restored company.
 
 Example:
 
@@ -84,6 +86,23 @@ fbcp https://lgn:pwd@company.flexibee.eu:5434/c/company_name https://lgn2:pwd2@v
 04/14/18 13:57:58 `FlexiPeeHP\Company`  ❁ backup restored
 ```
 
+
+Create New Company in FlexiBee
+------------------------------
+
+```
+    fbnc  new_company_name
+    fbnc  https://user:password@flexibee.source.cz:5434/c/nova_firma_a_s_
+```
+
+Delete Company in FlexiBee
+--------------------------
+
+```
+    fbdc company_to_delete
+    fbdc https://user:password@flexibee.source.cz:5434/c/smazat_firma_a_s_
+```
+
 Configuration file example
 --------------------------
 
@@ -96,6 +115,24 @@ Configuration file example
 }
 ```
 Default config file location is /etc/flexibee/client.json ( also provided by [php-flexibee-config](https://github.com/VitexSoftware/php-flexibee-config) debian package )
+
+WebHooks Wipe
+-------------
+
+Drop all webHooks
+
+```
+    fbwhwipe [custom config file] 
+```
+
+WebHook establish
+-----------------
+
+Register new webhook in FlexiBee
+
+```
+    fbwh  http://webhook.processor/url [xml|json] [custom/config.json]
+```
 
 Installation
 ------------
