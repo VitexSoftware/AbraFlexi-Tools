@@ -5,6 +5,7 @@ Maintainer: Vítězslav Dvořák <info@vitexsoftware.cz>
 Uploaders: Vitex <vitex@hippy.cz>
 Priority: optional
 Homepage: https://github.com/VitexSoftware/FlexiBee-Tools
+Section: development
 
 Package: flexibee-tools
 Depends: ${misc:Depends},composer, php-cli, php-flexibee, jaspercompiler
@@ -13,5 +14,6 @@ Replaces: flexibee-testing-tools
 Architecture: all
 Section: devel
 Priority: optional
-Description: several FlexiBee testing tools
- Tools related to testing FlexiBee functionality
+Description: commandline FlexiBee tools
+ Set of tools allowning interact with Abra FlexBee on command line
+ 
