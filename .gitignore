@@ -5,3 +5,4 @@
 /debian/flexibee-tools.debhelper.log
 /debian/flexibee-tools.substvars
 /nbproject/private/
+/debian/.debhelper/
