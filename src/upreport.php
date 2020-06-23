@@ -23,15 +23,8 @@ if ($argc < 3) {
     echo "example: " . $argv[0] . "  code:PokladDen pokDenik WinstromReports/vykazAnalyzaZakazky/analyzaZakazky.jrxml \n";
 } else {
     $reportID = $argv[1];
-
-    if ($argc == 3) {
-        if (is_file($argv[2])) {
-            $reportFile = $argv[2];
-        } else {
-            $formCode = $argv[2];
-            $reportFile = $argv[3];
-        }
-    }
+    $formCode = $argv[2];
+    $reportFile = $argv[3];
 
     if (strstr($reportFile, '.jrxml')) {
         system('jaspercompiler ' . $reportFile);
