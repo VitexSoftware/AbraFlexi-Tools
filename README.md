@@ -134,6 +134,19 @@ Register new webhook in FlexiBee
     fbwh  http://webhook.processor/url [xml|json] [custom/config.json]
 ```
 
+Report Uploader
+---------------
+
+Upload or Compile & Upload report files: https://github.com/Vitexus/winstrom-reports
+
+```
+upreport  <code:recordIdent> <formInfoCode> <reportfile.jrxml|jasper>
+``
+
+This tool do not use config file. Only environment variables like FLEXIBEE_URL.
+
+
+
 Installation
 ------------
 
@@ -155,9 +168,9 @@ Note: Debian package depends on [php-flexibee-config](https://github.com/VitexSo
 We use:
 
   * [PHP Language](https://secure.php.net/)
-  * [FlexiPeeHP](https://github.com/Spoje-NET/FlexiPeeHP) - Library for Interaction with [FlexiBee](https://flexibee.eu/)
-  * [EaseFramework](https://github.com/VitexSoftware/EaseFramework) - Glue & Tool Set 
-
+  * [PHP FlexiBee](https://github.com/Spoje-NET/php-flexibee) - Library for Interaction with [FlexiBee](https://flexibee.eu/)
+  * [Ease Core](https://github.com/VitexSoftware/php-ease-core) - Glue & Tool Set 
+  * [Jasper Compiler](https://github.com/VitexSoftware/jaspercompiler) - commandline jrxml compiler with FlexiBee support
 
 Thanks to:
 ----------

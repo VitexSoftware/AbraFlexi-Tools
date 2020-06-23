@@ -4,10 +4,10 @@ Standards-Version: 3.9.8
 Maintainer: Vítězslav Dvořák <info@vitexsoftware.cz>
 Uploaders: Vitex <vitex@hippy.cz>
 Priority: optional
-Homepage: https://github.com/VitexSoftware/FlexiBee-TestingTools
+Homepage: https://github.com/VitexSoftware/FlexiBee-Tools
 
 Package: flexibee-tools
-Depends: ${misc:Depends},composer, php-cli, php-flexibee
+Depends: ${misc:Depends},composer, php-cli, php-flexibee, jaspercompiler
 Suggests: flexibee-server,php-flexibee-config
 Architecture: all
 Section: devel
