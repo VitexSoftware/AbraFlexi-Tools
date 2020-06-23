@@ -3,7 +3,7 @@
 
 set -e
 
-cd /usr/share/flexibee-testing-tools
+cd /usr/share/flexibee-tools
 if [ -f composer.lock ] ; then
     rm -f composer.lock
 fi

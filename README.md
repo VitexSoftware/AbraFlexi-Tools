@@ -1,8 +1,8 @@
-# FlexiBee-TestingTools
+# FlexiBee-Tools
 
-Set of commandline tools related for testing FlexiBee functionality
+Set of commandline tools for interaction with FlexiBee server
 
-![Project Logo](https://raw.githubusercontent.com/VitexSoftware/FlexiBee-TestingTools/master/project-logo.png)
+![Project Logo](https://raw.githubusercontent.com/VitexSoftware/FlexiBee-Tools/master/project-logo.png)
 
 FlexiBee Get
 ------------
@@ -139,16 +139,16 @@ Installation
 
 To install tools into vendor/bin please use [composer](https://getcomposer.org/):
 
-    composer require vitexsoftware/flexibee-testing-tools
+    composer require vitexsoftware/flexibee-tools
 
 For Debian or Ubuntu please use [repo](http://vitexsoftware.cz/repos.php):
 
     wget -O - http://v.s.cz/info@vitexsoftware.cz.gpg.key|sudo apt-key add -
     echo deb http://v.s.cz/ stable main > /etc/apt/sources.list.d/vitexsoftware.list
     aptitude update
-    aptitude install flexibee-testing-tools
+    aptitude install flexibee-tools
 
-![Debian Installation](https://raw.githubusercontent.com/VitexSoftware/FlexiBee-TestingTools/master/debian-screenshot.png "Debian example")
+![Debian Installation](https://raw.githubusercontent.com/VitexSoftware/FlexiBee-Tools/master/debian-screenshot.png "Debian example")
 
 Note: Debian package depends on [php-flexibee-config](https://github.com/VitexSoftware/php-flexibee-config) package
 

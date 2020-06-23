@@ -1,5 +1,5 @@
 {
-    "name": "deb/flexibee-testing-tools",
+    "name": "deb/flexibee-tools",
     "description": "Several FlexiBee Testing Tools.",
     "minimum-stability": "dev",
     "license": "MIT",
@@ -9,9 +9,9 @@
             "email": "info@vitexsoftware.cz"
         }
     ],
-    "bin": ["bin/fbget", "bin/fbput", "bin/fbcp"],
+    "bin": ["bin/fbget", "bin/fbput", "bin/fbcp","bin/upreport"],
     "config": {
-	"vendor-dir": "/var/lib/flexibee-testing-tools"
+	"vendor-dir": "/var/lib/flexibee-tools"
     },
     "repositories": [
         {
@@ -31,8 +31,7 @@
     ],
     "require": {
         "deb/ease-core": "*",
-        "deb/flexibee": "*",
-        "fzaninotto/faker": "^1.7"
+        "deb/flexibee": "*"
     },
     "autoload-dev": {
         "psr-4": {
@@ -40,8 +39,5 @@
             "Test\\FlexiPeeHP\\": "vendor/spoje.net/flexibee/tests/src/FlexiPeeHP",
             "Test\\": "testing/"
         }
-    },
-    "require-dev": {
-        "codeception/codeception": "^2.3"
     }
 }

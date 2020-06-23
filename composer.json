@@ -1,5 +1,5 @@
 {
-    "name": "vitexsoftware/flexibee-testing-tools",
+    "name": "vitexsoftware/flexibee-tools",
     "description": "Several FlexiBee Testing Tools.",
     "type": "library",
     "minimum-stability": "dev",
@@ -10,7 +10,7 @@
             "email": "info@vitexsoftware.cz"
         }
     ],
-    "bin": ["bin/fbget", "bin/fbput", "bin/fbcp"],
+    "bin": ["bin/fbget", "bin/fbput", "bin/fbcp","bin/upreport"],
     "require": {
         "spoje.net/flexibee": "dev-master",
         "fzaninotto/faker": "*"
@@ -23,7 +23,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Test\\Ease\\": "vendor/vitexsoftware/ease-framework/tests/src/Ease",
+            "Test\\Ease\\": "vendor/vitexsoftware/ease-core/tests/src/EaseCore",
             "Test\\FlexiPeeHP\\": "vendor/spoje.net/flexipeehp/tests/src/FlexiPeeHP",
             "Test\\": "testing/"
         }

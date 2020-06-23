@@ -63,7 +63,9 @@ if (isset($options['config']) || isset($options['c'])) {
 } else {
     $configFile = '/etc/flexibee/client.json';
 }
-\Ease\Shared::instanced()->loadConfig($configFile);
+if(file_exists($configFile)){
+    \Ease\Shared::instanced()->loadConfig($configFile,true);
+}
 
 $grabber = new FlexiPeeHP\FlexiBeeRO(is_numeric($id) ? intval($id) : $id,
     ['evidence' => $evidence, 'detail' => $detail]);

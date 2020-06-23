@@ -7,14 +7,16 @@ if (file_exists($loaderPath)) {
     require __DIR__ . '/../vendor/autoload.php';
 }
 
-define('FLEXIBEE_URL', 'https://acc2.flexibee.eu:5434');
-define('FLEXIBEE_PASSWORD', 'flexibee');
-define('FLEXIBEE_LOGIN', 'test');
-define('FLEXIBEE_COMPANY', 'baseboys');
-
-
 define('EASE_APPNAME', 'ReportUploader');
 define('EASE_LOGGER', 'syslog|console');
+
+if (empty(getenv('FLEXIBEE_URL'))) {
+    echo "Please set up FlexiBee client configuration environment: \n\n";
+    echo "FLEXIBEE_URL=https://demo.flexibee.eu:5434\n";
+    echo "FLEXIBEE_PASSWORD=winstrom\n";
+    echo "FLEXIBEE_LOGIN=winstrom\n";
+    echo "FLEXIBEE_COMPANY=demo_de\n";
+}
 
 if ($argc < 3) {
     echo "usage: " . $argv[0] . " <recordIdent> <formInfoCode> <reportfile> \n";

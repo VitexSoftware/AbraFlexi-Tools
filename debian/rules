@@ -5,20 +5,15 @@
 
 override_dh_install:
 	dh_install
-	sed -i '/require/c\require  "/usr/share/flexibee-testing-tools/fbget.php";' debian/flexibee-testing-tools/usr/bin/fbget
-	sed -i '/require/c\require  "/usr/share/flexibee-testing-tools/fbput.php";' debian/flexibee-testing-tools/usr/bin/fbput
-	sed -i '/require/c\require  "/usr/share/flexibee-testing-tools/fbcp.php";' debian/flexibee-testing-tools/usr/bin/fbcp
-	sed -i '/require/c\require  "/usr/share/flexibee-testing-tools/fbnc.php";' debian/flexibee-testing-tools/usr/bin/fbnc
-	sed -i '/require/c\require  "/usr/share/flexibee-testing-tools/fbdc.php";' debian/flexibee-testing-tools/usr/bin/fbdc
-	sed -i '/require/c\require  "/usr/share/flexibee-testing-tools/fbwh.php";' debian/flexibee-testing-tools/usr/bin/fbwh
-	sed -i '/require/c\require  "/usr/share/flexibee-testing-tools/fbwhwipe.php";' debian/flexibee-testing-tools/usr/bin/fbwhwipe
-	sed -i "/realpath/c\$$loaderPath = \"/var/lib/flexibee-testing-tools/autoload.php\";" debian/flexibee-testing-tools/usr/share/flexibee-testing-tools/fbget.php
-	sed -i "/realpath/c\$$loaderPath = \"/var/lib/flexibee-testing-tools/autoload.php\";" debian/flexibee-testing-tools/usr/share/flexibee-testing-tools/fbput.php
-	sed -i "/realpath/c\$$loaderPath = \"/var/lib/flexibee-testing-tools/autoload.php\";" debian/flexibee-testing-tools/usr/share/flexibee-testing-tools/fbcp.php
-	sed -i "/realpath/c\$$loaderPath = \"/var/lib/flexibee-testing-tools/autoload.php\";" debian/flexibee-testing-tools/usr/share/flexibee-testing-tools/fbnc.php
-	sed -i "/realpath/c\$$loaderPath = \"/var/lib/flexibee-testing-tools/autoload.php\";" debian/flexibee-testing-tools/usr/share/flexibee-testing-tools/fbdc.php
-	sed -i "/realpath/c\$$loaderPath = \"/var/lib/flexibee-testing-tools/autoload.php\";" debian/flexibee-testing-tools/usr/share/flexibee-testing-tools/fbwh.php
-	sed -i "/realpath/c\$$loaderPath = \"/var/lib/flexibee-testing-tools/autoload.php\";" debian/flexibee-testing-tools/usr/share/flexibee-testing-tools/fbwhwipe.php
+	sed -i '/require/c\require  "/usr/share/flexibee-tools/fbget.php";' debian/flexibee-tools/usr/bin/fbget
+	sed -i '/require/c\require  "/usr/share/flexibee-tools/fbput.php";' debian/flexibee-tools/usr/bin/fbput
+	sed -i '/require/c\require  "/usr/share/flexibee-tools/fbcp.php";' debian/flexibee-tools/usr/bin/fbcp
+	sed -i '/require/c\require  "/usr/share/flexibee-tools/fbnc.php";' debian/flexibee-tools/usr/bin/fbnc
+	sed -i '/require/c\require  "/usr/share/flexibee-tools/fbdc.php";' debian/flexibee-tools/usr/bin/fbdc
+	sed -i '/require/c\require  "/usr/share/flexibee-tools/fbwh.php";' debian/flexibee-tools/usr/bin/fbwh
+	sed -i '/require/c\require  "/usr/share/flexibee-tools/fbwhwipe.php";' debian/flexibee-tools/usr/bin/fbwhwipe
+	sed -i '/require/c\require  "/usr/share/flexibee-tools/upreport.php";' debian/flexibee-tools/usr/bin/upreport
+	sed -i "/realpath/c\$$loaderPath = \"/var/lib/flexibee-tools/autoload.php\";" debian/flexibee-tools/usr/share/flexibee-tools/*
 
 override_dh_clean:
 	dh_clean

@@ -1,7 +1,7 @@
 /composer.lock
 /vendor/
-/debian/flexibee-testing-tools/
+/debian/flexibee-tools/
 /debian/debhelper-build-stamp
-/debian/flexibee-testing-tools.debhelper.log
-/debian/flexibee-testing-tools.substvars
+/debian/flexibee-tools.debhelper.log
+/debian/flexibee-tools.substvars
 /nbproject/private/
