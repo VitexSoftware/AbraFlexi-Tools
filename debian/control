@@ -8,7 +8,7 @@ Homepage: https://github.com/VitexSoftware/FlexiBee-Tools
 Section: development
 
 Package: flexibee-tools
-Depends: ${misc:Depends},composer, php-cli, php-flexibee, jaspercompiler
+Depends: ${misc:Depends},composer, php-cli, php-spojenet-flexibee, jaspercompiler
 Suggests: flexibee-server,php-flexibee-config
 Replaces: flexibee-testing-tools
 Architecture: all

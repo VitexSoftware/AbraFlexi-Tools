@@ -1,19 +1,20 @@
 <?php
-$loaderPath = realpath(__DIR__."/../../../autoload.php");
+
+$loaderPath = realpath(__DIR__ . "/../../../autoload.php");
 if (file_exists($loaderPath)) {
     require $loaderPath;
 } else {
-    require __DIR__.'/../vendor/autoload.php';
+    require __DIR__ . '/../vendor/autoload.php';
 }
 
 $shortopts = "e:i:c:vu::";
-$options   = getopt($shortopts);
+$options = getopt($shortopts);
 
 if (empty($options)) {
     echo "Obtain a record data from FlexiBee\n\n";
     echo "\nUsage:\n";
-    echo $argv[0]." -e evidence-name -i RowID [-c Path] [-u] [-v] column_name [column_name2 ...] \n\n";
-    echo "example: ".$argv[0]." -e adresar -u -i 333 kod nazev \n\n";
+    echo $argv[0] . " -e evidence-name -i RowID [-c Path] [-u] [-v] column_name [column_name2 ...] \n\n";
+    echo "example: " . $argv[0] . " -e adresar -u -i 333 kod nazev \n\n";
     echo "default config file is /etc/flexibee/client.json (Override it by -c)\n";
     exit();
 }
@@ -25,21 +26,20 @@ if (isset($options['id']) || isset($options['i'])) {
 }
 
 if (isset($options['evidence']) || isset($options['e'])) {
-    $evidence   = isset($options['evidence']) ? $options['evidence'] : $options['e'];
-    $infoSource = FlexiPeeHP\FlexiBeeRO::$infoDir.'/Properties.'.$evidence.'.json';
-    if (file_exists($infoSource)) {
+    $evidence = isset($options['evidence']) ? $options['evidence'] : $options['e'];
+    if (array_key_exists($evidence, \FlexiPeeHP\Structure::$evidence)) {
         $columnsToGet = [];
-        $columnsInfo  = json_decode(file_get_contents($infoSource), true);
+        $columnsInfo = \FlexiPeeHP\Structure::$evidence[$evidence];
         unset($argv[0]);
         foreach ($argv as $param) {
-            if(($param[0] == '-') && array_key_exists($param[1], $options)){
+            if (($param[0] == '-') && array_key_exists($param[1], $options)) {
                 continue; //Known switch
             }
-            
-            if(array_search($param, $options)){
+
+            if (array_search($param, $options)) {
                 continue; //Switch's parameter
             }
-            
+
             if (array_key_exists($param, $columnsInfo)) {
                 $columnsToGet[] = $param;
             } else {
@@ -51,8 +51,10 @@ if (isset($options['evidence']) || isset($options['e'])) {
         if (empty($columnsToGet)) {
             $detail = 'id';
         } else {
-            $detail = 'custom:'.implode(',', $columnsToGet);
+            $detail = 'custom:' . implode(',', $columnsToGet);
         }
+    } else {
+        //unknown evidence ?!?
     }
 } else {
     die("evidence is requied\n");
@@ -63,25 +65,25 @@ if (isset($options['config']) || isset($options['c'])) {
 } else {
     $configFile = '/etc/flexibee/client.json';
 }
-if(file_exists($configFile)){
-    \Ease\Shared::instanced()->loadConfig($configFile,true);
+if (file_exists($configFile)) {
+    \Ease\Shared::instanced()->loadConfig($configFile, true);
 }
 
 $grabber = new FlexiPeeHP\FlexiBeeRO(is_numeric($id) ? intval($id) : $id,
-    ['evidence' => $evidence, 'detail' => $detail]);
+        ['evidence' => $evidence, 'detail' => $detail]);
 
 if (isset($options['v'])) {
     $grabber->logBanner(__FILE__);
 }
 
 if (isset($options['show-url']) || isset($options['u'])) {
-    echo urldecode($grabber->getApiURL())."\n";
+    echo urldecode($grabber->getApiURL()) . "\n";
 }
 
 if ($grabber->lastResponseCode == 200) {
     echo \json_encode($grabber->getData(), JSON_PRETTY_PRINT);
     exit(0);
 } else {
-    echo \json_encode(json_decode($grabber->lastCurlResponse), JSON_PRETTY_PRINT)."\n";
+    echo \json_encode(json_decode($grabber->lastCurlResponse), JSON_PRETTY_PRINT) . "\n";
     exit(1);
 }
