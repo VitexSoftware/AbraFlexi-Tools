@@ -1,6 +1,6 @@
 #!/usr/bin/env php
 <?php
-/* Copy FlexiBee DATA
+/* FlexiBee Report Uploader
  *
  * (The MIT license)
  * Copyright (c) 2018 Vítězslav Dvořák
@@ -24,4 +24,4 @@
  * IN THE SOFTWARE.
  */
 
-require dirname(__DIR__) . '/src/fbcp.php';
+require dirname(__DIR__).'/src/fakeAddress.php';

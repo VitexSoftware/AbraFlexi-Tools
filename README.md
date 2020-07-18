@@ -146,6 +146,16 @@ upreport  <code:recordIdent> <formInfoCode> <reportfile.jrxml|jasper>
 This tool do not use config file. Only environment variables like FLEXIBEE_URL.
 
 
+Fake Address Generator
+----------------------
+
+
+```shell
+flexibee-fake-address --config=../tests/client.json -i 10
+```
+
+create 10 fake address
+
 
 Installation
 ------------

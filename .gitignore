@@ -6,3 +6,4 @@
 /debian/flexibee-tools.substvars
 /nbproject/private/
 /debian/.debhelper/
+/tests/client.json

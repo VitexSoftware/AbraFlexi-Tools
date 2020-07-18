@@ -1,6 +1,6 @@
 #!/usr/bin/env php
 <?php
-/* FlexiBee WebHooks Wipe
+/* FlexiBee Report Uploader
  *
  * (The MIT license)
  * Copyright (c) 2018 Vítězslav Dvořák

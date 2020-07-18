@@ -31,7 +31,8 @@
     ],
     "require": {
         "deb/ease-core": "*",
-        "deb/flexibee": "*"
+        "deb/flexibee": "*",
+        "fzaninotto/faker": "*"
     },
     "autoload-dev": {
         "psr-4": {

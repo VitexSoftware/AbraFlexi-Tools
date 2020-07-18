@@ -13,6 +13,8 @@ override_dh_install:
 	sed -i '/require/c\require  "/usr/share/flexibee-tools/fbwh.php";' debian/flexibee-tools/usr/bin/fbwh
 	sed -i '/require/c\require  "/usr/share/flexibee-tools/fbwhwipe.php";' debian/flexibee-tools/usr/bin/fbwhwipe
 	sed -i '/require/c\require  "/usr/share/flexibee-tools/upreport.php";' debian/flexibee-tools/usr/bin/upreport
+	sed -i '/require/c\require  "/usr/share/flexibee-tools/fakeAddress.php";' debian/flexibee-tools/usr/bin/flexibee-fake-address
+	sed -i '/dirname(__DIR__)/c require_once "\/var\/lib\/flexibee-tools\/autoload.php";' debian/flexibee-tools/usr/share/flexibee-tools/*
 	sed -i "/realpath/c\$$loaderPath = \"/var/lib/flexibee-tools/autoload.php\";" debian/flexibee-tools/usr/share/flexibee-tools/*
 
 override_dh_clean:
