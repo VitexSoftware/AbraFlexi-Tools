@@ -157,6 +157,26 @@ flexibee-fake-address --config=../tests/client.json -i 10
 create 10 fake address
 
 
+Benchmark
+---------
+
+```shell
+fbbenchmark
+```
+
+Check several operations speed upon given company/database
+
+
+Certificate Updater
+--------------------
+
+Generate or renew HTTPS certificate
+
+```shell
+flexibee-certbot
+```
+
+
 Installation
 ------------
 
