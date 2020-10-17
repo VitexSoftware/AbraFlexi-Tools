@@ -9,7 +9,7 @@
             "email": "info@vitexsoftware.cz"
         }
     ],
-    "bin": ["bin/fbget", "bin/fbput", "bin/fbcp","bin/upreport"],
+    "bin": ["bin/fbget", "bin/fbput", "bin/fbcp"],
     "config": {
 	"vendor-dir": "/var/lib/flexibee-tools"
     },

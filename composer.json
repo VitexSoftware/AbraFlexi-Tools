@@ -10,7 +10,7 @@
             "email": "info@vitexsoftware.cz"
         }
     ],
-    "bin": ["bin/fbget", "bin/fbput", "bin/fbcp","bin/upreport"],
+    "bin": ["bin/fbget", "bin/fbput", "bin/fbcp"],
     "require": {
         "spoje.net/flexibee": "dev-master",
         "fzaninotto/faker": "*"
