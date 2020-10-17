@@ -1,4 +1,13 @@
 <?php
+/**
+ * FlexiBee Tools  - FlexiBee copy
+ *
+ * @author     Vítězslav Dvořák <vitex@arachne.cz>
+ * @copyright  2020 Vitex Software
+ */
+
+
+
 $loaderPath = realpath(__DIR__."/../../../autoload.php");
 if (file_exists($loaderPath)) {
     require $loaderPath;

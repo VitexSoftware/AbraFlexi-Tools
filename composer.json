@@ -14,21 +14,5 @@
     "require": {
         "spoje.net/flexibee": "dev-master",
         "fzaninotto/faker": "*"
-    },
-    "autoload": {
-        "psr-4": {
-            "FlexiPeeHP\\Bricks\\": "FlexiPeeHP/Bricks",
-            "FlexiPeeHP\\ui\\": "FlexiPeeHP/ui"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Test\\Ease\\": "vendor/vitexsoftware/ease-core/tests/src/EaseCore",
-            "Test\\FlexiPeeHP\\": "vendor/spoje.net/flexipeehp/tests/src/FlexiPeeHP",
-            "Test\\": "testing/"
-        }
-    },
-    "require-dev": {
-        "codeception/codeception": "^2.3"
     }
 }

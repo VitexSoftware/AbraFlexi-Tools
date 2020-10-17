@@ -134,18 +134,6 @@ Register new webhook in FlexiBee
     fbwh  http://webhook.processor/url [xml|json] [custom/config.json]
 ```
 
-Report Uploader
----------------
-
-Upload or Compile & Upload report files: https://github.com/Vitexus/winstrom-reports
-
-```
-upreport  <code:recordIdent> <formInfoCode> <reportfile.jrxml|jasper>
-```
-
-This tool do not use config file. Only environment variables like FLEXIBEE_URL.
-
-
 Fake Address Generator
 ----------------------
 
@@ -186,21 +174,21 @@ To install tools into vendor/bin please use [composer](https://getcomposer.org/)
 
 For Debian or Ubuntu please use [repo](http://vitexsoftware.cz/repos.php):
 
-    wget -O - http://v.s.cz/info@vitexsoftware.cz.gpg.key|sudo apt-key add -
-    echo deb http://v.s.cz/ stable main > /etc/apt/sources.list.d/vitexsoftware.list
-    aptitude update
-    aptitude install flexibee-tools
+```shell
+sudo apt install lsb-release wget
+echo "deb http://repo.vitexsoftware.cz $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/vitexsoftware.list
+sudo wget -O /etc/apt/trusted.gpg.d/vitexsoftware.gpg http://repo.vitexsoftware.cz/keyring.gpg
+sudo apt update
+sudo apt install flexibee-tools
+```
 
 ![Debian Installation](https://raw.githubusercontent.com/VitexSoftware/FlexiBee-Tools/master/debian-screenshot.png "Debian example")
-
-Note: Debian package depends on [php-flexibee-config](https://github.com/VitexSoftware/php-flexibee-config) package
 
 We use:
 
   * [PHP Language](https://secure.php.net/)
   * [PHP FlexiBee](https://github.com/Spoje-NET/php-flexibee) - Library for Interaction with [FlexiBee](https://flexibee.eu/)
   * [Ease Core](https://github.com/VitexSoftware/php-ease-core) - Glue & Tool Set 
-  * [Jasper Compiler](https://github.com/VitexSoftware/jaspercompiler) - commandline jrxml compiler with FlexiBee support
 
 Thanks to:
 ----------
