@@ -4,6 +4,7 @@
 	dh $@
 
 override_dh_install:
+	jq '.version = "'`dpkg-parsechangelog | sed -n 's/^Version: //p'`'"' debian/conf/composer.json |sponge debian/conf/composer.json
 	dh_install
 	sed -i '/require/c\require  "/usr/share/flexibee-tools/fbget.php";' debian/flexibee-tools/usr/bin/fbget
 	sed -i '/require/c\require  "/usr/share/flexibee-tools/fbput.php";' debian/flexibee-tools/usr/bin/fbput
