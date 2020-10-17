@@ -1,44 +1,49 @@
 {
-    "name": "deb/flexibee-tools",
-    "description": "Several FlexiBee Testing Tools.",
-    "minimum-stability": "dev",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Vitex",
-            "email": "info@vitexsoftware.cz"
-        }
-    ],
-    "bin": ["bin/fbget", "bin/fbput", "bin/fbcp"],
-    "config": {
-	"vendor-dir": "/var/lib/flexibee-tools"
-    },
-    "repositories": [
-        {
-            "type": "path",
-            "url": "/usr/share/php/EaseCore",
-            "options": {
-                "symlink": true
-            }
-        },
-        {
-            "type": "path",
-            "url": "/usr/share/php/FlexiPeeHP",
-            "options": {
-                "symlink": true
-            }
-        }
-    ],
-    "require": {
-        "deb/ease-core": "*",
-        "deb/flexibee": "*",
-        "fzaninotto/faker": "*"
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Test\\Ease\\": "vendor/vitexsoftware/ease-core/tests/src/Ease",
-            "Test\\FlexiPeeHP\\": "vendor/spoje.net/flexibee/tests/src/FlexiPeeHP",
-            "Test\\": "testing/"
-        }
+  "name": "deb/flexibee-tools",
+  "description": "Several FlexiBee Testing Tools.",
+  "minimum-stability": "dev",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Vitex",
+      "email": "info@vitexsoftware.cz"
     }
+  ],
+  "bin": [
+    "bin/fbget",
+    "bin/fbput",
+    "bin/fbcp"
+  ],
+  "config": {
+    "vendor-dir": "/var/lib/flexibee-tools"
+  },
+  "repositories": [
+    {
+      "type": "path",
+      "url": "/usr/share/php/EaseCore",
+      "options": {
+        "symlink": true
+      }
+    },
+    {
+      "type": "path",
+      "url": "/usr/share/php/FlexiPeeHP",
+      "options": {
+        "symlink": true
+      }
+    }
+  ],
+  "require": {
+    "deb/ease-core": "*",
+    "deb/flexibee": "*",
+    "fzaninotto/faker": "*"
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Test\\Ease\\": "vendor/vitexsoftware/ease-core/tests/src/Ease",
+      "Test\\FlexiPeeHP\\": "vendor/spoje.net/flexibee/tests/src/FlexiPeeHP",
+      "Test\\": "testing/"
+    }
+  },
+  "version": "0.10.4"
 }

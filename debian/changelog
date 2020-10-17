@@ -1,10 +1,11 @@
-flexibee-tools (0.10.3) UNRELEASED; urgency=medium
+flexibee-tools (0.10.4) UNRELEASED; urgency=medium
 
   * Readme updated
   * 
   * getting Evidence structure data update
+  * Update version in debian's composer.json
 
- -- CyberVitexus <vitex@exiv.jinonice.czf>  Sat, 18 Jul 2020 22:38:41 +0200
+ -- CyberVitexus <vitex@exiv.jinonice.czf>  Sat, 17 Oct 2020 18:14:50 +0200
 
 flexibee-tools (0.9) experimental; urgency=medium
 
