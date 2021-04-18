@@ -160,7 +160,7 @@ fbbenchmark -p -c 10 -d 10
 
 Count time of several operations speed upon given company/database.
 
-[Result](benchmark-result.png?raw=true)
+[Result](https://raw.githubusercontent.com/VitexSoftware/AbraFlexi-Tools/ease-core-based/benchmark-result.png?raw=true)
 
 
 Certificate Updater
