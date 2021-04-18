@@ -1,19 +1,19 @@
-Source: flexibee-tools
+Source: abraflexi-tools
 Build-Depends: debhelper (>= 7.0.50~),po-debconf
 Standards-Version: 3.9.8
 Maintainer: Vítězslav Dvořák <info@vitexsoftware.cz>
 Uploaders: Vitex <vitex@hippy.cz>
 Priority: optional
-Homepage: https://github.com/VitexSoftware/FlexiBee-Tools
+Homepage: https://github.com/VitexSoftware/AbraFlexi-Tools
 Section: development
 
-Package: flexibee-tools
-Depends: ${misc:Depends},composer, php-cli, php-spojenet-flexibee-dev
-Suggests: flexibee-server,php-flexibee-config
-Replaces: flexibee-testing-tools
+Package: abraflexi-tools
+Depends: ${misc:Depends},composer, php-cli, php-spojenet-abraflexi-dev
+Suggests: abraflexi-server,php-abraflexi-config
+Replaces: abraflexi-testing-tools
 Architecture: all
 Section: devel
 Priority: optional
-Description: commandline FlexiBee tools
- Set of tools allowning interact with Abra FlexBee on command line
+Description: commandline AbraFlexi tools
+ Set of tools allowning interact with Abra Flexi on command line
  

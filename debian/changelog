@@ -1,20 +1,20 @@
-flexibee-tools (0.10.4) UNRELEASED; urgency=medium
+abraflexi-tools (0.12) UNRELEASED; urgency=medium
 
   * Readme updated
-  * 
   * getting Evidence structure data update
   * Update version in debian's composer.json
   * Release v0.10.4
+  * Create FUNDING.yml
 
- -- CyberVitexus <vitex@exiv.jinonice.czf>  Sat, 17 Oct 2020 18:56:27 +0200
+ -- CyberVitexus <vitex@exiv.jinonice.czf>  Sun, 18 Apr 2021 12:21:49 +0200
 
-flexibee-tools (0.9) experimental; urgency=medium
+abraflexi-tools (0.9) experimental; urgency=medium
 
   * fbwh added
 
  -- Vítězslav Dvořák <vitex@develoid.jinonice.czf>  Tue, 18 Jun 2019 12:08:57 +0200
 
-flexibee-tools (0.4) experimpental; urgency=medium
+abraflexi-tools (0.4) experimpental; urgency=medium
 
   * Create / Delete company
   * new WebHook wiper

@@ -1,6 +1,7 @@
 #!/usr/bin/env php
 <?php
-/* FlexiBee Get
+
+/* AbraFlexi Get
  *
  * (The MIT license)
  * Copyright (c) 2018 Vítězslav Dvořák
@@ -24,4 +25,4 @@
  * IN THE SOFTWARE.
  */
 
-require dirname(__DIR__).'/src/fbput.php';
+require dirname(__DIR__) . '/src/fbput.php';

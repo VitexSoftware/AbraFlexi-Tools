@@ -1,6 +1,7 @@
 #!/usr/bin/env php
 <?php
-/* Delete Company in FlexiBee 
+
+/* Delete Company in AbraFlexi 
  *
  * (The MIT license)
  * Copyright (c) 2018 Vítězslav Dvořák
@@ -24,4 +25,4 @@
  * IN THE SOFTWARE.
  */
 
-require dirname(__DIR__).'/src/fbdc.php';
+require dirname(__DIR__) . '/src/fbdc.php';

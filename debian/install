@@ -1,4 +1,7 @@
-README.md			usr/share/flexibee-tools/
-src/*.php                       usr/share/flexibee-tools/
+README.md			usr/share/abraflexi-tools/
+src/*.php                       usr/share/abraflexi-tools/
 bin/*		                usr/bin/
-debian/conf/composer.json       usr/share/flexibee-tools/
+debian/conf/composer.json       usr/share/abraflexi-tools/
+abraflexitools.svg		usr/share/icons/hicolor/scalable/apps/
+abraflexitools.png		usr/share/icons/hicolor/256x256/apps/
+io.github.vitexsoftware.abraflexi_tools.metainfo.xml	/usr/share/metainfo/

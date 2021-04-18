@@ -1,13 +1,13 @@
-# FlexiBee-Tools
+# AbraFlexi-Tools
 
-Set of commandline tools for interaction with FlexiBee server
+Set of commandline tools for interaction with AbraFlexi server
 
-![Project Logo](https://raw.githubusercontent.com/VitexSoftware/FlexiBee-Tools/master/project-logo.png)
+![Project Logo](abraflexitools.png)
 
-FlexiBee Get
+AbraFlexi Get
 ------------
 
-Obtain record data from FlexiBee
+Obtain record data from AbraFlexi
 
 
 Usage:
@@ -20,7 +20,7 @@ Usage:
 Example:
 
 ```shell
-~$ fbget -v -u -c /etc/flexibee/localhost-client.json -e adresar -i 666 kod nazev
+~$ fbget -v -u -c /etc/abraflexi/localhost-client.json -e adresar -i 666 kod nazev
 https://localhost:5434/c/spoje_net_s_r_o_/adresar/666&detail=custom:kod,nazev
 ```
 
@@ -41,10 +41,10 @@ https://localhost:5434/c/spoje_net_s_r_o_/adresar/666&detail=custom:kod,nazev
 }
 ```
 
-FlexiBee PUT
-------------
+AbraFlexi PUT
+-------------
 
-Insert or update record data in FlexiBee
+Insert or update record data in AbraFlexi
 
 Usage:
 
@@ -58,25 +58,25 @@ Example:
 fbput.php --evidence adresar -i 333 -u --nazev=Zmeneno
 
 ```
-https://demo.flexibee.eu:5434/c/demo/adresar/333
+https://demo.abraflexi.eu:5434/c/demo/adresar/333
 {"winstrom":{"@version":"1.0","success":"true","stats":{"created":"0","updated":"1","deleted":"0","skipped":"0","failed":"0"},"results":[{"id":"333","request-id":"333","ref":"
 ```
 
-FlexiBee company Copy
+AbraFlexi company Copy
 ---------------------
 
-Copy one FlexiBee company to another FlexiBee
+Copy one AbraFlexi company to another AbraFlexi
 
 Usage:
 
-    fbcp https://user:password@flexibee.source.cz:5434/c/firma_a_s_  https://user:password@flexibee.destination.cz:5434/c/firma_a_s_  [production] 
+    fbcp https://user:password@abraflexi.source.cz:5434/c/firma_a_s_  https://user:password@abraflexi.destination.cz:5434/c/firma_a_s_  [production] 
 
 Use **production** parameter to keep EET,  Auto Sending Mails and WebHooks enabled in restored company.
 
 Example:
 
 ```
-fbcp https://lgn:pwd@company.flexibee.eu:5434/c/company_name https://lgn2:pwd2@vitexsoftware.flexibee.eu:5434/c/company_name
+fbcp https://lgn:pwd@company.abraflexi.eu:5434/c/company_name https://lgn2:pwd2@vitexsoftware.abraflexi.eu:5434/c/company_name
 04/14/18 13:57:18 `FlexiPeeHP\Company`  ⓘ saving backup
 04/14/18 13:57:25 `FlexiPeeHP\Company`  ❁ backup saved
 04/14/18 13:57:26 `FlexiPeeHP\Company`  ⓘ Remove company before restore
@@ -87,20 +87,20 @@ fbcp https://lgn:pwd@company.flexibee.eu:5434/c/company_name https://lgn2:pwd2@v
 ```
 
 
-Create New Company in FlexiBee
+Create New Company in AbraFlexi
 ------------------------------
 
 ```
     fbnc  new_company_name
-    fbnc  https://user:password@flexibee.source.cz:5434/c/nova_firma_a_s_
+    fbnc  https://user:password@abraflexi.source.cz:5434/c/nova_firma_a_s_
 ```
 
-Delete Company in FlexiBee
+Delete Company in AbraFlexi
 --------------------------
 
 ```
     fbdc company_to_delete
-    fbdc https://user:password@flexibee.source.cz:5434/c/smazat_firma_a_s_
+    fbdc https://user:password@abraflexi.source.cz:5434/c/smazat_firma_a_s_
 ```
 
 Configuration file example
@@ -108,13 +108,13 @@ Configuration file example
 
 ```json
 {
-    "FLEXIBEE_URL": "https:\/\/demo.flexibee.eu:5434",
-    "FLEXIBEE_LOGIN": "winstrom",
-    "FLEXIBEE_PASSWORD": "winstrom",
-    "FLEXIBEE_COMPANY": "demo"
+    "ABRAFLEXI_URL": "https:\/\/demo.abraflexi.eu:5434",
+    "ABRAFLEXI_LOGIN": "winstrom",
+    "ABRAFLEXI_PASSWORD": "winstrom",
+    "ABRAFLEXI_COMPANY": "demo"
 }
 ```
-Default config file location is /etc/flexibee/client.json ( also provided by [php-flexibee-config](https://github.com/VitexSoftware/php-flexibee-config) debian package )
+Default config file location is /etc/abraflexi/client.json ( also provided by [php-abraflexi-config](https://github.com/VitexSoftware/php-abraflexi-config) debian package )
 
 WebHooks Wipe
 -------------
@@ -128,7 +128,7 @@ Drop all webHooks
 WebHook establish
 -----------------
 
-Register new webhook in FlexiBee
+Register new webhook in AbraFlexi
 
 ```
     fbwh  http://webhook.processor/url [xml|json] [custom/config.json]
@@ -139,7 +139,7 @@ Fake Address Generator
 
 
 ```shell
-flexibee-fake-address --config=../tests/client.json -i 10
+abraflexi-fake-address --config=../tests/client.json -i 10
 ```
 
 create 10 fake address
@@ -148,11 +148,17 @@ create 10 fake address
 Benchmark
 ---------
 
+Options:
+
+ * -p   - prepare database for test
+ * -c   - num of cycles
+ * -s   - sleep x seconds after each operation
+
 ```shell
-fbbenchmark
+fbbenchmark -p -c 10 -d 10
 ```
 
-Check several operations speed upon given company/database
+Check several operations speed upon given company/database. (Also emulate )
 
 
 Certificate Updater
@@ -161,7 +167,7 @@ Certificate Updater
 Generate or renew HTTPS certificate
 
 ```shell
-flexibee-certbot
+abraflexi-certbot
 ```
 
 
@@ -170,7 +176,7 @@ Installation
 
 To install tools into vendor/bin please use [composer](https://getcomposer.org/):
 
-    composer require vitexsoftware/flexibee-tools
+    composer require vitexsoftware/abraflexi-tools
 
 For Debian or Ubuntu please use [repo](http://vitexsoftware.cz/repos.php):
 
@@ -179,19 +185,19 @@ sudo apt install lsb-release wget
 echo "deb http://repo.vitexsoftware.cz $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/vitexsoftware.list
 sudo wget -O /etc/apt/trusted.gpg.d/vitexsoftware.gpg http://repo.vitexsoftware.cz/keyring.gpg
 sudo apt update
-sudo apt install flexibee-tools
+sudo apt install abraflexi-tools
 ```
 
-![Debian Installation](https://raw.githubusercontent.com/VitexSoftware/FlexiBee-Tools/master/debian-screenshot.png "Debian example")
+![Debian Installation](https://raw.githubusercontent.com/VitexSoftware/AbraFlexi-Tools/master/debian-screenshot.png "Debian example")
 
 We use:
 
   * [PHP Language](https://secure.php.net/)
-  * [PHP FlexiBee](https://github.com/Spoje-NET/php-flexibee) - Library for Interaction with [FlexiBee](https://flexibee.eu/)
+  * [PHP AbraFlexi](https://github.com/Spoje-NET/php-abraflexi) - Library for Interaction with [AbraFlexi](https://abraflexi.eu/)
   * [Ease Core](https://github.com/VitexSoftware/php-ease-core) - Glue & Tool Set 
 
 Thanks to:
 ----------
 
  * [PureHTML](https://purehtml.cz/) & [Spoje.Net]( https://spoje.net/ )  for support
- * [Abra](https://abra.eu) for [FlexiBee](https://flexibee.eu/)
+ * [Abra](https://abra.eu) for [AbraFlexi](https://abraflexi.eu/)

@@ -1,9 +1,10 @@
 /composer.lock
 /vendor/
-/debian/flexibee-tools/
+/debian/abraflexi-tools/
 /debian/debhelper-build-stamp
-/debian/flexibee-tools.debhelper.log
-/debian/flexibee-tools.substvars
+/debian/abraflexi-tools.debhelper.log
+/debian/abraflexi-tools.substvars
 /nbproject/private/
 /debian/.debhelper/
 /tests/client.json
+/debian/flexibee-tools.substvars

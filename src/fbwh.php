@@ -1,45 +1,43 @@
 <?php
+
 /**
- * FlexiBee Tools  - WebHook establisher
+ * AbraFlexi Tools  - WebHook establisher
  *
  * @author     Vítězslav Dvořák <vitex@arachne.cz>
  * @copyright  2020 Vitex Software
  */
-
-
-
-$loaderPath = realpath(__DIR__."/../../../autoload.php");
+$loaderPath = realpath(__DIR__ . "/../../../autoload.php");
 if (file_exists($loaderPath)) {
     require $loaderPath;
 } else {
-    require __DIR__.'/../vendor/autoload.php';
+    require __DIR__ . '/../vendor/autoload.php';
 }
 
-define('EASE_APPNAME', 'FlexiBee WebHook Establisher');
+define('EASE_APPNAME', 'AbraFlexi WebHook Establisher');
 define('EASE_LOGGER', 'syslog|console');
 
 if ($argc < 1) {
-    echo "usage: ".$argv[0]." http://webhook.processor/url [xml|json] [custom/config.json] \n";
+    echo "usage: " . $argv[0] . " http://webhook.processor/url [xml|json] [custom/config.json] \n";
 } else {
     $hookurl = $argv[1];
-    $format  = array_key_exists(2, $argv) ? $argv[2] : 'json';
-    $config  = array_key_exists(3, $argv) ? $argv[3] : '/etc/flexibee/client.json';
+    $format = array_key_exists(2, $argv) ? $argv[2] : 'json';
+    $config = array_key_exists(3, $argv) ? $argv[3] : '/etc/abraflexi/client.json';
 
     if (file_exists($config)) {
         \Ease\Shared::instanced()->loadConfig($config, true);
     } else {
         \Ease\Shared::instanced()->addStatusMessage(_('Cannot read %s'),
-            $config_file, 'error');
+                $config_file, 'error');
         die('unconfigured');
     }
 
-    $changer = new \FlexiPeeHP\Changes();
+    $changer = new \AbraFlexi\Changes();
     if (!$changer->getStatus()) {
         $changer->enable();
     }
 
     if (strlen($hookurl)) {
-        $hooker = new \FlexiPeeHP\Hooks();
+        $hooker = new \AbraFlexi\Hooks();
         $hooker->setDataValue('skipUrlTest', 'true');
 //        $hooker->setDataValue('skipUrlTest', 'false');
 //        $hooker->setDataValue('lastVersion', $lastversion);
@@ -48,11 +46,11 @@ if ($argc < 1) {
         $hookResult = $hooker->register($hookurl, $format);
         if ($hookResult) {
             $hooker->addStatusMessage(sprintf(_('Hook %s was registered'),
-                    $hookurl), 'success');
+                            $hookurl), 'success');
             $hookurl = '';
         } else {
             $hooker->addStatusMessage(sprintf(_('Hook %s not registered'),
-                    $hookurl), 'warning');
+                            $hookurl), 'warning');
         }
     }
 }

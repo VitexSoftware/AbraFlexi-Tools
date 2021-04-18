@@ -1,6 +1,6 @@
 {
-    "name": "vitexsoftware/flexibee-tools",
-    "description": "Several FlexiBee Testing Tools.",
+    "name": "vitexsoftware/abraflexi-tools",
+    "description": "Several AbraFlexi Testing Tools.",
     "type": "library",
     "minimum-stability": "dev",
     "license": "MIT",
@@ -12,7 +12,7 @@
     ],
     "bin": ["bin/fbget", "bin/fbput", "bin/fbcp"],
     "require": {
-        "spoje.net/flexibee": "dev-master",
+        "spojenet/flexibee": "2.0.x-dev",
         "fzaninotto/faker": "*"
     }
 }

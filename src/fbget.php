@@ -1,12 +1,11 @@
 <?php
+
 /**
- * FlexiBee Tools  - Get
+ * AbraFlexi Tools  - Get
  *
  * @author     Vítězslav Dvořák <vitex@arachne.cz>
  * @copyright  2020 Vitex Software
  */
-
-
 $loaderPath = realpath(__DIR__ . "/../../../autoload.php");
 if (file_exists($loaderPath)) {
     require $loaderPath;
@@ -18,11 +17,11 @@ $shortopts = "e:i:c:vu::";
 $options = getopt($shortopts);
 
 if (empty($options)) {
-    echo "Obtain a record data from FlexiBee\n\n";
+    echo "Obtain a record data from AbraFlexi\n\n";
     echo "\nUsage:\n";
     echo $argv[0] . " -e evidence-name -i RowID [-c Path] [-u] [-v] column_name [column_name2 ...] \n\n";
     echo "example: " . $argv[0] . " -e adresar -u -i 333 kod nazev \n\n";
-    echo "default config file is /etc/flexibee/client.json (Override it by -c)\n";
+    echo "default config file is /etc/abraflexi/client.json (Override it by -c)\n";
     exit();
 }
 
@@ -34,9 +33,9 @@ if (isset($options['id']) || isset($options['i'])) {
 
 if (isset($options['evidence']) || isset($options['e'])) {
     $evidence = isset($options['evidence']) ? $options['evidence'] : $options['e'];
-    if (array_key_exists($evidence, \FlexiPeeHP\Structure::$evidence)) {
+    if (array_key_exists($evidence, \AbraFlexi\Structure::$evidence)) {
         $columnsToGet = [];
-        $columnsInfo = \FlexiPeeHP\Structure::$evidence[$evidence];
+        $columnsInfo = \AbraFlexi\Structure::$evidence[$evidence];
         unset($argv[0]);
         foreach ($argv as $param) {
             if (($param[0] == '-') && array_key_exists($param[1], $options)) {
@@ -70,13 +69,13 @@ if (isset($options['evidence']) || isset($options['e'])) {
 if (isset($options['config']) || isset($options['c'])) {
     $configFile = isset($options['config']) ? isset($options['config']) : $options['c'];
 } else {
-    $configFile = '/etc/flexibee/client.json';
+    $configFile = '/etc/abraflexi/client.json';
 }
 if (file_exists($configFile)) {
     \Ease\Shared::instanced()->loadConfig($configFile, true);
 }
 
-$grabber = new FlexiPeeHP\FlexiBeeRO(is_numeric($id) ? intval($id) : $id,
+$grabber = new AbraFlexi\RO(is_numeric($id) ? intval($id) : $id,
         ['evidence' => $evidence, 'detail' => $detail]);
 
 if (isset($options['v'])) {

@@ -1,10 +1,10 @@
 #!/bin/sh
-# postrm script for flexibee-tools
+# postrm script for abraflexi-tools
 
 set -e
 
-rm -fr /var/lib/flexibee-tools 
-rm -f /usr/share/flexibee-tools/composer.lock
+rm -fr /var/lib/abraflexi-tools 
+rm -f /usr/share/abraflexi-tools/composer.lock
 
 #DEBHELPER#
 

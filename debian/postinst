@@ -1,9 +1,9 @@
 #!/bin/sh
-# postinst script for FlexiBee testing tools
+# postinst script for AbraFlexi testing tools
 
 set -e
 
-cd /usr/share/flexibee-tools
+cd /usr/share/abraflexi-tools
 if [ -f composer.lock ] ; then
     rm -f composer.lock
 fi

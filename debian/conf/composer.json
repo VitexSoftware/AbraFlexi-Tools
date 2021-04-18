@@ -1,6 +1,6 @@
 {
-  "name": "deb/flexibee-tools",
-  "description": "Several FlexiBee Testing Tools.",
+  "name": "deb/abraflexi-tools",
+  "description": "Several AbraFlexi Testing Tools.",
   "minimum-stability": "dev",
   "license": "MIT",
   "authors": [
@@ -15,7 +15,7 @@
     "bin/fbcp"
   ],
   "config": {
-    "vendor-dir": "/var/lib/flexibee-tools"
+    "vendor-dir": "/var/lib/abraflexi-tools"
   },
   "repositories": [
     {
@@ -27,7 +27,7 @@
     },
     {
       "type": "path",
-      "url": "/usr/share/php/FlexiPeeHP",
+      "url": "/usr/share/php/AbraFlexi",
       "options": {
         "symlink": true
       }
@@ -35,15 +35,15 @@
   ],
   "require": {
     "deb/ease-core": "*",
-    "deb/flexibee": "*",
+    "deb/abraflexi": "*",
     "fzaninotto/faker": "*"
   },
   "autoload-dev": {
     "psr-4": {
       "Test\\Ease\\": "vendor/vitexsoftware/ease-core/tests/src/Ease",
-      "Test\\FlexiPeeHP\\": "vendor/spoje.net/flexibee/tests/src/FlexiPeeHP",
+      "Test\\FlexiPeeHP\\": "vendor/spojenet/abraflexi/tests/src/AbraFlexi",
       "Test\\": "testing/"
     }
   },
-  "version": "0.10.4"
+  "version": "0.12"
 }

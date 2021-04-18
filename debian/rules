@@ -6,16 +6,16 @@
 override_dh_install:
 	jq '.version = "'`dpkg-parsechangelog | sed -n 's/^Version: //p'`'"' debian/conf/composer.json |sponge debian/conf/composer.json
 	dh_install
-	sed -i '/require/c\require  "/usr/share/flexibee-tools/fbget.php";' debian/flexibee-tools/usr/bin/fbget
-	sed -i '/require/c\require  "/usr/share/flexibee-tools/fbput.php";' debian/flexibee-tools/usr/bin/fbput
-	sed -i '/require/c\require  "/usr/share/flexibee-tools/fbcp.php";' debian/flexibee-tools/usr/bin/fbcp
-	sed -i '/require/c\require  "/usr/share/flexibee-tools/fbnc.php";' debian/flexibee-tools/usr/bin/fbnc
-	sed -i '/require/c\require  "/usr/share/flexibee-tools/fbdc.php";' debian/flexibee-tools/usr/bin/fbdc
-	sed -i '/require/c\require  "/usr/share/flexibee-tools/fbwh.php";' debian/flexibee-tools/usr/bin/fbwh
-	sed -i '/require/c\require  "/usr/share/flexibee-tools/fbwhwipe.php";' debian/flexibee-tools/usr/bin/fbwhwipe
-	sed -i '/require/c\require  "/usr/share/flexibee-tools/fakeAddress.php";' debian/flexibee-tools/usr/bin/flexibee-fake-address
-	sed -i '/dirname(__DIR__)/c require_once "\/var\/lib\/flexibee-tools\/autoload.php";' debian/flexibee-tools/usr/share/flexibee-tools/*
-	sed -i "/realpath/c\$$loaderPath = \"/var/lib/flexibee-tools/autoload.php\";" debian/flexibee-tools/usr/share/flexibee-tools/*
+	sed -i '/require/c\require  "/usr/share/abraflexi-tools/fbget.php";' debian/abraflexi-tools/usr/bin/fbget
+	sed -i '/require/c\require  "/usr/share/abraflexi-tools/fbput.php";' debian/abraflexi-tools/usr/bin/fbput
+	sed -i '/require/c\require  "/usr/share/abraflexi-tools/fbcp.php";' debian/abraflexi-tools/usr/bin/fbcp
+	sed -i '/require/c\require  "/usr/share/abraflexi-tools/fbnc.php";' debian/abraflexi-tools/usr/bin/fbnc
+	sed -i '/require/c\require  "/usr/share/abraflexi-tools/fbdc.php";' debian/abraflexi-tools/usr/bin/fbdc
+	sed -i '/require/c\require  "/usr/share/abraflexi-tools/fbwh.php";' debian/abraflexi-tools/usr/bin/fbwh
+	sed -i '/require/c\require  "/usr/share/abraflexi-tools/fbwhwipe.php";' debian/abraflexi-tools/usr/bin/fbwhwipe
+	sed -i '/require/c\require  "/usr/share/abraflexi-tools/fakeAddress.php";' debian/abraflexi-tools/usr/bin/abraflexi-fake-address
+	sed -i '/dirname(__DIR__)/c require_once "\/var\/lib\/abraflexi-tools\/autoload.php";' debian/abraflexi-tools/usr/share/abraflexi-tools/*
+	sed -i "/realpath/c\$$loaderPath = \"/var/lib/abraflexi-tools/autoload.php\";" debian/abraflexi-tools/usr/share/abraflexi-tools/*
 
 override_dh_clean:
 	dh_clean
