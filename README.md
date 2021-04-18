@@ -158,7 +158,9 @@ Options:
 fbbenchmark -p -c 10 -d 10
 ```
 
-Check several operations speed upon given company/database. (Also emulate )
+Count time of several operations speed upon given company/database.
+
+[Result](benchmark-result.png?raw=true)
 
 
 Certificate Updater
