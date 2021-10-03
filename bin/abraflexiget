@@ -1,0 +1,37 @@
+#!/bin/sh
+
+
+if [ -z $1 ]; then
+  echo "Usage: $0 client|server [version]" >&2
+  exit 1
+fi
+
+EDITION=$1
+VERSION=$2
+
+if [ -z ${VERSION} ]; then
+    LATESTURL=`curl -s -q https://www.flexibee.eu/podpora/stazeni-flexibee/stazeni-ekonomickeho-systemu-flexibee-linux/ | grep _all.deb | awk -F'"' '{print $2}' | head -n 1`
+    LATESTPKG=`basename $LATESTURL`
+    VERSION=`echo $LATESTPKG | awk -F_ '{print $2}'`
+fi
+
+YEAR=`echo ${VERSION}|awk -F. '{print \$1}'`
+VER=`echo ${VERSION}|awk -F. '{print \$2}'`
+REV=`echo ${VERSION}|awk -F. '{print \$3}'`
+
+
+if [ ${EDITION} = "client" ]; then
+    PACKNAME="flexibee-client"
+else
+    PACKNAME="flexibee"
+fi
+
+PACKAGE="${PACKNAME}_${VERSION}_all.deb"
+
+if [ -z ${REV} ]; then
+    DWLURL="https://download.flexibee.eu/download/${YEAR}.${VER}/${YEAR}.${VER}/${PACKAGE}"
+else
+    DWLURL="https://download.flexibee.eu/download/${YEAR}.${VER}/${YEAR}.${VER}.${REV}/${PACKAGE}"
+fi
+
+wget -c $DWLURL -O ${PACKAGE}

@@ -114,7 +114,7 @@ Configuration file example
     "ABRAFLEXI_COMPANY": "demo"
 }
 ```
-Default config file location is /etc/abraflexi/client.json ( also provided by [php-abraflexi-config](https://github.com/VitexSoftware/php-abraflexi-config) debian package )
+Default config file location is /etc/abraflexi/client.json ( also provided by [abraflexi-client-config](https://github.com/VitexSoftware/abraflexi-client-config) debian package )
 
 WebHooks Wipe
 -------------
