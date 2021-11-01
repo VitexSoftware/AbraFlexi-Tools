@@ -19,7 +19,7 @@ define('EASE_LOGGER', 'syslog|console');
 $config_file = $argc > 1 ? $argv[1] : '/etc/abraflexi/client.json';
 
 if (file_exists($config_file)) {
-    \Ease\Shared::instanced()->loadConfig($config_file, true);
+    \Ease\Shared::singleton()->loadConfig($config_file, true);
 
     $hooker = new \AbraFlexi\Hooks();
     $hooks = $hooker->getFlexiData();
