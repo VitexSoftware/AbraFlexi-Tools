@@ -187,7 +187,6 @@ def installPackages() {
     sh 'echo "${GREEN} Dry Run ${ENDCOLOR}"'
 //TODO:    sh 'abraflexi-certbot'  
     sh 'abraflexi-fake-address'
-    sh 'abraflexiget'  
     sh 'fbbenchmark'  
     sh 'fbcp'  
     sh 'fbdc'  
