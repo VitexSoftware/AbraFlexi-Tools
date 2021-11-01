@@ -4,7 +4,7 @@
 	dh $@
 
 override_dh_install:
-	jq '.version = "'`dpkg-parsechangelog | sed -n 's/^Version: //p'`'"' debian/conf/composer.json |sponge debian/conf/composer.json
+	jq '.version = "'`dpkg-parsechangelog | sed -n 's/^Version: //p'| sed 's/~.*//'`'"'  debian/conf/composer.json |sponge debian/conf/composer.json
 	dh_install
 	sed -i '/require/c\require  "/usr/share/abraflexi-tools/fbget.php";' debian/abraflexi-tools/usr/bin/fbget
 	sed -i '/require/c\require  "/usr/share/abraflexi-tools/fbput.php";' debian/abraflexi-tools/usr/bin/fbput
