@@ -12,7 +12,7 @@
     ],
     "bin": ["bin/fbget", "bin/fbput", "bin/fbcp"],
     "require": {
-        "spojenet/flexibee": "2.0.x-dev",
+        "spojenet/flexibee": "dev-main",
         "fzaninotto/faker": "*"
     }
 }

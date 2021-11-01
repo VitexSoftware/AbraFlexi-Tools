@@ -35,7 +35,7 @@ if ($argc < 3) {
     $originalName = null;
     if ($source->lastResponseCode == 200) {
 
-        $backupFile = constant('BACKUP_DIRECTORY') . $srcOptions['company'] . '.winstorm-backup';
+        $backupFile = \Ease\Functions::cfg('BACKUP_DIRECTORY') . $srcOptions['company'] . '.winstorm-backup';
         $source->addStatusMessage(_('saving backup'), 'info');
         if ($source->saveBackupTo($backupFile)) {
             $source->addStatusMessage(sprintf(_('backup %s saved'), $backupFile), 'success');

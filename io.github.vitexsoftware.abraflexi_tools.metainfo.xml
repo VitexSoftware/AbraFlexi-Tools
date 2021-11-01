@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="console-application">
+    <id>io.github.vitexsoftware.abraflexi_tools</id>
+  
+    <name>AbraFlexi Tools</name>
+    <summary>several AbraFlexi relates utilites</summary>
+  
+    <metadata_license>MIT</metadata_license>
+    <project_license>MIT</project_license>
+  
+    <description>
+        <p>
+            Set of tools providing the interact with Abra Flexi on command line
+        </p>
+    </description>
+  
+    <icon type="stock">abraflexitools</icon>
+  
+    <categories>
+        <category>Utility</category>
+        <category>Adult</category>
+    </categories>
+  
+    <provides>
+        <binary>abraflexi-certbot</binary>
+        <binary>abraflexi-fake-address</binary>
+        <binary>fbbenchmark</binary>
+        <binary>fbcp</binary>
+        <binary>fbdc</binary>
+        <binary>fbget</binary>
+        <binary>fbnc</binary>
+        <binary>fbput</binary>
+        <binary>fbwh</binary>
+        <binary>fbwhwipe</binary>
+    </provides>
+</component>

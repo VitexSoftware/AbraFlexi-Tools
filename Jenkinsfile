@@ -183,4 +183,18 @@ def installPackages() {
     sh 'sudo apt-get update'
     sh 'echo "${GREEN} INSTALATION ${ENDCOLOR}"'
     sh 'IFS="\n\b"; for package in  `ls $WORKSPACE/dist/debian/ | grep .deb | awk -F_ \'{print \$1}\'` ; do  echo -e "${GREEN} installing ${package} on `lsb_release -sc` ${ENDCOLOR} " ; sudo  DEBIAN_FRONTEND=noninteractive DEBCONF_DEBUG=' + DEBCONF_DEBUG  + ' apt-get -y install $package ; done;'
+
+    sh 'echo "${GREEN} Dry Run ${ENDCOLOR}"'
+    sh 'abraflexi-certbot'  
+    sh 'abraflexi-fake-address'
+    sh 'abraflexiget'  
+    sh 'fbbenchmark'  
+    sh 'fbcp'  
+    sh 'fbdc'  
+    sh 'fbget'  
+    sh 'fbnc'  
+    sh 'fbput'  
+    sh 'fbwh'  
+    sh 'fbwhwipe'
+
 }
