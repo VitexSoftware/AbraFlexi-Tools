@@ -25,10 +25,6 @@ if ($argc < 1) {
 
     if (file_exists($config)) {
         \Ease\Shared::instanced()->loadConfig($config, true);
-    } else {
-        \Ease\Logger\Regent::singleton()->addStatusMessage(_('Cannot read %s'),
-                $config_file, 'error');
-        die('unconfigured');
     }
 
     $changer = new \AbraFlexi\Changes();
