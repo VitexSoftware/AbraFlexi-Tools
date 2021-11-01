@@ -1,12 +1,16 @@
-abraflexi-tools (0.12) UNRELEASED; urgency=medium
+abraflexi-tools (1.0) UNRELEASED; urgency=medium
 
+  [ CyberVitexus ]
   * Readme updated
   * getting Evidence structure data update
   * Update version in debian's composer.json
   * Release v0.10.4
   * Create FUNDING.yml
 
- -- CyberVitexus <vitex@exiv.jinonice.czf>  Sun, 18 Apr 2021 12:21:49 +0200
+  [ vitex ]
+  * v1.0 release
+
+ -- vitex <info@vitexsoftware.cz>  Mon, 01 Nov 2021 21:32:07 +0100
 
 abraflexi-tools (0.9) experimental; urgency=medium
 
