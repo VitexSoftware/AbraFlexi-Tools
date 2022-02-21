@@ -4,7 +4,7 @@
  * AbraFlexi Tools  - WebHook establisher
  *
  * @author     Vítězslav Dvořák <vitex@arachne.cz>
- * @copyright  2020 Vitex Software
+ * @copyright  2020-2022 Vitex Software
  */
 $loaderPath = realpath(__DIR__ . "/../../../autoload.php");
 if (file_exists($loaderPath)) {
@@ -16,7 +16,7 @@ if (file_exists($loaderPath)) {
 define('EASE_APPNAME', 'AbraFlexi WebHook Establisher');
 define('EASE_LOGGER', 'syslog|console');
 
-if ($argc < 1) {
+if ($argc < 2) {
     echo "usage: " . $argv[0] . " http://webhook.processor/url [xml|json] [custom/config.json] \n";
 } else {
     $hookurl = $argv[1];
@@ -28,6 +28,7 @@ if ($argc < 1) {
     }
 
     $changer = new \AbraFlexi\Changes();
+    $changer->logBanner();
     if (!$changer->getStatus()) {
         $changer->enable();
     }
