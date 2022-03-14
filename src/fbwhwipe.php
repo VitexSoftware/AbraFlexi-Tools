@@ -23,15 +23,20 @@ if (file_exists($config_file)) {
 }
 
 $hooker = new \AbraFlexi\Hooks();
-$hooks = $hooker->getFlexiData();
-if (!isset($hooks['message']) && is_array($hooks) && !empty(current($hooks)) && count(current($hooks))) {
-    foreach ($hooks as $hookinfo) {
-        if ($hooker->unregister($hookinfo['id'])) {
-            $hooker->addStatusMessage(sprintf(_('Hook %s was unregistered'),
-                            $hookinfo['url']), 'success');
-        } else {
-            $hooker->addStatusMessage(sprintf(_('Hook %s was not unregistered'),
-                            $hookinfo['url']), 'warning');
+try {
+    $hooks = $hooker->getFlexiData();
+    if (!isset($hooks['message']) && is_array($hooks) && !empty(current($hooks)) && count(current($hooks))) {
+        foreach ($hooks as $hookinfo) {
+            if ($hooker->unregister($hookinfo['id'])) {
+                $hooker->addStatusMessage(sprintf(_('Hook %s was unregistered'),
+                                $hookinfo['url']), 'success');
+            } else {
+                $hooker->addStatusMessage(sprintf(_('Hook %s was not unregistered'),
+                                $hookinfo['url']), 'warning');
+            }
         }
     }
+} catch (\AbraFlexi\Exception $exc) {
+    
 }
+
