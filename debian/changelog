@@ -1,4 +1,4 @@
-abraflexi-tools (1.1) UNRELEASED; urgency=medium
+abraflexi-tools (1.1.1) UNRELEASED; urgency=medium
 
   [ CyberVitexus ]
   * Readme updated
@@ -10,8 +10,9 @@ abraflexi-tools (1.1) UNRELEASED; urgency=medium
   [ vitex ]
   * v1.0 release
   * webhook creator commandline processing fix
+  * installation fixed
 
- -- vitex <info@vitexsoftware.cz>  Mon, 21 Feb 2022 22:14:29 +0100
+ -- vitex <vitex@exiv.brevnov.czf>  Mon, 14 Mar 2022 23:07:09 +0100
 
 abraflexi-tools (0.9) experimental; urgency=medium
 

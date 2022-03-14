@@ -1,7 +1,7 @@
 README.md			usr/share/abraflexi-tools/
 src/*.php                       usr/share/abraflexi-tools/
 bin/*		                usr/bin/
-debian/conf/composer.json       usr/share/abraflexi-tools/
+debian/conf/composer.json       usr/lib/abraflexi-tools
 abraflexitools.svg		usr/share/icons/hicolor/scalable/apps/
 abraflexitools.png		usr/share/icons/hicolor/256x256/apps/
 io.github.vitexsoftware.abraflexi_tools.metainfo.xml	/usr/share/metainfo/

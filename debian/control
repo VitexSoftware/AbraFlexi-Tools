@@ -8,7 +8,7 @@ Homepage: https://github.com/VitexSoftware/AbraFlexi-Tools
 Section: development
 
 Package: abraflexi-tools
-Depends: ${misc:Depends},composer, php-cli, php-spojenet-abraflexi-dev
+Depends: ${misc:Depends},composer-debian, php-cli, php-spojenet-abraflexi-dev
 Suggests: abraflexi-server,abraflexi-client-config
 Replaces: abraflexi-testing-tools
 Architecture: all

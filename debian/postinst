@@ -3,11 +3,7 @@
 
 set -e
 
-cd /usr/share/abraflexi-tools
-if [ -f composer.lock ] ; then
-    rm -f composer.lock
-fi
-composer --no-dev -o install
+composer-debian abraflexi-tools
 
 #DEBHELPER#
 
