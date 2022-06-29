@@ -37,8 +37,7 @@ if ($argc != 2) {
         if (file_exists($config_file)) {
             \Ease\Shared::instanced()->loadConfig($config_file);
         } else {
-            \Ease\Shared::instanced()->addStatusMessage(_('Cannot read %s'),
-                    $config_file, $type);
+            \Ease\Shared::instanced()->addStatusMessage(_('Cannot read %s'), $config_file);
         }
         $srcOptions = ['company' => $argv[1]];
     }

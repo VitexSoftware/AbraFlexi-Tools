@@ -15,6 +15,7 @@ if (file_exists($loaderPath)) {
 
 $shortopts = "e:i:c:vu::";
 $options = getopt($shortopts);
+$detail = 'id';
 
 if (empty($options)) {
     echo "Obtain a record data from AbraFlexi\n\n";
@@ -33,9 +34,9 @@ if (isset($options['id']) || isset($options['i'])) {
 
 if (isset($options['evidence']) || isset($options['e'])) {
     $evidence = isset($options['evidence']) ? $options['evidence'] : $options['e'];
-    if (array_key_exists($evidence, \AbraFlexi\Structure::$evidence)) {
+    if (array_key_exists($evidence, \AbraFlexi\EvidenceList::$evidences)) {
         $columnsToGet = [];
-        $columnsInfo = \AbraFlexi\Structure::$evidence[$evidence];
+        $columnsInfo = \AbraFlexi\EvidenceList::$evidences[$evidence];
         unset($argv[0]);
         foreach ($argv as $param) {
             if (($param[0] == '-') && array_key_exists($param[1], $options)) {
@@ -54,9 +55,7 @@ if (isset($options['evidence']) || isset($options['e'])) {
                 }
             }
         }
-        if (empty($columnsToGet)) {
-            $detail = 'id';
-        } else {
+        if (!empty($columnsToGet)) {
             $detail = 'custom:' . implode(',', $columnsToGet);
         }
     } else {

@@ -4,7 +4,7 @@
  * AbraFlexi Tools  - AbraFlexi copy
  *
  * @author     Vítězslav Dvořák <vitex@arachne.cz>
- * @copyright  2020-2021 Vitex Software
+ * @copyright  2020-2022 Vitex Software
  */
 $loaderPath = realpath(__DIR__ . "/../../../autoload.php");
 if (file_exists($loaderPath)) {
@@ -42,9 +42,9 @@ if ($argc < 3) {
             $dstOptions = urlToOptions($argv[2]);
             $target = new \AbraFlexi\Company($dstOptions['company'],
                     $dstOptions);
-            if (!empty($target->getDataValue('stavEnum')))
-                $target->addStatusMessage(_('Remove company before restore'),
-                        'info');
+            if (!empty($target->getDataValue('stavEnum'))) {
+                $target->addStatusMessage(_('Remove company before restore'), 'info');
+            }
             if ($target->deleteFromAbraFlexi() || ($target->lastResponseCode == 404)) {
                 if ($target->lastResponseCode == 201) {
                     $target->addStatusMessage(_('company removed before restore'));

@@ -59,6 +59,12 @@ class Prober extends \AbraFlexi\RW {
      */
     private $version = '1.1';
 
+    /**
+     * 
+     * @var AbraFlexi\Pokladna
+     */
+    private $cash;
+
     public function __construct($init = null, $options = array()) {
         parent::__construct($init, $options);
         $this->logBanner('AbraFlexi Prober v' . $this->version);

@@ -12,7 +12,7 @@ if (file_exists($loaderPath)) {
 } else {
     require __DIR__ . '/../vendor/autoload.php';
 }
-
+$columnsToPut = [];
 $shortopts = "c:e:i:v:u::";
 $options = getopt($shortopts);
 
@@ -29,7 +29,7 @@ if (isset($options['evidence']) || isset($options['e'])) {
     $evidence = isset($options['evidence']) ? $options['evidence'] : $options['e'];
     $infoSource = AbraFlexi\RO::$infoDir . '/Properties.' . $evidence . '.json';
     if (file_exists($infoSource)) {
-
+        $columnsAvailble = [];
         $columnsInfo = json_decode(file_get_contents($infoSource), true);
         foreach ($columnsInfo as $columnName => $columnProperties) {
             $columnsAvailble[] = $columnName . '::';

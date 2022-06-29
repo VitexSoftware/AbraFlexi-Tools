@@ -48,7 +48,7 @@ if ($argc != 2) {
     $company = $source->getDataValue('nazev');
     if (is_null($company)) {
         $source->addStatusMessage(sprintf(_('Company %s no exists (%s) '),
-                        $srcOptionsp['company'], $source->getApiURL()), 'warning');
+                        $srcOptions['company'], $source->getApiURL()), 'warning');
     } else {
         $source->addStatusMessage(sprintf(_('Company %s removing'),
                         $source->getApiURL()),
