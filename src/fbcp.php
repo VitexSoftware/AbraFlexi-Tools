@@ -4,7 +4,7 @@
  * AbraFlexi Tools  - AbraFlexi copy
  *
  * @author     Vítězslav Dvořák <vitex@arachne.cz>
- * @copyright  2020-2022 Vitex Software
+ * @copyright  2020-2023 Vitex Software
  */
 $loaderPath = realpath(__DIR__ . "/../../../autoload.php");
 if (file_exists($loaderPath)) {
@@ -18,16 +18,19 @@ define('EASE_APPNAME', 'AbraFlexi Company Transfer');
 define('EASE_LOGGER', 'syslog|console');
 
 function urlToOptions($url) {
-    $optionsRaw = parse_url($url);
-    $options['url'] = $optionsRaw['scheme'] . '://' . $optionsRaw['host'] . ':' . $optionsRaw['port'];
-    $options['company'] = str_replace('/c/', '', $optionsRaw['path']);
-    $options['user'] = $optionsRaw['user'];
-    $options['password'] = $optionsRaw['pass'];
-    return $options;
+    return \AbraFlexi\RO::companyUrlToOptions($url);
 }
+
+
+\Ease\Shared::init(['ABRAFLEXI_URL', 'ABRAFLEXI_LOGIN', 'ABRAFLEXI_PASSWORD', 'ABRAFLEXI_COMPANY'], '../.env');
+$source = new \AbraFlexi\Company(null, $srcOptions);
+
+
 
 if ($argc < 3) {
     echo "usage: " . $argv[0] . " https://user:password@abraflexi.source.cz:5434/c/firma_a_s_  https://user:password@abraflexi.source.cz:5434/c/firma_a_s_ [production] \n";
+    echo "you can also set ABRAFLEXI_URL and ABRAFLEXI_LOGIN,ABRAFLEXI_PASSWORD env variables and specify  only destination URL\n";
+    echo "       " . $argv[0] . " destination_url [production] \n";
 } else {
     $srcOptions = urlToOptions($argv[1]);
     $production = array_key_exists(3, $argv) && ($argv[3] == 'production');
