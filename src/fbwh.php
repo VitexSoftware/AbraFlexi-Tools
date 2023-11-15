@@ -6,6 +6,7 @@
  * @author     Vítězslav Dvořák <vitex@arachne.cz>
  * @copyright  2020-2022 Vitex Software
  */
+
 $loaderPath = realpath(__DIR__ . "/../../../autoload.php");
 if (file_exists($loaderPath)) {
     require $loaderPath;
@@ -42,14 +43,16 @@ if ($argc < 2) {
 
         $hookResult = $hooker->register($hookurl, $format);
         if ($hookResult) {
-            $hooker->addStatusMessage(sprintf(_('Hook %s was registered'),
-                            $hookurl), 'success');
+            $hooker->addStatusMessage(sprintf(
+                _('Hook %s was registered'),
+                $hookurl
+            ), 'success');
             $hookurl = '';
         } else {
-            $hooker->addStatusMessage(sprintf(_('Hook %s not registered'),
-                            $hookurl), 'warning');
+            $hooker->addStatusMessage(sprintf(
+                _('Hook %s not registered'),
+                $hookurl
+            ), 'warning');
         }
     }
 }
-
-

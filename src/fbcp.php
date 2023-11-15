@@ -6,6 +6,7 @@
  * @author     Vítězslav Dvořák <vitex@arachne.cz>
  * @copyright  2020-2023 Vitex Software
  */
+
 $loaderPath = realpath(__DIR__ . "/../../../autoload.php");
 if (file_exists($loaderPath)) {
     require $loaderPath;
@@ -17,7 +18,8 @@ define('BACKUP_DIRECTORY', sys_get_temp_dir() . DIRECTORY_SEPARATOR);
 define('EASE_APPNAME', 'AbraFlexi Company Transfer');
 define('EASE_LOGGER', 'syslog|console');
 
-function urlToOptions($url) {
+function urlToOptions($url)
+{
     return \AbraFlexi\RO::companyUrlToOptions($url);
 }
 
@@ -37,14 +39,15 @@ if ($argc < 3) {
     $source = new \AbraFlexi\Company($srcOptions['company'], $srcOptions);
     $originalName = null;
     if ($source->lastResponseCode == 200) {
-
         $backupFile = \Ease\Functions::cfg('BACKUP_DIRECTORY') . $srcOptions['company'] . '.winstorm-backup';
         $source->addStatusMessage(_('saving backup'), 'info');
         if ($source->saveBackupTo($backupFile)) {
             $source->addStatusMessage(sprintf(_('backup %s saved'), $backupFile), 'success');
             $dstOptions = urlToOptions($argv[2]);
-            $target = new \AbraFlexi\Company($dstOptions['company'],
-                    $dstOptions);
+            $target = new \AbraFlexi\Company(
+                $dstOptions['company'],
+                $dstOptions
+            );
             if (!empty($target->getDataValue('stavEnum'))) {
                 $target->addStatusMessage(_('Remove company before restore'), 'info');
             }
@@ -52,14 +55,25 @@ if ($argc < 3) {
                 if ($target->lastResponseCode == 201) {
                     $target->addStatusMessage(_('company removed before restore'));
                 }
-                $target->addStatusMessage(($production ? _('Production') : _('Development')) . ' ' . _('restore begin'),
-                        'success');
-                if ($target->restoreBackupFrom($backupFile, $originalName,
-                                !$production, !$production, !$production)) {
+                $target->addStatusMessage(
+                    ($production ? _('Production') : _('Development')) . ' ' . _('restore begin'),
+                    'success'
+                );
+                if (
+                    $target->restoreBackupFrom(
+                        $backupFile,
+                        $originalName,
+                        !$production,
+                        !$production,
+                        !$production
+                    )
+                ) {
                     $target->addStatusMessage(_('backup restored'), 'success');
                 } else {
-                    $target->addStatusMessage(sprintf(_('company %s was not restored'),
-                                    $dstOptions['company']), 'warning');
+                    $target->addStatusMessage(sprintf(
+                        _('company %s was not restored'),
+                        $dstOptions['company']
+                    ), 'warning');
                 }
             } else {
                 $target->addStatusMessage(_('company cleanup failed'), 'warning');

@@ -6,6 +6,7 @@
  * @author     Vítězslav Dvořák <vitex@arachne.cz>
  * @copyright  2020-2022 Vitex Software
  */
+
 $loaderPath = realpath(__DIR__ . "/../../../autoload.php");
 if (file_exists($loaderPath)) {
     require $loaderPath;
@@ -28,15 +29,17 @@ try {
     if (!isset($hooks['message']) && is_array($hooks) && !empty(current($hooks)) && count(current($hooks))) {
         foreach ($hooks as $hookinfo) {
             if ($hooker->unregister($hookinfo['id'])) {
-                $hooker->addStatusMessage(sprintf(_('Hook %s was unregistered'),
-                                $hookinfo['url']), 'success');
+                $hooker->addStatusMessage(sprintf(
+                    _('Hook %s was unregistered'),
+                    $hookinfo['url']
+                ), 'success');
             } else {
-                $hooker->addStatusMessage(sprintf(_('Hook %s was not unregistered'),
-                                $hookinfo['url']), 'warning');
+                $hooker->addStatusMessage(sprintf(
+                    _('Hook %s was not unregistered'),
+                    $hookinfo['url']
+                ), 'warning');
             }
         }
     }
 } catch (\AbraFlexi\Exception $exc) {
-    
 }
-

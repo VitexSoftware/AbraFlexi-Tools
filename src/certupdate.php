@@ -6,6 +6,7 @@
  * @author     Vítězslav Dvořák <vitex@arachne.cz>
  * @copyright  2020 Vitex Software
  */
+
 $loaderPath = realpath(__DIR__ . "/../../../autoload.php");
 if (file_exists($loaderPath)) {
     require $loaderPath;
@@ -37,5 +38,4 @@ $leRootCA = file_get_contents('https://ssl-tools.net/certificates/dac9024f54d8f6
 $leAbraFlexi = $leRootCA . file_get_contents('/etc/letsencrypt/live/' . $certificateName . '/fullchain.pem') . file_get_contents('le-rsaprivkey.pem');
 
 $uploader = new \AbraFlexi\Root();
-$uploader->addStatusMessage(_('New certificate upload'), $uploader->uploadCertificate($leAbraFlexi) ? 'success' : 'error' );
-
+$uploader->addStatusMessage(_('New certificate upload'), $uploader->uploadCertificate($leAbraFlexi) ? 'success' : 'error');

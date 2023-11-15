@@ -35,7 +35,7 @@ $faker = Faker\Factory::create();
 for ($index = 0; $index < $iterations; $index++) {
     $addresser->dataReset();
     $addresser->setData(
-            [
+        [
                 'popis' => $faker->userName,
                 'email' => $faker->email,
                 'nazev' => $faker->firstName . ' ' . $faker->lastName,

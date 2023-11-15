@@ -6,6 +6,7 @@
  * @author     Vítězslav Dvořák <vitex@arachne.cz>
  * @copyright  2020 Vitex Software
  */
+
 $loaderPath = realpath(__DIR__ . "/../../../autoload.php");
 if (file_exists($loaderPath)) {
     require $loaderPath;
@@ -19,7 +20,8 @@ define('BACKUP_DIRECTORY', sys_get_temp_dir() . DIRECTORY_SEPARATOR);
 define('EASE_APPNAME', 'AbraFlexi Create Company');
 define('EASE_LOGGER', 'syslog|console');
 
-function urlToOptions($url) {
+function urlToOptions($url)
+{
     $optionsRaw = parse_url($url);
     $options['url'] = $optionsRaw['scheme'] . '://' . $optionsRaw['host'] . ':' . $optionsRaw['port'];
     $options['company'] = str_replace('/c/', '', $optionsRaw['path']);
@@ -37,21 +39,33 @@ if ($argc != 2) {
         if (file_exists($config_file)) {
             \Ease\Shared::instanced()->loadConfig($config_file);
         } else {
-            \Ease\Shared::instanced()->addStatusMessage(_('Cannot read %s'),
-                    $config_file, 'error');
+            \Ease\Shared::instanced()->addStatusMessage(
+                _('Cannot read %s'),
+                $config_file,
+                'error'
+            );
         }
         $srcOptions = ['company' => $argv[1]];
     }
     $srcOptions['ignore404'] = true;
-    $source = new \AbraFlexi\Company($srcOptions['company'],
-            $srcOptions);
+    $source = new \AbraFlexi\Company(
+        $srcOptions['company'],
+        $srcOptions
+    );
     $company = $source->getDataValue('nazev');
     if (is_null($company)) {
-        $source->addStatusMessage(sprintf(_('Company %s no exists (%s) '),
-                        $srcOptions['company'], $source->getApiURL()), 'warning');
+        $source->addStatusMessage(sprintf(
+            _('Company %s no exists (%s) '),
+            $srcOptions['company'],
+            $source->getApiURL()
+        ), 'warning');
     } else {
-        $source->addStatusMessage(sprintf(_('Company %s removing'),
-                        $source->getApiURL()),
-                $source->deleteFromAbraFlexi() ? 'success' : 'error' );
+        $source->addStatusMessage(
+            sprintf(
+                _('Company %s removing'),
+                $source->getApiURL()
+            ),
+            $source->deleteFromAbraFlexi() ? 'success' : 'error'
+        );
     }
 }

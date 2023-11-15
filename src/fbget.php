@@ -6,6 +6,7 @@
  * @author     Vítězslav Dvořák <vitex@arachne.cz>
  * @copyright  2020 Vitex Software
  */
+
 $loaderPath = realpath(__DIR__ . "/../../../autoload.php");
 if (file_exists($loaderPath)) {
     require $loaderPath;
@@ -74,8 +75,10 @@ if (file_exists($configFile)) {
     \Ease\Shared::instanced()->loadConfig($configFile, true);
 }
 
-$grabber = new AbraFlexi\RO(is_numeric($id) ? intval($id) : $id,
-        ['evidence' => $evidence, 'detail' => $detail]);
+$grabber = new AbraFlexi\RO(
+    is_numeric($id) ? intval($id) : $id,
+    ['evidence' => $evidence, 'detail' => $detail]
+);
 
 if (isset($options['v'])) {
     $grabber->logBanner(__FILE__);
