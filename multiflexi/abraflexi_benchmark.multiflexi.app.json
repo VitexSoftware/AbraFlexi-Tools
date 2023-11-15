@@ -4,7 +4,7 @@
     "description": "AbraFlexi Server Benchmark",
     "executable": "\/usr\/bin\/fbbenchmark",
     "setup": "",
-    "cmdparams": "-p -c 10 -d 5",
+    "cmdparams": "-p -c {ABRAFLEXI_BENCHMARK_CYCLES} -d {ABRAFLEXI_BENCHMARK_DELAY}",
     "deploy": "apt install abraflexi-tools",
     "homepage": "https:\/\/github.com\/VitexSoftware\/AbraFlexi-Tools",
     "requirements": null,
@@ -13,26 +13,39 @@
             "type": "string",
             "description": "",
             "defval": "demo_de",
-            "required": 0
+            "required": true
         },
         "ABRAFLEXI_LOGIN": {
             "type": "string",
             "description": "AbraFlexi Login",
             "defval": "winstrom",
-            "required": 0
+            "required": true
         },
         "ABRAFLEXI_PASSWORD": {
             "type": "string",
             "description": "AbraFlexi password",
             "defval": "winstrom",
-            "required": 0
+            "required": true
         },
         "ABRAFLEXI_URL": {
             "type": "string",
             "description": "AbraFlexi Server URI",
             "defval": "https:\/\/demo.flexibee.eu:5434",
-            "required": 0
+            "required": true
+        },
+        "ABRAFLEXI_BENCHMARK_CYCLES": {
+            "type": "int",
+            "description": "Count of Benchmark Cycles",
+            "defval": "10",
+            "required": false
+        },
+        "ABRAFLEXI_BENCHMARK_DELAY": {
+            "type": "int",
+            "description": "Deleay in seconds between Benchmark Cycles",
+            "defval": "5",
+            "required": false
         }
+        
     },
-    "multiflexi": "MultiFlexi v1.5.1.0 @vyvojar.spojenet.cz 2023-11-15 11:08:04 GMT"
+    "multiflexi": "1.7.2"
 }
