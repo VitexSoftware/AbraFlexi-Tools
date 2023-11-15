@@ -9,3 +9,5 @@
 /tests/client.json
 /debian/flexibee-tools.substvars
 /debian/files
+/.env
+/.vscode/
