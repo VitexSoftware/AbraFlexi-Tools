@@ -11,3 +11,7 @@
 /debian/files
 /.env
 /.vscode/
+/debian/multiflexi-abraflexi-tools.debhelper.log
+/debian/multiflexi-abraflexi-tools.substvars
+/debian/multiflexi-abraflexi-tools/
+

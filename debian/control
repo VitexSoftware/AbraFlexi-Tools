@@ -17,3 +17,14 @@ Priority: optional
 Description: commandline AbraFlexi tools
  Set of tools allowning interact with Abra Flexi on command line
  
+Package: multiflexi-abraflexi-tools
+Depends: multiflexi, abraflexi-tools
+Suggests: abraflexi-server,abraflexi-client-config
+Replaces: abraflexi-testing-tools
+Architecture: all
+Section: devel
+Priority: optional
+Description: Add commandline AbraFlexi tools into MultiFlexi
+ Use MultiFlexi as launcher for AbraFlexi tools
+ 
+

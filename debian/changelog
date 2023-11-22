@@ -1,4 +1,4 @@
-abraflexi-tools (1.1.2) UNRELEASED; urgency=medium
+abraflexi-tools (1.1.3) UNRELEASED; urgency=medium
 
   [ CyberVitexus ]
   * Readme updated
@@ -14,8 +14,9 @@ abraflexi-tools (1.1.2) UNRELEASED; urgency=medium
 
   [  ]
   * MultiFlexi package added
+  * MultiFlexi Package build
 
- --  <vitezslav.dvorak@spojenet.cz>  Wed, 15 Nov 2023 12:25:43 +0100
+ -- vitex <info@vitexsoftware.cz>  Wed, 22 Nov 2023 21:20:03 +0100
 
 abraflexi-tools (0.9) experimental; urgency=medium
 
