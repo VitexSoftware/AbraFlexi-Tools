@@ -62,6 +62,8 @@ https://demo.abraflexi.eu:5434/c/demo/adresar/333
 {"winstrom":{"@version":"1.0","success":"true","stats":{"created":"0","updated":"1","deleted":"0","skipped":"0","failed":"0"},"results":[{"id":"333","request-id":"333","ref":"
 ```
 
+![fbcp](fbcp.svg?raw=true)
+
 AbraFlexi company Copy
 ---------------------
 
@@ -155,7 +157,7 @@ Options:
  * -s   - sleep x seconds after each operation
 
 ```shell
-fbbenchmark -p -c 10 -d 10
+abraflexi-benchmark -p -c 10 -d 10
 ```
 
 Count time of several operations speed upon given company/database.

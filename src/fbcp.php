@@ -14,59 +14,57 @@ if (file_exists($loaderPath)) {
     require __DIR__ . '/../vendor/autoload.php';
 }
 
-define('BACKUP_DIRECTORY', sys_get_temp_dir() . DIRECTORY_SEPARATOR);
-define('EASE_APPNAME', 'AbraFlexi Company Transfer');
+
+define('EASE_APPNAME', 'AbraFlexi Company Copy');
 define('EASE_LOGGER', 'syslog|console');
 
-function urlToOptions($url)
-{
-    return \AbraFlexi\RO::companyUrlToOptions($url);
-}
-
-
-\Ease\Shared::init(['ABRAFLEXI_URL', 'ABRAFLEXI_LOGIN', 'ABRAFLEXI_PASSWORD', 'ABRAFLEXI_COMPANY'], '../.env');
-$source = new \AbraFlexi\Company(null, $srcOptions);
-
-
-
-if ($argc < 3) {
+if (substr($argv[1], 0, 4) != 'http') {
     echo "usage: " . $argv[0] . " https://user:password@abraflexi.source.cz:5434/c/firma_a_s_  https://user:password@abraflexi.source.cz:5434/c/firma_a_s_ [production] \n";
     echo "you can also set ABRAFLEXI_URL and ABRAFLEXI_LOGIN,ABRAFLEXI_PASSWORD env variables and specify  only destination URL\n";
     echo "       " . $argv[0] . " destination_url [production] \n";
 } else {
-    $srcOptions = urlToOptions($argv[1]);
-    $production = array_key_exists(3, $argv) && ($argv[3] == 'production');
+    if (substr($argv[2], 0, 4) == 'http') {
+        $srcOptions = \AbraFlexi\RO::companyUrlToOptions($argv[1]);
+        $dstOptions = \AbraFlexi\RO::companyUrlToOptions($argv[2]);
+        $production = array_key_exists(3, $argv) && ($argv[3] == 'production');
+    } else {
+        \Ease\Shared::init(['ABRAFLEXI_URL', 'ABRAFLEXI_LOGIN', 'ABRAFLEXI_PASSWORD', 'ABRAFLEXI_COMPANY'], '../.env');
+        $production = array_key_exists(2, $argv) && ($argv[2] == 'production');
+        $srcOptions = ['company' => \Ease\Shared::cfg('ABRAFLEXI_COMPANY')]; //Use ENV
+        $dstOptions = \AbraFlexi\RO::companyUrlToOptions($argv[1]);
+    }
+
     $source = new \AbraFlexi\Company($srcOptions['company'], $srcOptions);
     $originalName = null;
     if ($source->lastResponseCode == 200) {
-        $backupFile = \Ease\Functions::cfg('BACKUP_DIRECTORY') . $srcOptions['company'] . '.winstorm-backup';
+        $backupFile = \Ease\Functions::cfg('BACKUP_DIRECTORY', sys_get_temp_dir() . DIRECTORY_SEPARATOR) . $srcOptions['company'] . date('Y-m-d_h:m:s') . '.winstorm-backup';
         $source->addStatusMessage(_('saving backup'), 'info');
         if ($source->saveBackupTo($backupFile)) {
             $source->addStatusMessage(sprintf(_('backup %s saved'), $backupFile), 'success');
-            $dstOptions = urlToOptions($argv[2]);
+            $dstOptions['ignore404'] = true;
             $target = new \AbraFlexi\Company(
                 $dstOptions['company'],
                 $dstOptions
             );
             if (!empty($target->getDataValue('stavEnum'))) {
-                $target->addStatusMessage(_('Remove company before restore'), 'info');
+                $target->addStatusMessage(_('Removing previous company data'), 'info');
             }
             if ($target->deleteFromAbraFlexi() || ($target->lastResponseCode == 404)) {
                 if ($target->lastResponseCode == 201) {
-                    $target->addStatusMessage(_('company removed before restore'));
+                    $target->addStatusMessage(_('company removed before restore'), 'info');
                 }
                 $target->addStatusMessage(
                     ($production ? _('Production') : _('Development')) . ' ' . _('restore begin'),
-                    'success'
+                    'info'
                 );
                 if (
-                    $target->restoreBackupFrom(
-                        $backupFile,
-                        $originalName,
-                        !$production,
-                        !$production,
-                        !$production
-                    )
+                        $target->restoreBackupFrom(
+                            $backupFile,
+                            $originalName,
+                            !$production,
+                            !$production,
+                            !$production
+                        )
                 ) {
                     $target->addStatusMessage(_('backup restored'), 'success');
                 } else {

@@ -7,7 +7,7 @@
     "cmdparams": "-p -c {ABRAFLEXI_BENCHMARK_CYCLES} -d {ABRAFLEXI_BENCHMARK_DELAY}",
     "deploy": "apt install abraflexi-tools",
     "homepage": "https:\/\/github.com\/VitexSoftware\/AbraFlexi-Tools",
-    "requirements": null,
+    "requirements": "MultiFlexi",
     "environment": {
         "ABRAFLEXI_COMPANY": {
             "type": "string",
