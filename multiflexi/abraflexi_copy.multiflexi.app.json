@@ -4,7 +4,7 @@
     "description": "Copy Company data between two AbraFlexi servers",
     "executable": "fbcp",
     "setup": "",
-    "cmdparams": "{DESTINATION_ABRAFLEXI} {DESTINATION_ABRAFLEXI_PRODUCTION}",
+    "cmdparams": "{SOURCE_ABRAFLEXI} {DESTINATION_ABRAFLEXI_PRODUCTION}",
     "deploy": "apt install abraflexi-tools",
     "homepage": "https:\/\/github.com\/VitexSoftware\/AbraFlexi-Tools",
     "requirements": null,
@@ -33,22 +33,22 @@
             "defval": "https:\/\/demo.flexibee.eu:5434",
             "required": true
         },
-        "DESTINATION_ABRAFLEXI": {
+        "SOURC_ABRAFLEXI": {
             "type": "string",
-            "description": "Uri to reach destination server",
+            "description": "Uri to reach data to copy",
             "defval": "https://user:password@abraflexi.destination.cz:5434/c/firma_a_s_",
             "required": true
         },
         "DESTINATION_ABRAFLEXI_PRODUCTION": {
             "type": "string",
             "description": "Restore webhooks, enable sending mails etc.",
-            "defval": "production",
+            "defval": "",
             "required": false
         },
         "BACKUP_DIRECTORY": {
             "type": "string",
             "description": "path to directory where temporary file is stored",
-            "defval": "production",
+            "defval": "",
             "required": false
         }
     },
