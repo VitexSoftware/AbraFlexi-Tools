@@ -7,7 +7,9 @@
     "cmdparams": "{SOURCE_ABRAFLEXI} {DESTINATION_ABRAFLEXI_PRODUCTION}",
     "deploy": "apt install abraflexi-tools",
     "homepage": "https:\/\/github.com\/VitexSoftware\/AbraFlexi-Tools",
-    "requirements": null,
+    "requirements": "AbraFlexi",
+    "uuid": "a5aad62a-f574-4732-8483-30f4187e3054",
+    "ociimage": "",
     "environment": {
         "ABRAFLEXI_COMPANY": {
             "type": "string",
