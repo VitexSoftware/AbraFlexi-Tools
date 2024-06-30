@@ -44,5 +44,6 @@
       "Test\\FlexiPeeHP\\": "vendor/spojenet/abraflexi/tests/src/AbraFlexi",
       "Test\\": "testing/"
     }
-  }
+  },
+  "version": "1.1.4"
 }

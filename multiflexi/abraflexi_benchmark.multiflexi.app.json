@@ -9,6 +9,7 @@
     "homepage": "https:\/\/github.com\/VitexSoftware\/AbraFlexi-Tools",
     "requirements": "AbraFlexi",
     "uuid": "49ae4677-757b-40dc-b437-989fa372c898",
+    "topics": "AbraFlexi, Benchmark",
     "ociimage": "",
     "environment": {
         "ABRAFLEXI_COMPANY": {
