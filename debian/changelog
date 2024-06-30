@@ -1,4 +1,10 @@
-abraflexi-tools (1.1.3) UNRELEASED; urgency=medium
+abraflexi-tools (1.1.4) UNRELEASED; urgency=medium
+
+  * Benchmark multiflexi binary name fix
+
+ -- Vítězslav Dvořák <info@vitexsoftware.cz>  Sun, 30 Jun 2024 17:13:29 +0200
+
+abraflexi-tools (1.1.3) jammy; urgency=medium
 
   [ CyberVitexus ]
   * Readme updated
@@ -16,7 +22,7 @@ abraflexi-tools (1.1.3) UNRELEASED; urgency=medium
   * MultiFlexi package added
   * MultiFlexi Package build
 
- -- vitex <info@vitexsoftware.cz>  Wed, 22 Nov 2023 21:20:03 +0100
+ -- Vítězslav Dvořák <info@vitexsoftware.cz>  Sun, 30 Jun 2024 17:13:02 +0200
 
 abraflexi-tools (0.9) experimental; urgency=medium
 
