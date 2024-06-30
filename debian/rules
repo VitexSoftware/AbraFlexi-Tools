@@ -4,8 +4,8 @@
 	dh $@
 
 override_dh_install:
-	jq '.version = "'`dpkg-parsechangelog | sed -n 's/^Version: //p'| sed 's/~.*//'`'"'  debian/conf/composer.json |sponge debian/conf/composer.json
 	dh_install
+	jq '.version = "'`dpkg-parsechangelog | sed -n 's/^Version: //p'| sed 's/~.*//'`'"'  debian/conf/composer.json |sponge debian/conf/composer.json
 	sed -i '/require/c\require  "/usr/share/abraflexi-tools/fbget.php";' debian/abraflexi-tools/usr/bin/fbget
 	sed -i '/require/c\require  "/usr/share/abraflexi-tools/fbput.php";' debian/abraflexi-tools/usr/bin/fbput
 	sed -i '/require/c\require  "/usr/share/abraflexi-tools/fbcp.php";' debian/abraflexi-tools/usr/bin/fbcp
@@ -17,6 +17,7 @@ override_dh_install:
 	sed -i '/require/c\require  "/usr/share/abraflexi-tools/fakeAddress.php";' debian/abraflexi-tools/usr/bin/abraflexi-fake-address
 	sed -i '/dirname(__DIR__)/c require_once "\/var\/lib\/composer\/abraflexi-tools\/autoload.php";' debian/abraflexi-tools/usr/share/abraflexi-tools/*
 	sed -i "/realpath/c\$$loaderPath = \"/var/lib/composer/abraflexi-tools/autoload.php\";" debian/abraflexi-tools/usr/share/abraflexi-tools/*
+	mkdir -p debian/multiflexi-abraflexi-digest/usr/lib/abraflexi-tools/multiflexi/
 	jq '.version = "'`dpkg-parsechangelog | sed -n 's/^Version: //p'| sed 's/~.*//'`'"'  multiflexi/abraflexi_benchmark.multiflexi.app.json |sponge  debian/multiflexi-abraflexi-digest/usr/lib/abraflexi-tools/multiflexi/abraflexi_benchmark.multiflexi.app.json	jq '.version = "'`dpkg-parsechangelog | sed -n 's/^Version: //p'| sed 's/~.*//'`'"'  multiflexi/abraflexi_benchmark.multiflexi.app.json |sponge  debian/multiflexi-abraflexi-digest/usr/lib/abraflexi-tools/multiflexi/abraflexi_benchmark.multiflexi.app.json	jq '.version = "'`dpkg-parsechangelog | sed -n 's/^Version: //p'| sed 's/~.*//'`'"'  multiflexi/abraflexi_benchmark.multiflexi.app.json |sponge  debian/multiflexi-abraflexi-digest/usr/lib/abraflexi-tools/multiflexi/abraflexi_benchmark.multiflexi.app.json
 	jq '.version = "'`dpkg-parsechangelog | sed -n 's/^Version: //p'| sed 's/~.*//'`'"'  multiflexi/abraflexi_copy.multiflexi.app.json |sponge  debian/multiflexi-abraflexi-digest/usr/lib/abraflexi-tools/multiflexi/abraflexi_benchmark.multiflexi.app.json	jq '.version = "'`dpkg-parsechangelog | sed -n 's/^Version: //p'| sed 's/~.*//'`'"'  multiflexi/abraflexi_benchmark.multiflexi.app.json |sponge  debian/multiflexi-abraflexi-digest/usr/lib/abraflexi-tools/multiflexi/abraflexi_benchmark.multiflexi.app.json	jq '.version = "'`dpkg-parsechangelog | sed -n 's/^Version: //p'| sed 's/~.*//'`'"'  multiflexi/abraflexi_benchmark.multiflexi.app.json |sponge  debian/multiflexi-abraflexi-digest/usr/lib/abraflexi-tools/multiflexi/abraflexi_copy.multiflexi.app.json
 
