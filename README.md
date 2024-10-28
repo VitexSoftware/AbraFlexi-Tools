@@ -1,11 +1,11 @@
-# AbraFlexi-Tools
+# Tools for AbraFlexi
 
 Set of commandline tools for interaction with AbraFlexi server
 
 ![Project Logo](abraflexitools.png)
 
 AbraFlexi Get
-------------
+-------------
 
 Obtain record data from AbraFlexi
 

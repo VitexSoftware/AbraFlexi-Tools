@@ -15,3 +15,4 @@
 /debian/multiflexi-abraflexi-tools.substvars
 /debian/multiflexi-abraflexi-tools/
 
+/.build/

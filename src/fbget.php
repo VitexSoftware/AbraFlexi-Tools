@@ -1,83 +1,94 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * AbraFlexi Tools  - Get
+ * This file is part of the Tools4AbraFlexi package
  *
- * @author     Vítězslav Dvořák <vitex@arachne.cz>
- * @copyright  2020 Vitex Software
+ * https://github.com/VitexSoftware/AbraFlexi-Tools
+ *
+ * (C) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
-$loaderPath = realpath(__DIR__ . "/../../../autoload.php");
+$loaderPath = realpath(__DIR__.'/../../../autoload.php');
+
 if (file_exists($loaderPath)) {
     require $loaderPath;
 } else {
-    require __DIR__ . '/../vendor/autoload.php';
+    require __DIR__.'/../vendor/autoload.php';
 }
 
-$shortopts = "e:i:c:vu::";
+$shortopts = 'e:i:c:vu::';
 $options = getopt($shortopts);
 $detail = 'id';
 
 if (empty($options)) {
     echo "Obtain a record data from AbraFlexi\n\n";
     echo "\nUsage:\n";
-    echo $argv[0] . " -e evidence-name -i RowID [-c Path] [-u] [-v] column_name [column_name2 ...] \n\n";
-    echo "example: " . $argv[0] . " -e adresar -u -i 333 kod nazev \n\n";
+    echo $argv[0]." -e evidence-name -i RowID [-c Path] [-u] [-v] column_name [column_name2 ...] \n\n";
+    echo 'example: '.$argv[0]." -e adresar -u -i 333 kod nazev \n\n";
     echo "default config file is /etc/abraflexi/client.json (Override it by -c)\n";
-    exit();
+
+    exit;
 }
 
 if (isset($options['id']) || isset($options['i'])) {
-    $id = isset($options['id']) ? $options['id'] : $options['i'];
+    $id = $options['id'] ?? $options['i'];
 } else {
-    die("row ID is requied\n");
+    exit("row ID is requied\n");
 }
 
 if (isset($options['evidence']) || isset($options['e'])) {
-    $evidence = isset($options['evidence']) ? $options['evidence'] : $options['e'];
-    if (array_key_exists($evidence, \AbraFlexi\EvidenceList::$evidences)) {
+    $evidence = $options['evidence'] ?? $options['e'];
+
+    if (\array_key_exists($evidence, \AbraFlexi\EvidenceList::$evidences)) {
         $columnsToGet = [];
         $columnsInfo = \AbraFlexi\EvidenceList::$evidences[$evidence];
         unset($argv[0]);
+
         foreach ($argv as $param) {
-            if (($param[0] == '-') && array_key_exists($param[1], $options)) {
-                continue; //Known switch
+            if (($param[0] === '-') && \array_key_exists($param[1], $options)) {
+                continue; // Known switch
             }
 
-            if (array_search($param, $options)) {
-                continue; //Switch's parameter
+            if (array_search($param, $options, true)) {
+                continue; // Switch's parameter
             }
 
-            if (array_key_exists($param, $columnsInfo)) {
+            if (\array_key_exists($param, $columnsInfo)) {
                 $columnsToGet[] = $param;
             } else {
-                if (($param != $evidence) && ($param != $id) && ($param[0] != '-')) {
-                    die("column $param does not exist in evidence $evidence \n");
+                if (($param !== $evidence) && ($param !== $id) && ($param[0] !== '-')) {
+                    exit("column {$param} does not exist in evidence {$evidence} \n");
                 }
             }
         }
+
         if (!empty($columnsToGet)) {
-            $detail = 'custom:' . implode(',', $columnsToGet);
+            $detail = 'custom:'.implode(',', $columnsToGet);
         }
-    } else {
-        //unknown evidence ?!?
     }
+    // unknown evidence ?!?
 } else {
-    die("evidence is requied\n");
+    exit("evidence is requied\n");
 }
 
 if (isset($options['config']) || isset($options['c'])) {
-    $configFile = isset($options['config']) ? isset($options['config']) : $options['c'];
+    $configFile = isset($options['config']) ?: $options['c'];
 } else {
     $configFile = '/etc/abraflexi/client.json';
 }
+
 if (file_exists($configFile)) {
     \Ease\Shared::instanced()->loadConfig($configFile, true);
 }
 
 $grabber = new AbraFlexi\RO(
-    is_numeric($id) ? intval($id) : $id,
-    ['evidence' => $evidence, 'detail' => $detail]
+    is_numeric($id) ? (int) $id : $id,
+    ['evidence' => $evidence, 'detail' => $detail],
 );
 
 if (isset($options['v'])) {
@@ -85,13 +96,15 @@ if (isset($options['v'])) {
 }
 
 if (isset($options['show-url']) || isset($options['u'])) {
-    echo urldecode($grabber->getApiURL()) . "\n";
+    echo urldecode($grabber->getApiURL())."\n";
 }
 
-if ($grabber->lastResponseCode == 200) {
-    echo \json_encode($grabber->getData(), JSON_PRETTY_PRINT);
+if ($grabber->lastResponseCode === 200) {
+    echo \json_encode($grabber->getData(), \JSON_PRETTY_PRINT);
+
     exit(0);
-} else {
-    echo \json_encode(json_decode($grabber->lastCurlResponse), JSON_PRETTY_PRINT) . "\n";
-    exit(1);
 }
+
+echo \json_encode(json_decode($grabber->lastCurlResponse), \JSON_PRETTY_PRINT)."\n";
+
+exit(1);

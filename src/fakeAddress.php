@@ -1,12 +1,25 @@
 #!/usr/bin/php
 <?php
 
-require_once dirname(__DIR__) . '/vendor/autoload.php';
+declare(strict_types=1);
 
-define('EASE_LOGGER', 'syslog|console');
+/**
+ * This file is part of the Tools4AbraFlexi package
+ *
+ * https://github.com/VitexSoftware/AbraFlexi-Tools
+ *
+ * (C) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-$shortopts = "c:i:";
-$longopts = array("config::", "iterations::");
+require_once \dirname(__DIR__).'/vendor/autoload.php';
+
+\define('EASE_LOGGER', 'syslog|console');
+
+$shortopts = 'c:i:';
+$longopts = ['config::', 'iterations::'];
 $options = getopt($shortopts, $longopts);
 
 if (empty($options)) {
@@ -14,16 +27,17 @@ if (empty($options)) {
     echo "\nUsage:\n";
     echo "fakeaddress [-c|--config path/to.cfg] [-i|--iterations NUM] \n\n";
     echo "default config file is /etc/abraflexi/client.json\n";
-    exit();
+
+    exit;
 }
 
 if (isset($options['config']) || isset($options['c'])) {
-    $configFile = isset($options['config']) ? $options['config'] : $options['c'];
+    $configFile = $options['config'] ?? $options['c'];
 } else {
     $configFile = '/etc/abraflexi/client.json';
 }
 
-$iterations = (array_key_exists('iterations', $options) || array_key_exists('i', $options)) ? (array_key_exists('iterations', $options) ? intval($options['iterations']) : intval($options['i'])) : 1;
+$iterations = (\array_key_exists('iterations', $options) || \array_key_exists('i', $options)) ? (\array_key_exists('iterations', $options) ? (int) ($options['iterations']) : (int) ($options['i'])) : 1;
 
 if (file_exists($configFile)) {
     \Ease\Shared::instanced()->loadConfig($configFile, true);
@@ -32,19 +46,20 @@ if (file_exists($configFile)) {
 $addresser = new \AbraFlexi\Adresar();
 $addresser->logBanner('Fake Address Generator');
 $faker = Faker\Factory::create();
-for ($index = 0; $index < $iterations; $index++) {
+
+for ($index = 0; $index < $iterations; ++$index) {
     $addresser->dataReset();
     $addresser->setData(
         [
-                'popis' => $faker->userName,
-                'email' => $faker->email,
-                'nazev' => $faker->firstName . ' ' . $faker->lastName,
-                'mesto' => $faker->city,
-                'ulice' => $faker->streetName,
-                'tel' => $faker->phoneNumber,
-                'stat' => \AbraFlexi\RO::code($faker->countryCode),
-            ]
+            'popis' => $faker->userName,
+            'email' => $faker->email,
+            'nazev' => $faker->firstName.' '.$faker->lastName,
+            'mesto' => $faker->city,
+            'ulice' => $faker->streetName,
+            'tel' => $faker->phoneNumber,
+            'stat' => \AbraFlexi\RO::code($faker->countryCode),
+        ],
     );
     $newAddr = $addresser->insertToAbraFlexi();
-    $addresser->addStatusMessage('#' . $index . '/' . $iterations . ': ' . $addresser->getRecordIdent() . ': ' . $addresser->getDataValue('nazev'), ($addresser->lastResponseCode == 201) ? 'success' : 'error');
+    $addresser->addStatusMessage('#'.$index.'/'.$iterations.': '.$addresser->getRecordIdent().': '.$addresser->getDataValue('nazev'), ($addresser->lastResponseCode === 201) ? 'success' : 'error');
 }
