@@ -47,7 +47,6 @@ class benchmark extends \AbraFlexi\RW
      * Seconds to wait before each test.
      */
     public int $delay = 0;
-
     private RW $banka = null;
     private $cashType;
     private $pricelist;
@@ -56,7 +55,6 @@ class benchmark extends \AbraFlexi\RW
      * Benchmark version.
      */
     private string $version = '1.1';
-
     private AbraFlexi\Pokladna $cash;
 
     public function __construct($init = null, $options = [])
@@ -79,7 +77,7 @@ class benchmark extends \AbraFlexi\RW
     }
 
     /**
-     * Cout the time pass.
+     * Count the time pass.
      *
      * @param string $timerName
      * @param bool   $writing

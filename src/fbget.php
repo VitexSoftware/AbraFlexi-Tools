@@ -13,13 +13,9 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-$loaderPath = realpath(__DIR__.'/../../../autoload.php');
+\define('APP_NAME', 'AbraFlexi Get Record');
 
-if (file_exists($loaderPath)) {
-    require $loaderPath;
-} else {
-    require __DIR__.'/../vendor/autoload.php';
-}
+require '../vendor/autoload.php';
 
 $shortopts = 'e:i:c:vu::';
 $options = getopt($shortopts);
@@ -46,7 +42,7 @@ if (isset($options['evidence']) || isset($options['e'])) {
 
     if (\array_key_exists($evidence, \AbraFlexi\EvidenceList::$evidences)) {
         $columnsToGet = [];
-        $columnsInfo = \AbraFlexi\EvidenceList::$evidences[$evidence];
+        $columnsInfo = \AbraFlexi\Functions::getOfflineColumnsInfo($evidence);
         unset($argv[0]);
 
         foreach ($argv as $param) {
