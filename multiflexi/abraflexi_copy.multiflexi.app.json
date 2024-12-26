@@ -36,7 +36,7 @@
             "defval": "https:\/\/demo.flexibee.eu:5434",
             "required": true
         },
-        "SOURC_ABRAFLEXI": {
+        "SOURCE_ABRAFLEXI": {
             "type": "string",
             "description": "Uri to reach data to copy",
             "defval": "https://user:password@abraflexi.destination.cz:5434/c/firma_a_s_",
