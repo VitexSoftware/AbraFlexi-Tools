@@ -33,7 +33,10 @@ if ($argc < 2) {
 
     if (file_exists($config)) {
         \Ease\Shared::instanced()->loadConfig($config, true);
+    } else {
+        \Ease\Shared::init(['ABRAFLEXI_URL', 'ABRAFLEXI_LOGIN', 'ABRAFLEXI_PASSWORD', 'ABRAFLEXI_COMPANY']);
     }
+
 
     $changer = new \AbraFlexi\Changes();
     $changer->logBanner();

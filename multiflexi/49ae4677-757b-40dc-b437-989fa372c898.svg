@@ -8,7 +8,7 @@
    version="1.1"
    id="svg36"
    inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
-   sodipodi:docname="fbcp.svg"
+   sodipodi:docname="fbbenchmark.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -25,8 +25,8 @@
      inkscape:document-units="mm"
      showgrid="false"
      inkscape:zoom="0.84096521"
-     inkscape:cx="330.57253"
-     inkscape:cy="478.61671"
+     inkscape:cx="292.52102"
+     inkscape:cy="479.80582"
      inkscape:window-width="1920"
      inkscape:window-height="1120"
      inkscape:window-x="0"
@@ -56,18 +56,6 @@
          offset="100%"
          id="stop6" />
     </linearGradient>
-    <filter
-       id="filter3232"
-       inkscape:collect="always"
-       x="-0.080225755"
-       y="-0.11153856"
-       width="1.1619623"
-       height="1.2289985">
-      <feGaussianBlur
-         id="feGaussianBlur3234"
-         stdDeviation="4.3283459"
-         inkscape:collect="always" />
-    </filter>
     <clipPath
        clipPathUnits="userSpaceOnUse"
        id="clipPath166">
@@ -119,45 +107,8 @@
      inkscape:groupmode="layer"
      id="layer1">
     <g
-       id="Page-1"
-       stroke="none"
-       stroke-width="1"
-       fill="none"
-       fill-rule="evenodd"
-       transform="matrix(2.0822078,0,0,2.0822078,32.830509,6.4173174)">
-      <g
-         id="Icon/Light/Setting/Company">
-        <path
-           id="Rectangle"
-           d="M 0,0 H 32 V 32 H 0 Z" />
-        <path
-           d="M 15,4.75 H 6 A 1.246,1.246 0 0 0 4.75,6 v 21.25 h 11.5 V 6 A 1.246,1.246 0 0 0 15,4.75 Z"
-           id="svg130-Rectangle"
-           stroke="#1e1b18"
-           stroke-width="1.5" />
-        <path
-           d="m 9,15 a 1,1 0 1 1 0,2 1,1 0 0 1 0,-2 z m 3,0 a 1,1 0 1 1 0,2 1,1 0 0 1 0,-2 z M 9,12 a 1,1 0 1 1 0,2 1,1 0 0 1 0,-2 z m 3,0 a 1,1 0 1 1 0,2 1,1 0 0 1 0,-2 z M 9,9 a 1,1 0 1 1 0,2 1,1 0 0 1 0,-2 z m 3,0 a 1,1 0 1 1 0,2 1,1 0 0 1 0,-2 z"
-           id="Combined-Shape"
-           fill="#004b96" />
-        <path
-           d="M 12,20.75 8.75,21 v 6.25 h 3.5 z"
-           id="svg131-Rectangle"
-           stroke="#1e1b18"
-           stroke-width="1.5" />
-        <path
-           d="M 26,14.75 H 18 A 1.246,1.246 0 0 0 16.75,16 v 11.25 h 10.5 V 16 A 1.246,1.246 0 0 0 26,14.75 Z"
-           id="svg132-Rectangle"
-           stroke="#1e1b18"
-           stroke-width="1.5" />
-        <path
-           d="m 20,22 a 1,1 0 1 1 0,2 1,1 0 0 1 0,-2 z m 3,0 a 1,1 0 1 1 0,2 1,1 0 0 1 0,-2 z m -3,-3 a 1,1 0 1 1 0,2 1,1 0 0 1 0,-2 z m 3,0 a 1,1 0 1 1 0,2 1,1 0 0 1 0,-2 z"
-           id="svg133-Combined-Shape"
-           fill="#004b96" />
-      </g>
-    </g>
-    <g
        id="g221"
-       transform="matrix(0.08363135,0,0,-0.08363135,9.6807663,124.46123)">
+       transform="matrix(0.04480837,-0.03581276,-0.03581276,-0.04480837,29.864143,78.81931)">
       <g
          id="g158" />
       <g
@@ -206,71 +157,11 @@
         </g>
       </g>
     </g>
-    <g
-       id="g468"
-       transform="matrix(0.08363135,0,0,-0.08363135,78.472437,124.46123)">
-      <g
-         id="g442" />
-      <g
-         id="g450">
-        <g
-           id="g448"
-           clip-path="url(#clipPath166)">
-          <g
-             id="g446"
-             clip-path="url(#clipPath172)">
-            <path
-               d="M -1,513 H 513 V -1 H -1 Z"
-               style="fill:#f6b102;fill-opacity:1;fill-rule:nonzero;stroke:none"
-               id="path444" />
-          </g>
-        </g>
-      </g>
-      <g
-         id="g458">
-        <g
-           id="g456"
-           clip-path="url(#clipPath182)">
-          <g
-             id="g454"
-             clip-path="url(#clipPath188)">
-            <path
-               d="M 252.6875,363 H 425.7089 V 161.0939 H 252.6875 Z"
-               style="fill:#fdebbf;fill-opacity:1;fill-rule:nonzero;stroke:none"
-               id="path452" />
-          </g>
-        </g>
-      </g>
-      <g
-         id="g466">
-        <g
-           id="g464"
-           clip-path="url(#clipPath198)">
-          <g
-             id="g462"
-             clip-path="url(#clipPath204)">
-            <path
-               d="M 82.51535,363 H 311.6214 V 161.0939 H 82.51535 Z"
-               style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"
-               id="path460" />
-          </g>
-        </g>
-      </g>
-    </g>
-    <g
-       id="g3248"
-       transform="matrix(0.26458333,0,0,0.26458333,45.772388,-31.97286)">
-      <path
-         id="path3242"
-         d="m 385.54,459.3 c 63.33,-11.33 101.34,-9.38 125.15,0 -4.08,14 -19.27,24.52 -33.23,36.77 27.4,-13.11 55.19,-25.08 84.15,-36.07 -8.34,-34.82 -36.77,-54.13 -60.81,-78.48 3.52,8.18 8.64,17.16 12.08,25.32 1.73,4.09 2.49,7.79 1.35,10.74 -41.72,-13.9 -83.44,-13.43 -125.16,-2.83 z"
-         sodipodi:nodetypes="cccccsccc"
-         style="fill:#8e8e8e;fill-rule:evenodd;stroke:#000000;stroke-width:6.8;filter:url(#filter3232)"
-         transform="matrix(-1,0,0,1,550.71,3.9286)" />
-      <path
-         id="path3244"
-         sodipodi:nodetypes="cccccsccc"
-         style="fill:#0c3bfe;fill-rule:evenodd;stroke:#000000;stroke-width:6.8"
-         d="m 155.89,452.51 c -63.335,-11.32 -101.34,-9.38 -125.16,0 4.091,14.01 19.274,24.53 33.238,36.77 -27.399,-13.1 -55.193,-25.08 -84.146,-36.06 8.337,-34.83 36.766,-54.14 60.812,-78.49 -3.521,8.19 -8.649,17.16 -12.088,25.32 -1.725,4.09 -2.491,7.8 -1.347,10.74 41.719,-13.89 83.441,-13.43 125.16,-2.83 l 3.53,44.55 z" />
-    </g>
+    <path
+       id="path3270"
+       class="fil1"
+       inkscape:connector-curvature="0"
+       style="fill:#000000;fill-rule:evenodd;stroke-width:2.87975"
+       d="M 59.879774,55.759537 41.089528,31.98439 2.7542755,61.962502 c -1.80999254,-2.34464 -2.71028772,-6.891254 -1.2066219,-9.741 2.4409522,-4.309013 4.4860182,-6.384421 7.5647026,-10.22943 l 20.6910728,-24.69151 0.0741,0.09518 L 44.391414,5.8943388 54.7619,19.155928 74.653551,3.5995143 C 75.571395,15.704176 75.571395,15.704811 60.984546,27.111784 l 8.296556,10.608934 c 14.58675,-11.40782 14.58675,-11.40782 26.112902,-7.59908 L 75.503927,45.676573 131.50348,117.28434 116.91609,128.69215 71.286507,70.345649 42.336428,84.476555 c -4.473967,2.061241 -6.980176,3.545226 -11.75053,4.876008 -3.127966,0.772968 -7.323732,-1.197339 -9.163326,-3.519012 C 34.166343,75.431871 46.73203,65.63896 59.878678,55.760274 Z" />
   </g>
 </svg>

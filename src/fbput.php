@@ -13,13 +13,9 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-$loaderPath = realpath(__DIR__.'/../../../autoload.php');
+\define('APP_NAME', 'AbraFlexi Put Record');
 
-if (file_exists($loaderPath)) {
-    require $loaderPath;
-} else {
-    require __DIR__.'/../vendor/autoload.php';
-}
+require '../vendor/autoload.php';
 
 $columnsToPut = [];
 $shortopts = 'c:e:i:v:u::';
@@ -28,7 +24,7 @@ $options = getopt($shortopts);
 if (empty($options)) {
     echo "Update or create an record in AbraFlexi\n\n";
     echo "\nUsage:\n";
-    echo $argv[0]." -eevidence-name [-iRowID] [-c path] [-u] [-v] [--colum-name=value] [--colum-name2=value2] ... \n\n";
+    echo $argv[0]." -e evidence-name [-iRowID] [-c path] [-u] [-v] [--colum-name=value] [--colum-name2=value2] ... \n\n";
     echo 'example:  '.$argv[0]." -e adresar -u -i333 --nazev=zmeneno \n\n";
     echo "default config file is /etc/abraflexi/client.json (Override it by -c)\n";
 
@@ -48,7 +44,7 @@ if (isset($options['evidence']) || isset($options['e'])) {
         }
 
         $columnsToPut = getopt($shortopts, $columnsAvailble);
-        unset($columnsToPut['v'], $columnsToPut['e'], $columnsToPut['i'], $columnsToPut['u']);
+        unset($columnsToPut['v'], $columnsToPut['e'], $columnsToPut['i'], $columnsToPut['u'],$columnsToPut['c']);
     }
 } else {
     exit("evidence is requied\n");
@@ -62,10 +58,10 @@ if (isset($options['id']) || isset($options['i'])) {
 if (isset($options['config']) || isset($options['c'])) {
     $configFile = $options['config'] ?? $options['c'];
 } else {
-    $configFile = '/etc/abraflexi/client.json';
+    $configFile = '.env';
 }
 
-\Ease\Shared::instanced()->loadConfig($configFile);
+\Ease\Shared::init(['ABRAFLEXI_URL', 'ABRAFLEXI_LOGIN', 'ABRAFLEXI_PASSWORD', 'ABRAFLEXI_COMPANY'], $configFile);
 
 $grabber = new AbraFlexi\RW(
     null,
@@ -73,7 +69,7 @@ $grabber = new AbraFlexi\RW(
 );
 
 if (isset($options['v'])) {
-    $grabber->logBanner(__FILE__);
+    $grabber->logBanner();
 }
 
 $grabber->insertToAbraFlexi($columnsToPut);

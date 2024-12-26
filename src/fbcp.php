@@ -30,21 +30,21 @@ if (substr($argv[1], 0, 4) !== 'http') {
     echo '       '.$argv[0]." destination_url [production] \n";
 } else {
     if (substr($argv[2], 0, 4) === 'http') {
-        $srcOptions = \AbraFlexi\RO::companyUrlToOptions($argv[1]);
-        $dstOptions = \AbraFlexi\RO::companyUrlToOptions($argv[2]);
+        $srcOptions = \AbraFlexi\Functions::companyUrlToOptions($argv[1]);
+        $dstOptions = \AbraFlexi\Functions::companyUrlToOptions($argv[2]);
         $production = \array_key_exists(3, $argv) && ($argv[3] === 'production');
     } else {
         \Ease\Shared::init(['ABRAFLEXI_URL', 'ABRAFLEXI_LOGIN', 'ABRAFLEXI_PASSWORD', 'ABRAFLEXI_COMPANY'], '../.env');
         $production = \array_key_exists(2, $argv) && ($argv[2] === 'production');
         $srcOptions = ['company' => \Ease\Shared::cfg('ABRAFLEXI_COMPANY')]; // Use ENV
-        $dstOptions = \AbraFlexi\RO::companyUrlToOptions($argv[1]);
+        $dstOptions = \AbraFlexi\Functions::companyUrlToOptions($argv[1]);
     }
 
     $source = new \AbraFlexi\Company($srcOptions['company'], $srcOptions);
     $originalName = null;
 
     if ($source->lastResponseCode === 200) {
-        $backupFile = \Ease\Functions::cfg('BACKUP_DIRECTORY', sys_get_temp_dir().\DIRECTORY_SEPARATOR).$srcOptions['company'].date('Y-m-d_h:m:s').'.winstorm-backup';
+        $backupFile = \Ease\Shared::cfg('BACKUP_DIRECTORY', sys_get_temp_dir().\DIRECTORY_SEPARATOR).$srcOptions['company'].date('Y-m-d_h:m:s').'.winstorm-backup';
         $source->addStatusMessage(_('saving backup'), 'info');
 
         if ($source->saveBackupTo($backupFile)) {
