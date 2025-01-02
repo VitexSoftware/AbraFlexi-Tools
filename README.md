@@ -175,20 +175,24 @@ abraflexi-certbot
 ```
 
 
-Installation
-------------
+## MultiFlexi
 
-To install tools into vendor/bin please use [composer](https://getcomposer.org/):
+Tools for AbraFlexi is ready for run as [MultiFlexi](https://multiflexi.eu) application.
+See the full list of ready-to-run applications within the MultiFlexi platform on the [application list page](https://www.multiflexi.eu/apps.php).
 
-    composer require vitexsoftware/abraflexi-tools
+[![MultiFlexi App](https://github.com/VitexSoftware/MultiFlexi/blob/main/doc/multiflexi-app.svg)](https://www.multiflexi.eu/apps.php)
 
-For Debian or Ubuntu please use [repo](http://vitexsoftware.cz/repos.php):
+## Installation
+
+There is repository for Debian/Ubuntu Linux distributions:
 
 ```shell
-sudo apt install lsb-release wget
-echo "deb http://repo.vitexsoftware.cz $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/vitexsoftware.list
-sudo wget -O /etc/apt/trusted.gpg.d/vitexsoftware.gpg http://repo.vitexsoftware.cz/keyring.gpg
+sudo apt install lsb-release wget apt-transport-https bzip2
+
+wget -qO- https://repo.vitexsoftware.com/keyring.gpg | sudo tee /etc/apt/trusted.gpg.d/vitexsoftware.gpg
+echo "deb [signed-by=/etc/apt/trusted.gpg.d/vitexsoftware.gpg]  https://repo.vitexsoftware.com  $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/vitexsoftware.list
 sudo apt update
+
 sudo apt install abraflexi-tools
 ```
 
