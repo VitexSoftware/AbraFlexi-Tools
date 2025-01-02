@@ -17,12 +17,12 @@ use AbraFlexi\Company;
 use AbraFlexi\Functions;
 use Ease\Shared;
 
-require '../vendor/autoload.php';
+require \dirname(__DIR__).'/vendor/autoload.php';
 
 \define('EASE_APPNAME', 'AbraFlexi Backup Download');
 \define('EASE_LOGGER', 'syslog|console');
 
-if (array_key_exists(1, $argv) && $argv[1] == '-h') {
+if (\array_key_exists(1, $argv) && $argv[1] === '-h') {
     echo 'usage: '.$argv[0]." https://user:password@abraflexi.source.cz:5434/c/firma_a_s_ \n";
     echo "you can also set ABRAFLEXI_URL and ABRAFLEXI_LOGIN,ABRAFLEXI_PASSWORD env variables and specify source credentials\n";
     echo '       '.$argv[0]." destination_url \n";

@@ -15,7 +15,7 @@ declare(strict_types=1);
 
 \define('APP_NAME', 'AbraFlexi Put Record');
 
-require '../vendor/autoload.php';
+require \dirname(__DIR__).'/vendor/autoload.php';
 
 $columnsToPut = [];
 $shortopts = 'c:e:i:v:u::';

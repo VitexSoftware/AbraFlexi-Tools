@@ -1,3 +1,12 @@
 /.build/
 /composer.lock
 /.env
+/debian/.debhelper/
+/debian/abraflexi-tools/
+/debian/multiflexi-abraflexi-tools/
+/debian/debhelper-build-stamp
+/debian/abraflexi-tools.substvars
+/debian/abraflexi-tools.debhelper.log
+/debian/files
+/debian/multiflexi-abraflexi-tools.debhelper.log
+/debian/multiflexi-abraflexi-tools.substvars

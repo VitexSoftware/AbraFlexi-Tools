@@ -28,7 +28,7 @@ use Ease\Shared;
  * file that was distributed with this source code.
  */
 
-require '../vendor/autoload.php';
+require \dirname(__DIR__).'/vendor/autoload.php';
 
 \define('EASE_APPNAME', 'AbraFlexi Company Copy');
 \define('EASE_LOGGER', 'syslog|console');
