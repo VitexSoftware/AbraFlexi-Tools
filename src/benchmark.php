@@ -13,12 +13,37 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
+use AbraFlexi\Adresar;
+use AbraFlexi\Banka;
+use AbraFlexi\Cenik;
+use AbraFlexi\FakturaVydana;
+use AbraFlexi\Functions as Functions2;
+use AbraFlexi\Pokladna;
+use AbraFlexi\PokladniPohyb;
+use AbraFlexi\RO;
+use AbraFlexi\RW;
+use Ease\Functions;
+use Ease\Shared;
+use Faker\Factory;
+
+/**
+ * This file is part of the Tools4AbraFlexi package.
+ *
+ * https://github.com/VitexSoftware/AbraFlexi-Tools
+ *
+ * (C) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 require \dirname(__DIR__).'/vendor/autoload.php';
 
 \define('EASE_APPNAME', 'AbraFlexi Benchmark');
-\define('EASE_LOGGER', 'syslog|console');
 
-if (empty('ABRAFLEXI_URL')) {
+Shared::init(['ABRAFLEXI_URL', 'ABRAFLEXI_LOGIN', 'ABRAFLEXI_PASSWORD', 'ABRAFLEXI_COMPANY'], '../.env');
+
+if (empty(Shared::cfg('ABRAFLEXI_URL'))) {
     echo "Please set up AbraFlexi client configuration environment: \n\n";
     echo "ABRAFLEXI_URL=https://demo.abraflexi.eu:5434\n";
     echo "ABRAFLEXI_PASSWORD=winstrom\n";
@@ -28,7 +53,7 @@ if (empty('ABRAFLEXI_URL')) {
     exit(1);
 }
 
-class benchmark extends \AbraFlexi\RW
+class benchmark extends RW
 {
     public array $benchmark = [];
 
@@ -41,7 +66,7 @@ class benchmark extends \AbraFlexi\RW
      * Seconds to wait before each test.
      */
     public int $delay = 0;
-    private RW $banka = null;
+    private RW $banka;
     private $cashType;
     private $pricelist;
 
@@ -49,7 +74,7 @@ class benchmark extends \AbraFlexi\RW
      * Benchmark version.
      */
     private string $version = '1.1';
-    private AbraFlexi\Pokladna $cash;
+    private Pokladna $cash;
 
     public function __construct($init = null, $options = [])
     {
@@ -103,12 +128,12 @@ class benchmark extends \AbraFlexi\RW
     /**
      * Testing address record.
      *
-     * @return \AbraFlexi\Adresar
+     * @return Adresar
      */
     public function createAddress()
     {
-        $faker = Faker\Factory::create();
-        $checker = new AbraFlexi\Adresar();
+        $faker = Factory::create();
+        $checker = new Adresar();
         $checker->setData(
             [
                 'popis' => $faker->userName,
@@ -117,7 +142,7 @@ class benchmark extends \AbraFlexi\RW
                 'mesto' => $faker->city,
                 'ulice' => $faker->streetName,
                 'tel' => $faker->phoneNumber,
-                'stat' => \AbraFlexi\RO::code($faker->countryCode),
+                'stat' => Functions2::code($faker->countryCode),
             ],
         );
 
@@ -132,11 +157,11 @@ class benchmark extends \AbraFlexi\RW
     /**
      * Testing bank move.
      *
-     * @return \AbraFlexi\Banka
+     * @return Banka
      */
     public function createBankMove()
     {
-        $yesterday = new \DateTime();
+        $yesterday = new DateTime();
         $yesterday->modify('-1 day');
 
         $bdata = [
@@ -144,14 +169,14 @@ class benchmark extends \AbraFlexi\RW
             'banka' => $this->banka,
             'typPohybuK' => 'typPohybu.prijem',
             'popis' => 'AbraFlexi Benchmark record',
-            'varSym' => \Ease\Functions::randomNumber(1111, 9999),
-            'specSym' => \Ease\Functions::randomNumber(111, 999),
+            'varSym' => Functions::randomNumber(1111, 9999),
+            'specSym' => Functions::randomNumber(111, 999),
             'bezPolozek' => true,
-            'datVyst' => \AbraFlexi\RO::dateToFlexiDate($yesterday),
-            'typDokl' => \AbraFlexi\RO::code('STANDARD'),
+            'datVyst' => RO::dateToFlexiDate($yesterday),
+            'typDokl' => RO::code('STANDARD'),
         ];
 
-        $checker = new AbraFlexi\Banka($bdata);
+        $checker = new Banka($bdata);
         $this->timerStart('Bank Move', true);
         $checker->insertToAbraFlexi();
         $this->timerStop('Bank Move', true);
@@ -160,26 +185,26 @@ class benchmark extends \AbraFlexi\RW
     }
 
     /**
-     * @return \AbraFlexi\PokladniPohyb
+     * @return PokladniPohyb
      */
     public function createCashMove()
     {
-        $checker = new AbraFlexi\PokladniPohyb();
+        $checker = new PokladniPohyb();
         $this->timerStart('Cash Move', true);
         $cashMove = [
             'cisDosle' => time(),
-            'kod' => \AbraFlexi\RO::code('CASH_'.time()),
+            'kod' => RO::code('CASH_'.time()),
             'typDokl' => $this->cashType,
             'pokladna' => $this->cash,
             'polozkyDokladu' => [
                 'Nazev' => 'Test',
                 'typPolozkyK' => 'typPolozky.obecny',
                 'mnozMj' => 1,
-                'cenaMj' => \Ease\Functions::randomNumber(1111, 9999),
+                'cenaMj' => Functions::randomNumber(1111, 9999),
             ],
             'popis' => 'benchmark',
             'typPohybuK' => 'typPohybu.prijem',
-            'datVyst' => \AbraFlexi\RO::dateToFlexiDate(new DateTime()),
+            'datVyst' => RO::dateToFlexiDate(new DateTime()),
         ];
         $checker->insertToAbraFlexi($cashMove);
         $this->timerStop('Cash Move', true);
@@ -188,14 +213,14 @@ class benchmark extends \AbraFlexi\RW
     }
 
     /**
-     * @return \AbraFlexi\Cenik
+     * @return Cenik
      */
     public function createPricelistItem()
     {
-        $checker = new AbraFlexi\Cenik();
+        $checker = new Cenik();
         $this->timerStart('Pricelist Item', true);
         $pricelistItem = [
-            'kod' => \AbraFlexi\RO::code('PRICELIST_'.time()),
+            'kod' => RO::code('PRICELIST_'.time()),
             'nazev' => (string) time(),
         ];
         $checker->insertToAbraFlexi($pricelistItem);
@@ -205,25 +230,25 @@ class benchmark extends \AbraFlexi\RW
     }
 
     /**
-     * @return \AbraFlexi\FakturaVydana
+     * @return FakturaVydana
      */
     public function createInvoice()
     {
-        $yesterday = new \DateTime();
+        $yesterday = new DateTime();
         $yesterday->modify('-1 day');
         $testCode = 'TEST_'.time();
 
         $idata = [
             'kod' => $testCode,
-            'varSym' => \Ease\Functions::randomNumber(1111, 9999),
-            'specSym' => \Ease\Functions::randomNumber(111, 999),
+            'varSym' => Functions::randomNumber(1111, 9999),
+            'specSym' => Functions::randomNumber(111, 999),
             'bezPolozek' => true,
             'popis' => 'AbraFlexi Test invoice',
-            'datVyst' => \AbraFlexi\RO::dateToFlexiDate($yesterday),
-            'typDokl' => \AbraFlexi\RO::code('FAKTURA'),
+            'datVyst' => RO::dateToFlexiDate($yesterday),
+            'typDokl' => RO::code('FAKTURA'),
         ];
 
-        $checker = new AbraFlexi\FakturaVydana($idata);
+        $checker = new FakturaVydana($idata);
         $this->timerStart('Invoice', true);
         $checker->insertToAbraFlexi();
         $this->timerStop('Invoice', true);
@@ -232,13 +257,13 @@ class benchmark extends \AbraFlexi\RW
     }
 
     /**
-     * @param \AbraFlexi\Adresar $identifier
+     * @param Adresar $identifier
      *
-     * @return \AbraFlexi\Adresar
+     * @return Adresar
      */
     public function readAddress($identifier)
     {
-        $checker = new AbraFlexi\Adresar();
+        $checker = new Adresar();
         $this->timerStart('Address', false);
         $checker->loadFromAbraFlexi($identifier->getRecordIdent());
         $this->timerStop('Address', false);
@@ -247,13 +272,13 @@ class benchmark extends \AbraFlexi\RW
     }
 
     /**
-     * @param \AbraFlexi\Banka $identifier
+     * @param Banka $identifier
      *
-     * @return \AbraFlexi\Banka
+     * @return Banka
      */
     public function readBankMove($identifier)
     {
-        $checker = new AbraFlexi\Banka();
+        $checker = new Banka();
         $this->timerStart('Bank Move', false);
         $checker->loadFromAbraFlexi($identifier->getRecordIdent());
         $this->timerStop('Bank Move', false);
@@ -262,13 +287,13 @@ class benchmark extends \AbraFlexi\RW
     }
 
     /**
-     * @param \AbraFlexi\PokladniPohyb $identifier
+     * @param PokladniPohyb $identifier
      *
-     * @return \AbraFlexi\PokladniPohyb
+     * @return PokladniPohyb
      */
     public function readCashMove($identifier)
     {
-        $checker = new AbraFlexi\PokladniPohyb();
+        $checker = new PokladniPohyb();
         $this->timerStart('Cash Move', false);
         $checker->loadFromAbraFlexi($identifier->getRecordIdent());
         $this->timerStop('Cash Move', false);
@@ -277,13 +302,13 @@ class benchmark extends \AbraFlexi\RW
     }
 
     /**
-     * @param \AbraFlexi\Cenik $identifier
+     * @param Cenik $identifier
      *
-     * @return \AbraFlexi\Cenik
+     * @return Cenik
      */
     public function readPricelistItem($identifier)
     {
-        $checker = new AbraFlexi\Cenik();
+        $checker = new Cenik();
         $this->timerStart('Pricelist Item', false);
         $checker->loadFromAbraFlexi($identifier->getRecordIdent());
         $this->timerStop('Pricelist Item', false);
@@ -294,13 +319,13 @@ class benchmark extends \AbraFlexi\RW
     /**
      * Create & Read an invoice record.
      *
-     * @param \AbraFlexi\FakturaVydana $identifier
+     * @param FakturaVydana $identifier
      *
-     * @return \AbraFlexi\FakturaVydana
+     * @return FakturaVydana
      */
     public function readInvoice($identifier)
     {
-        $checker = new AbraFlexi\FakturaVydana();
+        $checker = new FakturaVydana();
         $this->timerStart('Invoice', false);
         $checker->loadFromAbraFlexi($identifier->getRecordIdent());
         $this->timerStop('Invoice', false);
@@ -317,7 +342,7 @@ class benchmark extends \AbraFlexi\RW
      */
     public function bankAccount($code = 'BENCHMARK')
     {
-        $this->banka = new \AbraFlexi\RW(\AbraFlexi\RO::code($code), ['evidence' => 'bankovni-ucet', 'ignore404' => true]);
+        $this->banka = new RW(Functions2::code($code), ['evidence' => 'bankovni-ucet', 'ignore404' => true]);
 
         if ($this->banka->lastResponseCode !== 200) {
             $this->banka->sync(['kod' => $code, 'nazev' => $code]);
@@ -331,11 +356,11 @@ class benchmark extends \AbraFlexi\RW
      *
      * @param string $code
      *
-     * @return \AbraFlexi\RW
+     * @return RW
      */
     public function cashMoveType($code = 'BENCHMARK')
     {
-        $this->cashType = new \AbraFlexi\RW(\AbraFlexi\RO::code($code), ['evidence' => 'typ-pokladni-pohyb', 'ignore404' => true]);
+        $this->cashType = new RW(RO::code($code), ['evidence' => 'typ-pokladni-pohyb', 'ignore404' => true]);
 
         if ($this->cashType->lastResponseCode !== 200) {
             $this->cashType->sync(['kod' => $code, 'nazev' => $code]);
@@ -349,11 +374,11 @@ class benchmark extends \AbraFlexi\RW
      *
      * @param string $code
      *
-     * @return \AbraFlexi\RW
+     * @return RW
      */
     public function cash($code = 'BENCHMARK')
     {
-        $this->cash = new \AbraFlexi\RW(\AbraFlexi\RO::code($code), ['evidence' => 'pokladna', 'ignore404' => true]);
+        $this->cash = new Pokladna(RO::code($code), ['ignore404' => true]);
 
         if ($this->cash->lastResponseCode !== 200) {
             $this->cash->sync(['kod' => $code, 'nazev' => $code]);
@@ -367,11 +392,11 @@ class benchmark extends \AbraFlexi\RW
      *
      * @param string $code
      *
-     * @return \AbraFlexi\Cenik
+     * @return Cenik
      */
     public function pricelist($code = 'BENCHMARK')
     {
-        $this->pricelist = new \AbraFlexi\Cenik('code:'.$code, ['ignore404' => true]);
+        $this->pricelist = new Cenik('code:'.$code, ['ignore404' => true]);
 
         if ($this->pricelist->lastResponseCode !== 200) {
             $this->pricelist->sync(['kod' => $code, 'nazev' => $code]);
@@ -441,7 +466,7 @@ if (empty($options)) {
     exit;
 }
 
-$prober = new Prober();
+$prober = new Benchmark();
 
 if (\array_key_exists('v', $options)) {
     exit(0);

@@ -2,6 +2,8 @@
 
 Set of commandline tools for interaction with AbraFlexi server
 
+[![wakatime](https://wakatime.com/badge/user/5abba9ca-813e-43ac-9b5f-b1cfdf3dc1c7/project/de981fb2-c103-4203-a51a-104ed0489608.svg)](https://wakatime.com/badge/user/5abba9ca-813e-43ac-9b5f-b1cfdf3dc1c7/project/de981fb2-c103-4203-a51a-104ed0489608)
+
 ![Project Logo](abraflexitools.svg?raw=true)
 
 AbraFlexi Get
