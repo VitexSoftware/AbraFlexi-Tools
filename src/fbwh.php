@@ -37,7 +37,6 @@ if ($argc < 2) {
         \Ease\Shared::init(['ABRAFLEXI_URL', 'ABRAFLEXI_LOGIN', 'ABRAFLEXI_PASSWORD', 'ABRAFLEXI_COMPANY']);
     }
 
-
     $changer = new \AbraFlexi\Changes();
     $changer->logBanner();
 

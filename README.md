@@ -2,7 +2,7 @@
 
 Set of commandline tools for interaction with AbraFlexi server
 
-![Project Logo](abraflexitools.png?raw=true)
+![Project Logo](abraflexitools.svg?raw=true)
 
 AbraFlexi Get
 -------------
