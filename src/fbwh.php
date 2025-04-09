@@ -13,13 +13,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-$loaderPath = realpath(__DIR__.'/../../../autoload.php');
-
-if (file_exists($loaderPath)) {
-    require $loaderPath;
-} else {
-    require __DIR__.'/../vendor/autoload.php';
-}
+require \dirname(__DIR__).'/vendor/autoload.php';
 
 \define('EASE_APPNAME', 'AbraFlexi WebHook Establisher');
 \define('EASE_LOGGER', 'syslog|console');
@@ -29,16 +23,15 @@ if ($argc < 2) {
 } else {
     $hookurl = $argv[1];
     $format = \array_key_exists(2, $argv) ? $argv[2] : 'json';
-    $config = \array_key_exists(3, $argv) ? $argv[3] : '/etc/abraflexi/client.json';
+    $config = \array_key_exists(3, $argv) ? $argv[3] : '../.env';
 
-    if (file_exists($config)) {
-        \Ease\Shared::instanced()->loadConfig($config, true);
-    } else {
-        \Ease\Shared::init(['ABRAFLEXI_URL', 'ABRAFLEXI_LOGIN', 'ABRAFLEXI_PASSWORD', 'ABRAFLEXI_COMPANY']);
-    }
+    \Ease\Shared::init(['ABRAFLEXI_URL', 'ABRAFLEXI_LOGIN', 'ABRAFLEXI_PASSWORD', 'ABRAFLEXI_COMPANY'], file_exists($config) ? $config : null);
 
     $changer = new \AbraFlexi\Changes();
-    $changer->logBanner();
+
+    if (\Ease\Shared::cfg('APP_DEBUG', false)) {
+        $changer->logBanner();
+    }
 
     if (!$changer->getStatus()) {
         $changer->enable();

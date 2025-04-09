@@ -13,13 +13,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-$loaderPath = realpath(__DIR__.'/../../../autoload.php');
-
-if (file_exists($loaderPath)) {
-    require $loaderPath;
-} else {
-    require __DIR__.'/../vendor/autoload.php';
-}
+require \dirname(__DIR__).'/vendor/autoload.php';
 
 \define('EASE_APPNAME', 'Wipe AbraFlexi WebHooks');
 \define('EASE_LOGGER', 'syslog|console');

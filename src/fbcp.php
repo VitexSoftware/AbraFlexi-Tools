@@ -13,13 +13,22 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-$loaderPath = realpath(__DIR__.'/../../../autoload.php');
+use AbraFlexi\Company;
+use AbraFlexi\Functions;
+use Ease\Shared;
 
-if (file_exists($loaderPath)) {
-    require $loaderPath;
-} else {
-    require __DIR__.'/../vendor/autoload.php';
-}
+/**
+ * This file is part of the Tools4AbraFlexi package.
+ *
+ * https://github.com/VitexSoftware/AbraFlexi-Tools
+ *
+ * (C) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+require \dirname(__DIR__).'/vendor/autoload.php';
 
 \define('EASE_APPNAME', 'AbraFlexi Company Copy');
 \define('EASE_LOGGER', 'syslog|console');
@@ -29,28 +38,28 @@ if (substr($argv[1], 0, 4) !== 'http') {
     echo "you can also set ABRAFLEXI_URL and ABRAFLEXI_LOGIN,ABRAFLEXI_PASSWORD env variables and specify  only destination URL\n";
     echo '       '.$argv[0]." destination_url [production] \n";
 } else {
-    if (substr($argv[2], 0, 4) === 'http') {
-        $srcOptions = \AbraFlexi\Functions::companyUrlToOptions($argv[1]);
-        $dstOptions = \AbraFlexi\Functions::companyUrlToOptions($argv[2]);
+    if (\array_key_exists(2, $argv) && substr($argv[2], 0, 4) === 'http') {
+        $srcOptions = Functions::companyUrlToOptions($argv[1]);
+        $dstOptions = Functions::companyUrlToOptions($argv[2]);
         $production = \array_key_exists(3, $argv) && ($argv[3] === 'production');
     } else {
-        \Ease\Shared::init(['ABRAFLEXI_URL', 'ABRAFLEXI_LOGIN', 'ABRAFLEXI_PASSWORD', 'ABRAFLEXI_COMPANY'], '../.env');
+        Shared::init(['ABRAFLEXI_URL', 'ABRAFLEXI_LOGIN', 'ABRAFLEXI_PASSWORD', 'ABRAFLEXI_COMPANY'], '../.env');
         $production = \array_key_exists(2, $argv) && ($argv[2] === 'production');
-        $srcOptions = ['company' => \Ease\Shared::cfg('ABRAFLEXI_COMPANY')]; // Use ENV
-        $dstOptions = \AbraFlexi\Functions::companyUrlToOptions($argv[1]);
+        $srcOptions = ['company' => Shared::cfg('ABRAFLEXI_COMPANY')]; // Use ENV
+        $dstOptions = Functions::companyUrlToOptions($argv[1]);
     }
 
-    $source = new \AbraFlexi\Company($srcOptions['company'], $srcOptions);
+    $source = new Company($srcOptions['company'], $srcOptions);
     $originalName = null;
 
     if ($source->lastResponseCode === 200) {
-        $backupFile = \Ease\Shared::cfg('BACKUP_DIRECTORY', sys_get_temp_dir().\DIRECTORY_SEPARATOR).$srcOptions['company'].date('Y-m-d_h:m:s').'.winstorm-backup';
-        $source->addStatusMessage(_('saving backup'), 'info');
+        $backupFile = Shared::cfg('BACKUP_DIRECTORY', sys_get_temp_dir().\DIRECTORY_SEPARATOR).$srcOptions['company'].date('Y-m-d_h:m:s').'.winstorm-backup';
+        $source->addStatusMessage(sprintf(_('saving backup to %s'), $backupFile), 'info');
 
         if ($source->saveBackupTo($backupFile)) {
             $source->addStatusMessage(sprintf(_('backup %s saved'), $backupFile), 'success');
             $dstOptions['ignore404'] = true;
-            $target = new \AbraFlexi\Company(
+            $target = new Company(
                 $dstOptions['company'],
                 $dstOptions,
             );

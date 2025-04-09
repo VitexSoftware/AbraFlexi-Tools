@@ -15,7 +15,7 @@ declare(strict_types=1);
 
 \define('APP_NAME', 'AbraFlexi Get Record');
 
-require '../vendor/autoload.php';
+require \dirname(__DIR__).'/vendor/autoload.php';
 
 $shortopts = 'e:i:c:vu::';
 $options = getopt($shortopts);
@@ -75,12 +75,10 @@ if (isset($options['evidence']) || isset($options['e'])) {
 if (isset($options['config']) || isset($options['c'])) {
     $configFile = isset($options['config']) ?: $options['c'];
 } else {
-    $configFile = '/etc/abraflexi/client.json';
+    $configFile = '../.env';
 }
 
-if (file_exists($configFile)) {
-    \Ease\Shared::instanced()->loadConfig($configFile, true);
-}
+Shared::init(['ABRAFLEXI_URL', 'ABRAFLEXI_LOGIN', 'ABRAFLEXI_PASSWORD', 'ABRAFLEXI_COMPANY'], $configFile);
 
 $grabber = new AbraFlexi\RO(
     is_numeric($id) ? (int) $id : $id,

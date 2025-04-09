@@ -13,15 +13,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-$loaderPath = realpath(__DIR__.'/../../../autoload.php');
-
-if (file_exists($loaderPath)) {
-    require $loaderPath;
-} else {
-    require __DIR__.'/../vendor/autoload.php';
-}
-
-$config_file = '/etc/abraflexi/client.json';
+require \dirname(__DIR__).'/vendor/autoload.php';
 
 \define('BACKUP_DIRECTORY', sys_get_temp_dir().\DIRECTORY_SEPARATOR);
 \define('EASE_APPNAME', 'AbraFlexi Create Company');
