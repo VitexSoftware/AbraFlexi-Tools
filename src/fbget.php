@@ -13,6 +13,18 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
+use Ease\Shared;
+
+/**
+ * This file is part of the Tools4AbraFlexi package.
+ *
+ * https://github.com/VitexSoftware/AbraFlexi-Tools
+ *
+ * (C) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 \define('APP_NAME', 'AbraFlexi Get Record');
 
 require \dirname(__DIR__).'/vendor/autoload.php';

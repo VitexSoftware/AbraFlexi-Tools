@@ -20,7 +20,6 @@ use AbraFlexi\FakturaVydana;
 use AbraFlexi\Functions as Functions2;
 use AbraFlexi\Pokladna;
 use AbraFlexi\PokladniPohyb;
-use AbraFlexi\RO;
 use AbraFlexi\RW;
 use Ease\Functions;
 use Ease\Shared;
@@ -80,6 +79,9 @@ class benchmark extends RW
     {
         parent::__construct($init, $options);
         $this->logBanner('AbraFlexi Prober v'.$this->version);
+
+        $bankCode = Functions2::code(Shared::cfg('ABRAFLEXI_BANK', 'BANKOVNÍ ÚČET'));
+        $this->banka = new \AbraFlexi\RW($bankCode, ['autoload' => false]);
     }
 
     /**
@@ -114,15 +116,13 @@ class benchmark extends RW
 
     /**
      * @param array $startEnd
-     *
-     * @return string
      */
-    public function timerValue($startEnd)
+    public function timerValue($startEnd): string
     {
         $time_start = explode(' ', $startEnd['start']);
         $time_end = explode(' ', $startEnd['end']);
 
-        return number_format($time_end[1] + $time_end[0] - ($time_start[1] + $time_start[0]), 3);
+        return number_format((int) $time_end[1] + (int) $time_end[0] - ((int) $time_start[1] + (int) $time_start[0]), 3);
     }
 
     /**
@@ -161,7 +161,7 @@ class benchmark extends RW
      */
     public function createBankMove()
     {
-        $yesterday = new DateTime();
+        $yesterday = new \AbraFlexi\Date();
         $yesterday->modify('-1 day');
 
         $bdata = [
@@ -172,8 +172,8 @@ class benchmark extends RW
             'varSym' => Functions::randomNumber(1111, 9999),
             'specSym' => Functions::randomNumber(111, 999),
             'bezPolozek' => true,
-            'datVyst' => RO::dateToFlexiDate($yesterday),
-            'typDokl' => RO::code('STANDARD'),
+            'datVyst' => $yesterday,
+            'typDokl' => Functions2::code('STANDARD'),
         ];
 
         $checker = new Banka($bdata);
@@ -193,7 +193,7 @@ class benchmark extends RW
         $this->timerStart('Cash Move', true);
         $cashMove = [
             'cisDosle' => time(),
-            'kod' => RO::code('CASH_'.time()),
+            'kod' => Functions2::code('CASH_'.time()),
             'typDokl' => $this->cashType,
             'pokladna' => $this->cash,
             'polozkyDokladu' => [
@@ -204,7 +204,7 @@ class benchmark extends RW
             ],
             'popis' => 'benchmark',
             'typPohybuK' => 'typPohybu.prijem',
-            'datVyst' => RO::dateToFlexiDate(new DateTime()),
+            'datVyst' => new \AbraFlexi\Date(),
         ];
         $checker->insertToAbraFlexi($cashMove);
         $this->timerStop('Cash Move', true);
@@ -220,7 +220,7 @@ class benchmark extends RW
         $checker = new Cenik();
         $this->timerStart('Pricelist Item', true);
         $pricelistItem = [
-            'kod' => RO::code('PRICELIST_'.time()),
+            'kod' => Functions2::code('PRICELIST_'.time()),
             'nazev' => (string) time(),
         ];
         $checker->insertToAbraFlexi($pricelistItem);
@@ -234,7 +234,7 @@ class benchmark extends RW
      */
     public function createInvoice()
     {
-        $yesterday = new DateTime();
+        $yesterday = new \AbraFlexi\Date();
         $yesterday->modify('-1 day');
         $testCode = 'TEST_'.time();
 
@@ -244,8 +244,8 @@ class benchmark extends RW
             'specSym' => Functions::randomNumber(111, 999),
             'bezPolozek' => true,
             'popis' => 'AbraFlexi Test invoice',
-            'datVyst' => RO::dateToFlexiDate($yesterday),
-            'typDokl' => RO::code('FAKTURA'),
+            'datVyst' => $yesterday,
+            'typDokl' => Functions2::code('FAKTURA'),
         ];
 
         $checker = new FakturaVydana($idata);
@@ -337,10 +337,8 @@ class benchmark extends RW
      * Prepare Bank account.
      *
      * @param string $code
-     *
-     * @return type
      */
-    public function bankAccount($code = 'BENCHMARK')
+    public function bankAccount($code = 'BENCHMARK'): RW
     {
         $this->banka = new RW(Functions2::code($code), ['evidence' => 'bankovni-ucet', 'ignore404' => true]);
 
@@ -360,7 +358,7 @@ class benchmark extends RW
      */
     public function cashMoveType($code = 'BENCHMARK')
     {
-        $this->cashType = new RW(RO::code($code), ['evidence' => 'typ-pokladni-pohyb', 'ignore404' => true]);
+        $this->cashType = new RW(Functions2::code($code), ['evidence' => 'typ-pokladni-pohyb', 'ignore404' => true]);
 
         if ($this->cashType->lastResponseCode !== 200) {
             $this->cashType->sync(['kod' => $code, 'nazev' => $code]);
@@ -378,7 +376,7 @@ class benchmark extends RW
      */
     public function cash($code = 'BENCHMARK')
     {
-        $this->cash = new Pokladna(RO::code($code), ['ignore404' => true]);
+        $this->cash = new Pokladna(Functions2::code($code), ['ignore404' => true]);
 
         if ($this->cash->lastResponseCode !== 200) {
             $this->cash->sync(['kod' => $code, 'nazev' => $code]);
@@ -466,7 +464,7 @@ if (empty($options)) {
     exit;
 }
 
-$prober = new Benchmark();
+$prober = new benchmark();
 
 if (\array_key_exists('v', $options)) {
     exit(0);

@@ -18,14 +18,14 @@ require \dirname(__DIR__).'/vendor/autoload.php';
 \define('EASE_APPNAME', 'AbraFlexi Certificate Updater');
 \define('EASE_LOGGER', 'syslog|console');
 
-if (empty(\Ease\Functions::cfg('ABRAFLEXI_URL'))) {
+if (empty(\Ease\Shared::cfg('ABRAFLEXI_URL'))) {
     echo "Please set up AbraFlexi client configuration environment: \n\n";
     echo "ABRAFLEXI_URL=https://demo.abraflexi.eu:5434\n";
     echo "ABRAFLEXI_PASSWORD=winstrom\n";
     echo "ABRAFLEXI_LOGIN=winstrom\n";
 }
 
-$certificateName = parse_url(\Ease\Functions::cfg('ABRAFLEXI_URL'), \PHP_URL_HOST);
+$certificateName = parse_url(\Ease\Shared::cfg('ABRAFLEXI_URL'), \PHP_URL_HOST);
 
 system('certbot '.$certificateName.' --noninteractive');
 

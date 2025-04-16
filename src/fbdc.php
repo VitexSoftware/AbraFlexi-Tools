@@ -19,22 +19,11 @@ require \dirname(__DIR__).'/vendor/autoload.php';
 \define('EASE_APPNAME', 'AbraFlexi Create Company');
 \define('EASE_LOGGER', 'syslog|console');
 
-function urlToOptions($url)
-{
-    $optionsRaw = parse_url($url);
-    $options['url'] = $optionsRaw['scheme'].'://'.$optionsRaw['host'].':'.$optionsRaw['port'];
-    $options['company'] = str_replace('/c/', '', $optionsRaw['path']);
-    $options['user'] = $optionsRaw['user'];
-    $options['password'] = $optionsRaw['pass'];
-
-    return $options;
-}
-
 if ($argc !== 2) {
     echo 'usage: '.$argv[0]." smazat_firma_a_s_ / https://[user:password@]abraflexi.source.cz:5434/c/smazat_firma_a_s_\n";
 } else {
     if (strstr($argv[1], '://')) {
-        $srcOptions = urlToOptions($argv[1]);
+        $srcOptions = \AbraFlexi\Functions::companyUrlToOptions($argv[1]);
     } else {
         if (file_exists($config_file)) {
             \Ease\Shared::instanced()->loadConfig($config_file);
