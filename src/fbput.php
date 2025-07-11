@@ -33,7 +33,7 @@ if (empty($options)) {
 
 if (isset($options['evidence']) || isset($options['e'])) {
     $evidence = $options['evidence'] ?? $options['e'];
-    $infoSource = AbraFlexi\RO::$infoDir.'/Properties.'.$evidence.'.json';
+    $infoSource = AbraFlexi\Functions::$infoDir.'/Properties.'.$evidence.'.json';
 
     if (file_exists($infoSource)) {
         $columnsAvailble = [];

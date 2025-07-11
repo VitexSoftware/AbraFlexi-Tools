@@ -53,7 +53,14 @@
             "description": "path to directory where temporary file is stored",
             "defval": "",
             "required": false
+        },
+        "EASE_LOGGER": {
+            "type": "string",
+            "description": "write log messages using",
+            "defval": "console|syslog",
+            "required": false
         }
+
     },
     "multiflexi": "1.5.1.0"
 }

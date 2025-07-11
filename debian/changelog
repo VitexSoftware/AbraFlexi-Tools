@@ -1,8 +1,14 @@
-abraflexi-tools (1.1.6) UNRELEASED; urgency=medium
+abraflexi-tools (1.1.7) UNRELEASED; urgency=medium
+
+  * better benchmark configuration
+
+ -- vitex <info@vitexsoftware.cz>  Fri, 11 Jul 2025 13:32:22 +0200
+
+abraflexi-tools (1.1.6) jammy; urgency=medium
 
   * Update for crurren php-abraflexi
 
- -- vitex <info@vitexsoftware.cz>  Wed, 11 Dec 2024 00:51:53 +0100
+ -- vitex <info@vitexsoftware.cz>  Fri, 11 Jul 2025 13:32:07 +0200
 
 abraflexi-tools (1.1.5) jammy; urgency=medium
 

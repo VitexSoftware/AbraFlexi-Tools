@@ -37,7 +37,7 @@
             "required": true
         },
         "ABRAFLEXI_BENCHMARK_CYCLES": {
-            "type": "int",
+            "type": "integer",
             "description": "Count of Benchmark Cycles",
             "defval": "10",
             "required": false
@@ -46,6 +46,12 @@
             "type": "int",
             "description": "Deleay in seconds between Benchmark Cycles",
             "defval": "5",
+            "required": false
+        },
+        "EASE_LOGGER": {
+            "type": "string",
+            "description": "write log messages using",
+            "defval": "console|syslog",
             "required": false
         }
     },

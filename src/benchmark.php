@@ -450,10 +450,28 @@ class benchmark extends RW
             }
         }
     }
+
+    public function getReport(): array {
+        $results = [];
+        foreach ($this->benchmark as $passId => $pass) {
+            $passResults = ['pass' => $passId, 'operations' => []];
+            foreach (array_keys($pass) as $testName) {
+                $operation = [
+                    'name' => $testName,
+                    'read' => $this->timerValue($this->benchmark[$passId][$testName]['read']),
+                    'write' => $this->timerValue($this->benchmark[$passId][$testName]['write']),
+                ];
+                $passResults['operations'][] = $operation;
+            }
+            $results[] = $passResults;
+        }
+        return $results;
+    }
+    
 }
 
-$shortopts = 'c:d:v::p::';
-$options = getopt($shortopts);
+$shortopts = 'c:d:v::p::o::e::';
+$options = getopt($shortopts,['output::environment::']);
 
 if (empty($options)) {
     echo "Perform benchmark of AbraFlexi server\n\n";
@@ -463,6 +481,16 @@ if (empty($options)) {
 
     exit;
 }
+
+Shared::init(
+    [
+        'ABRAFLEXI_URL', 'ABRAFLEXI_LOGIN', 'ABRAFLEXI_PASSWORD', 'ABRAFLEXI_COMPANY',
+    ],
+    \array_key_exists('environment', $options) ? $options['environment'] : (\array_key_exists('e', $options) ? $options['e'] : '../.env'),
+);
+
+$destination = \array_key_exists('o', $options) ? $options['o'] : (\array_key_exists('output', $options) ? $options['output'] : Shared::cfg('RESULT_FILE', 'php://stdout'));
+
 
 $prober = new benchmark();
 
@@ -484,3 +512,11 @@ if (\array_key_exists('p', $options)) {
 
 $prober->probeAll();
 $prober->printResults();
+
+$engine->addStatusMessage('stage 6/6: saving report', 'debug');
+
+$report['exitcode'] = $exitcode;
+$written = file_put_contents($destination, json_encode($report, Shared::cfg('DEBUG') ? \JSON_PRETTY_PRINT | \JSON_UNESCAPED_UNICODE : 0));
+$engine->addStatusMessage(sprintf(_('Saving result to %s'), $destination), $written ? 'success' : 'error');
+
+exit($exitcode);
