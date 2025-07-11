@@ -470,6 +470,7 @@ class benchmark extends RW
     
 }
 
+$exitcode = 0;
 $shortopts = 'c:d:v::p::o::e::';
 $options = getopt($shortopts,['output::environment::']);
 
@@ -513,10 +514,9 @@ if (\array_key_exists('p', $options)) {
 $prober->probeAll();
 $prober->printResults();
 
-$engine->addStatusMessage('stage 6/6: saving report', 'debug');
+$prober->addStatusMessage('benchmark done', 'debug');
 
-$report['exitcode'] = $exitcode;
 $written = file_put_contents($destination, json_encode($report, Shared::cfg('DEBUG') ? \JSON_PRETTY_PRINT | \JSON_UNESCAPED_UNICODE : 0));
-$engine->addStatusMessage(sprintf(_('Saving result to %s'), $destination), $written ? 'success' : 'error');
+$prober->addStatusMessage(sprintf(_('Saving result to %s'), $destination), $written ? 'success' : 'error');
 
 exit($exitcode);

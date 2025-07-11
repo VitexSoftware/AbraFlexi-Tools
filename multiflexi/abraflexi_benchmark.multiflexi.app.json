@@ -53,6 +53,18 @@
             "description": "write log messages using",
             "defval": "console|syslog",
             "required": false
+        },
+        "RESULT_FILE": {
+            "type": "string",
+            "description": "File to save results",
+            "defval": "benchmark.json",
+            "required": false
+        },
+        "DEBUG": {
+            "type": "boolean",
+            "description": "Enable debug mode",
+            "defval": false,
+            "required": false
         }
     },
     "multiflexi": "1.7.2"
