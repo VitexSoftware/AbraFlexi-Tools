@@ -7,9 +7,9 @@
     "cmdparams": "-p -c {ABRAFLEXI_BENCHMARK_CYCLES} -d {ABRAFLEXI_BENCHMARK_DELAY}",
     "deploy": "apt install abraflexi-tools",
     "homepage": "https:\/\/github.com\/VitexSoftware\/AbraFlexi-Tools",
-    "requirements": "AbraFlexi",
+    "requirements": ["AbraFlexi"],
     "uuid": "49ae4677-757b-40dc-b437-989fa372c898",
-    "topics": "AbraFlexi, Benchmark",
+    "topics": ["AbraFlexi", "Benchmark"],
     "ociimage": "",
     "environment": {
         "ABRAFLEXI_COMPANY": {
@@ -39,13 +39,13 @@
         "ABRAFLEXI_BENCHMARK_CYCLES": {
             "type": "integer",
             "description": "Count of Benchmark Cycles",
-            "defval": "10",
+            "defval": 10,
             "required": false
         },
         "ABRAFLEXI_BENCHMARK_DELAY": {
-            "type": "int",
-            "description": "Deleay in seconds between Benchmark Cycles",
-            "defval": "5",
+            "type": "integer",
+            "description": "Delay in seconds between Benchmark Cycles",
+            "defval": 5,
             "required": false
         },
         "EASE_LOGGER": {

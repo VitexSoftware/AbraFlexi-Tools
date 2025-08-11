@@ -7,9 +7,9 @@
     "cmdparams": "{SOURCE_ABRAFLEXI} {DESTINATION_ABRAFLEXI_PRODUCTION}",
     "deploy": "apt install abraflexi-tools",
     "homepage": "https:\/\/github.com\/VitexSoftware\/AbraFlexi-Tools",
-    "requirements": "AbraFlexi",
+    "requirements": ["AbraFlexi"],
     "uuid": "a5aad62a-f574-4732-8483-30f4187e3054",
-    "topics": "AbraFlexi, Backup, Restore",
+    "topics": ["AbraFlexi", "Backup", "Restore"],
     "ociimage": "",
     "environment": {
         "ABRAFLEXI_COMPANY": {
@@ -62,5 +62,5 @@
         }
 
     },
-    "multiflexi": "1.5.1.0"
+    "multiflexi": "1.7.2"
 }
