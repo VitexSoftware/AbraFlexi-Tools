@@ -16,7 +16,7 @@
         "phpstan/phpstan": "*",
         "friendsofphp/php-cs-fixer": "^3.86",
         "ergebnis/composer-normalize": "^2.47",
-        "ergebnis/php-cs-fixer-config": "^6.52"
+        "ergebnis/php-cs-fixer-config": "^6.53"
     },
     "require": {
         "spojenet/flexibee": "dev-main",
