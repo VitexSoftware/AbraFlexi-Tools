@@ -1,6 +1,6 @@
 #!groovy
 
-String[] distributions = ['debian:bookworm', 'debian:trixie', 'ubuntu:jammy', 'ubuntu:noble']
+String[] distributions = ['debian:bullseye', 'debian:bookworm', 'debian:trixie', 'debian:forky', 'ubuntu:focal', 'ubuntu:jammy', 'ubuntu:noble']
 
 String vendor = 'vitexsoftware'
 String distribution = ''
@@ -70,7 +70,6 @@ distributions.each {
                             sh 'sudo DEBIAN_FRONTEND=noninteractive DEBCONF_DEBUG=' + debconf_debug + ' apt-get -y install $WORKSPACE/dist/debian/' + deb_file
                         }
                     }
-                    sh 'ABRAFLEXI_URL="https://demo.flexibee.eu:5434" ABRAFLEXI_LOGIN="winstrom" ABRAFLEXI_PASSWORD="winstrom" ABRAFLEXI_COMPANY="demo_de"  abraflexi-benchmark -p -c 1 -d 5;'
                 }
             }
             stage('Copy artifacts ' + distribution ) {
@@ -78,8 +77,8 @@ distributions.each {
                     artifacts.each { deb_file ->
                         println "Copying artifact: " + deb_file
                         archiveArtifacts artifacts: 'dist/debian/' + deb_file
+                        sh 'cp $WORKSPACE/dist/debian/' + deb_file + ' $WORKSPACE'
                     }
-                    sh 'mv $WORKSPACE/dist/debian/*.deb $WORKSPACE'
                 }
             }
         }
