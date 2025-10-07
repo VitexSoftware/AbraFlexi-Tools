@@ -61,7 +61,7 @@
             "required": false
         },
         "DEBUG": {
-            "type": "boolean",
+            "type": "bool",
             "description": "Enable debug mode",
             "defval": false,
             "required": false
