@@ -1,71 +1,110 @@
 {
-    "image": "",
-    "name": "AbraFlexi Benchmark",
-    "description": "AbraFlexi Server Benchmark",
-    "executable": "abraflexi-benchmark",
-    "setup": "",
-    "cmdparams": "-p -c {ABRAFLEXI_BENCHMARK_CYCLES} -d {ABRAFLEXI_BENCHMARK_DELAY}",
-    "deploy": "apt install abraflexi-tools",
-    "homepage": "https:\/\/github.com\/VitexSoftware\/AbraFlexi-Tools",
-    "requirements": ["AbraFlexi"],
+    "$schema": "https://raw.githubusercontent.com/VitexSoftware/php-vitexsoftware-multiflexi-core/refs/heads/main/multiflexi.app.schema.json",
+    "schemaVersion": "3.0.0",
     "uuid": "49ae4677-757b-40dc-b437-989fa372c898",
-    "topics": ["AbraFlexi", "Benchmark"],
+    "name": {
+        "en": "AbraFlexi Benchmark",
+        "cs": "AbraFlexi Benchmark"
+    },
+    "description": {
+        "en": "AbraFlexi Server Benchmark",
+        "cs": "AbraFlexi Server Benchmark"
+    },
+    "tags": [
+        "AbraFlexi",
+        "Benchmark"
+    ],
+    "homepage": "https://github.com/VitexSoftware/AbraFlexi-Tools",
+    "image": "",
     "ociimage": "",
+    "executable": "abraflexi-benchmark",
     "environment": {
         "ABRAFLEXI_COMPANY": {
             "type": "string",
             "description": "",
             "defval": "demo_de",
-            "required": true
+            "required": true,
+            "category": "API"
         },
         "ABRAFLEXI_LOGIN": {
             "type": "string",
-            "description": "AbraFlexi Login",
+            "description": {
+                "en": "AbraFlexi Login",
+                "cs": "AbraFlexi Login"
+            },
             "defval": "winstrom",
-            "required": true
+            "required": true,
+            "category": "API"
         },
         "ABRAFLEXI_PASSWORD": {
-            "type": "string",
-            "description": "AbraFlexi password",
+            "type": "password",
+            "description": {
+                "en": "AbraFlexi password",
+                "cs": "AbraFlexi password"
+            },
             "defval": "winstrom",
-            "required": true
+            "required": true,
+            "category": "API"
         },
         "ABRAFLEXI_URL": {
             "type": "string",
-            "description": "AbraFlexi Server URI",
-            "defval": "https:\/\/demo.flexibee.eu:5434",
-            "required": true
+            "description": {
+                "en": "AbraFlexi Server URI",
+                "cs": "AbraFlexi Server URI"
+            },
+            "defval": "https://demo.flexibee.eu:5434",
+            "required": true,
+            "category": "API"
         },
         "ABRAFLEXI_BENCHMARK_CYCLES": {
             "type": "integer",
-            "description": "Count of Benchmark Cycles",
+            "description": {
+                "en": "Count of Benchmark Cycles",
+                "cs": "Count of Benchmark Cycles"
+            },
             "defval": 10,
-            "required": false
+            "required": false,
+            "category": "API"
         },
         "ABRAFLEXI_BENCHMARK_DELAY": {
             "type": "integer",
-            "description": "Delay in seconds between Benchmark Cycles",
+            "description": {
+                "en": "Delay in seconds between Benchmark Cycles",
+                "cs": "Delay in seconds between Benchmark Cycles"
+            },
             "defval": 5,
-            "required": false
+            "required": false,
+            "category": "API"
         },
         "EASE_LOGGER": {
             "type": "string",
-            "description": "write log messages using",
+            "description": {
+                "en": "write log messages using",
+                "cs": "write log messages using"
+            },
             "defval": "console|syslog",
-            "required": false
+            "required": false,
+            "category": "Behavior"
         },
         "RESULT_FILE": {
             "type": "string",
-            "description": "File to save results",
+            "description": {
+                "en": "File to save results",
+                "cs": "File to save results"
+            },
             "defval": "benchmark.json",
-            "required": false
+            "required": false,
+            "category": "Other"
         },
         "DEBUG": {
             "type": "bool",
-            "description": "Enable debug mode",
+            "description": {
+                "en": "Enable debug mode",
+                "cs": "Enable debug mode"
+            },
             "defval": false,
-            "required": false
+            "required": false,
+            "category": "Behavior"
         }
-    },
-    "multiflexi": "1.7.2"
+    }
 }
