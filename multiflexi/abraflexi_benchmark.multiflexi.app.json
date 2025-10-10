@@ -15,8 +15,6 @@
         "Benchmark"
     ],
     "homepage": "https://github.com/VitexSoftware/AbraFlexi-Tools",
-    "image": "",
-    "ociimage": "",
     "executable": "abraflexi-benchmark",
     "environment": {
         "ABRAFLEXI_COMPANY": {

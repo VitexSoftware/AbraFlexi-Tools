@@ -16,8 +16,6 @@
         "Restore"
     ],
     "homepage": "https://github.com/VitexSoftware/AbraFlexi-Tools",
-    "image": "",
-    "ociimage": "",
     "executable": "fbcp",
     "environment": {
         "ABRAFLEXI_COMPANY": {
