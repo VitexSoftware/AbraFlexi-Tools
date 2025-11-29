@@ -1,6 +1,7 @@
 {
     "$schema": "https://raw.githubusercontent.com/VitexSoftware/php-vitexsoftware-multiflexi-core/refs/heads/main/multiflexi.app.schema.json",
     "schemaVersion": "3.0.0",
+    "ociimage": "",
     "uuid": "a5aad62a-f574-4732-8483-30f4187e3054",
     "name": {
         "en": "AbraFlexi Copy",

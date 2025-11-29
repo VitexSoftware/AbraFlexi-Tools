@@ -451,10 +451,13 @@ class benchmark extends RW
         }
     }
 
-    public function getReport(): array {
+    public function getReport(): array
+    {
         $results = [];
+
         foreach ($this->benchmark as $passId => $pass) {
             $passResults = ['pass' => $passId, 'operations' => []];
+
             foreach (array_keys($pass) as $testName) {
                 $operation = [
                     'name' => $testName,
@@ -463,16 +466,17 @@ class benchmark extends RW
                 ];
                 $passResults['operations'][] = $operation;
             }
+
             $results[] = $passResults;
         }
+
         return $results;
     }
-    
 }
 
 $exitcode = 0;
 $shortopts = 'c:d:v::p::o::e::';
-$options = getopt($shortopts,['output::environment::']);
+$options = getopt($shortopts, ['output::environment::']);
 
 if (empty($options)) {
     echo "Perform benchmark of AbraFlexi server\n\n";
@@ -491,7 +495,6 @@ Shared::init(
 );
 
 $destination = \array_key_exists('o', $options) ? $options['o'] : (\array_key_exists('output', $options) ? $options['output'] : Shared::cfg('RESULT_FILE', 'php://stdout'));
-
 
 $prober = new benchmark();
 

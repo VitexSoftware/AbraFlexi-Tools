@@ -26,7 +26,7 @@ $banker = new Banka();
 
 // Získání všech položek v evidenci banka
 $polozky = $banker->getColumnsFromAbraFlexi(['id', 'kod'], ['limit' => 0]);
-$count = count($polozky);
+$count = \count($polozky);
 echo "Nalezeno {$count} bankovních položek ke smazání.\n";
 
 foreach ($polozky as $idx => $polozka) {
@@ -37,4 +37,3 @@ foreach ($polozky as $idx => $polozka) {
         echo sprintf("[%d/%d] Chyba při mazání ID: %s, kód: %s - %s\n", $idx + 1, $count, $polozka['id'], $polozka['kod'] ?? '-', $ex->getMessage());
     }
 }
-

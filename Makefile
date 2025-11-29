@@ -23,16 +23,6 @@ vendor: composer.json composer.lock ## Installs composer dependencies
 cs: ## Update Coding Standards
 	vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php --diff --verbose
 
-
-
-release:
-	echo Release v$(nextversion)
-	dch -v $(nextversion) `git log -1 --pretty=%B | head -n 1`
-	debuild -i -us -uc -b
-	git commit -a -m "Release v$(nextversion)"
-	git tag -a $(nextversion) -m "version $(nextversion)"
-
-
-deb:
+deb: ## Build debian package
 	debuild -us -uc
 	
