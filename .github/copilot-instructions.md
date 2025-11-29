@@ -1,47 +1,95 @@
-<!-- Use this file to provide workspace-specific custom instructions to Copilot. For more details, visit https://code.visualstudio.com/docs/copilot/copilot-customization#_use-a-githubcopilotinstructionsmd-file -->
+---
+description: AbraFlexi Tools - collection of utilities and tools for AbraFlexi accounting system
+applyTo: '**'
+---
 
-All code comments should be written in English.
+# AbraFlexi Tools - Copilot Instructions
 
-All messages, including error messages, should be written in English.
+## Project Overview
+AbraFlexi Tools is a **comprehensive utilities collection** for AbraFlexi accounting system:
+- **Data Manipulation**: Tools for data import/export and transformation
+- **Reporting Tools**: Custom report generators and formatters
+- **Synchronization**: Data sync utilities between systems
+- **Maintenance Tools**: Database cleanup and optimization utilities
+- **MultiFlexi Integration**: Built using VitexSoftware MultiFlexi ecosystem
 
-All code should be written in PHP 8.4 or later.
+## 📋 Development Standards
 
-All code should follow the PSR-12 coding standard.
+### Core Coding Guidelines
+- **PHP 8.4+**: Use modern PHP features and strict types: `declare(strict_types=1);`
+- **PSR-12**: Follow PHP-FIG coding standards for consistency
+- **Type Safety**: Include type hints for all parameters and return types
+- **Documentation**: PHPDoc blocks for all public methods and classes
+- **Testing**: PHPUnit tests for all new functionality
+- **Internationalization**: Use `_()` functions for translatable strings
 
-When writing code, always include a docblock for functions and classes, describing their purpose, parameters, and return types.
+### Code Quality Requirements
+- **Syntax Validation**: After every PHP file edit, run `php -l filename.php` for syntax checking
+- **Error Handling**: Implement comprehensive try-catch blocks with meaningful error messages
+- **Testing**: Create/update PHPUnit test files for all new/modified classes
+- **Performance**: Optimize for production use with large datasets
+- **Security**: Ensure code doesn't expose sensitive AbraFlexi credentials
 
-When writing tests, use PHPUnit and follow the PSR-12 coding standard.
+### Development Best Practices
+- **Code Comments**: Write in English using complete sentences and proper grammar
+- **Variable Names**: Use meaningful names that describe their purpose
+- **Constants**: Avoid magic numbers/strings; define constants instead
+- **Exception Handling**: Always provide meaningful error messages
+- **Commit Messages**: Use imperative mood and keep them concise
+- **Security**: Ensure code is secure and doesn't expose sensitive information
+- **Compatibility**: Maintain compatibility with latest PHP and library versions
+- **Maintainability**: Follow best practices for maintainable code
 
-When writing documentation, use MarkDown format.
+### Working Directory Requirements
+- **Scripts Execution**: Always change to `src/` directory before running scripts
+  ```bash
+  cd src/
+  php script-name.php
+  ```
+- **Path Resolution**: Ensures proper relative path resolution for dependencies
+- **Consistent Environment**: Maintains consistent execution environment
 
-When writing commit messages, use the imperative mood and keep them concise.
+### MultiFlexi Integration Guidelines
+- **Schema Compliance**: All MultiFlexi JSON files must conform to official schemas
+- **Application Config** (`multiflexi/*.app.json`): 
+  https://raw.githubusercontent.com/VitexSoftware/php-vitexsoftware-multiflexi-core/refs/heads/main/multiflexi.app.schema.json
+- **Report Output**: 
+  https://raw.githubusercontent.com/VitexSoftware/php-vitexsoftware-multiflexi-core/refs/heads/main/multiflexi.report.schema.json
 
-When writing code comments, use complete sentences and proper grammar.
+### AbraFlexi Integration Requirements
+- **API Authentication**: Secure authentication with AbraFlexi systems
+- **Data Privacy**: Handle sensitive financial data appropriately
+- **Large Dataset Handling**: Optimize tools for processing large amounts of accounting data
+- **Transaction Safety**: Ensure data integrity in all operations
 
-When writing code, always use meaningful variable names that describe their purpose.
+### Testing Requirements
+- **PHPUnit Integration**: All new classes require corresponding test files
+- **Test Coverage**: Aim for comprehensive test coverage of all functionality
+- **Mock AbraFlexi**: Use mocks for AbraFlexi API during testing
+- **Tool Validation**: Test each tool with sample data
 
-When writing code, avoid using magic numbers or strings; instead, define constants for them.
+## Example Workflow
+```bash
+# 1. Navigate to source directory
+cd src/
 
-When writing code, always handle exceptions properly and provide meaningful error messages.
+# 2. Run specific tool
+php data-export.php
 
-When writing code, always include type hints for function parameters and return types.
+# 3. Validate output against schema
+multiflexi-cli application validate-json --file ../multiflexi/tools.app.json
 
-We are using the i18n library for internationalization, so always use the _() functions for strings that need to be translated.
+# 4. Test changes
+cd ..
+vendor/bin/phpunit tests/
 
-When writing code, always ensure that it is secure and does not expose any sensitive information.
+# 5. Syntax validation
+php -l src/new-tool.php
+```
 
-When writing code, always consider performance and optimize where necessary.
-
-When writing code, always ensure that it is compatible with the latest version of PHP and the libraries we are using.
-
-When writing code, always ensure that it is well-tested and includes unit tests where applicable.
-
-When writing code, always ensure that it is maintainable and follows best practices.
-
-When create new class or update existing class, always create or update its phpunit test files.
-
-All files in the multiflexi/*.app.json directory must conform to the schema available at: https://raw.githubusercontent.com/VitexSoftware/php-vitexsoftware-multiflexi-core/refs/heads/main/multiflexi.app.schema.json
-
-All reports produced by scripts must comply with the schema available at: https://raw.githubusercontent.com/VitexSoftware/php-vitexsoftware-multiflexi-core/refs/heads/main/multiflexi.report.schema.json
-
-Change directory to src before running any scripts.
+⚠️ **Important Notes for Copilot:**
+- This is a **utilities collection** - each tool should be standalone and focused
+- **Data integrity** is critical when manipulating accounting data
+- **Performance optimization** is essential for large AbraFlexi datasets
+- Follow **MultiFlexi ecosystem patterns** for consistency
+- **Working directory matters** - always use `src/` directory for script execution

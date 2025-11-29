@@ -1,0 +1,28 @@
+#!/bin/sh
+set -e
+
+case "$1" in
+    remove|purge)
+        # Clean up vendor directory and any remaining files
+        if [ -d /usr/lib/abraflexi-tools ]; then
+            rm -rf /usr/lib/abraflexi-tools
+        fi
+        
+        # Clean up /var/lib/abraflexi-tools if it exists (from composer vendor-dir)
+        if [ -d /var/lib/abraflexi-tools ]; then
+            rm -rf /var/lib/abraflexi-tools
+        fi
+        ;;
+
+    upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
+        ;;
+
+    *)
+        echo "postrm called with unknown argument \`$1'" >&2
+        exit 1
+        ;;
+esac
+
+#DEBHELPER#
+
+exit 0
