@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.vitexsoftware.abraflexi_tools</id>
+  <metadata_license>MIT</metadata_license>
+  <project_license>MIT</project_license>
+  <name>abraflexi-tools</name>
+  <summary>commandline AbraFlexi tools</summary>
+  <description>
+    <p>
+      Set of tools allowning interact with Abra Flexi on command line Use MultiFlexi as launcher for AbraFlexi tools
+    </p>
+  </description>
+  <categories>
+    <category>Utility</category>
+  </categories>
+  <url type="homepage">https://github.com/VitexSoftware/AbraFlexi-Tools</url>
+  <url type="bugtracker">https://github.com/VitexSoftware/AbraFlexi-Tools/issues</url>
+  <developer id="cz.vitexsoftware">
+    <name>VitexSoftware</name>
+  </developer>
+  <content_rating type="oars-1.1"/>
+</component>
