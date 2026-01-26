@@ -9,17 +9,16 @@
     <project_license>MIT</project_license>
   
     <description>
-        <p>
-            Set of tools providing the interact with Abra Flexi on command line
-        </p>
-    </description>
+    <p>
+      Set of tools providing the interact with Abra Flexi on command line
+    </p>
+  </description>
   
     <icon type="stock">abraflexitools</icon>
-  
-    <categories>
-        <category>Utility</category>
-        <category>Adult</category>
-    </categories>
+  <categories>
+    <category>Utility</category>
+    <category>Adult</category>
+  </categories>
   
     <provides>
         <binary>abraflexi-certbot</binary>

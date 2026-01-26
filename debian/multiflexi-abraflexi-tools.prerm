@@ -24,7 +24,7 @@ case "$1" in
     remove|purge)
 		for file in $(ls /usr/lib/abraflexi-tools/multiflexi/*.json)
 		do
-			multiflexi-json-app-remover $file
+			multiflexi-cli application remove-json --file $file
 		done
     ;;
 
