@@ -451,26 +451,42 @@ class benchmark extends RW
         }
     }
 
-    public function getReport(): array
+    /**
+     * Generate a report compliant with MultiFlexi report schema.
+     *
+     * @param string $status  Execution status: success, error, warning
+     * @param string $message Human-readable message about the execution result
+     *
+     * @return array Report data conforming to the MultiFlexi report schema
+     *
+     * @see https://raw.githubusercontent.com/VitexSoftware/php-vitexsoftware-multiflexi-core/refs/heads/main/schema/report.json
+     */
+    public function getReport(string $status = 'success', string $message = ''): array
     {
-        $results = [];
+        $metrics = [];
 
         foreach ($this->benchmark as $passId => $pass) {
-            $passResults = ['pass' => $passId, 'operations' => []];
-
             foreach (array_keys($pass) as $testName) {
-                $operation = [
-                    'name' => $testName,
-                    'read' => $this->timerValue($this->benchmark[$passId][$testName]['read']),
-                    'write' => $this->timerValue($this->benchmark[$passId][$testName]['write']),
-                ];
-                $passResults['operations'][] = $operation;
+                $key = str_replace(' ', '_', strtolower($testName));
+                $metrics["pass_{$passId}_{$key}_read"] = $this->timerValue($this->benchmark[$passId][$testName]['read']);
+                $metrics["pass_{$passId}_{$key}_write"] = $this->timerValue($this->benchmark[$passId][$testName]['write']);
             }
-
-            $results[] = $passResults;
         }
 
-        return $results;
+        $metrics['cycles'] = \count($this->benchmark);
+        $metrics['delay'] = $this->delay;
+
+        if (empty($message)) {
+            $message = sprintf('Benchmark completed: %d cycles with %ds delay', \count($this->benchmark), $this->delay);
+        }
+
+        return [
+            'producer' => 'abraflexi-benchmark',
+            'status' => $status,
+            'timestamp' => date('c'),
+            'message' => $message,
+            'metrics' => $metrics,
+        ];
     }
 }
 
@@ -510,14 +526,18 @@ if (\array_key_exists('c', $options)) {
     $prober->cycles = (int) $options['c'];
 }
 
-if (\array_key_exists('p', $options)) {
-    $prober->prepare();
+$prober->prepare();
+
+try {
+    $prober->probeAll();
+    $prober->printResults();
+    $prober->addStatusMessage('benchmark done', 'debug');
+    $report = $prober->getReport();
+} catch (\Throwable $e) {
+    $exitcode = 1;
+    $prober->addStatusMessage($e->getMessage(), 'error');
+    $report = $prober->getReport('error', $e->getMessage());
 }
-
-$prober->probeAll();
-$prober->printResults();
-
-$prober->addStatusMessage('benchmark done', 'debug');
 
 $written = file_put_contents($destination, json_encode($report, Shared::cfg('DEBUG') ? \JSON_PRETTY_PRINT | \JSON_UNESCAPED_UNICODE : 0));
 $prober->addStatusMessage(sprintf(_('Saving result to %s'), $destination), $written ? 'success' : 'error');

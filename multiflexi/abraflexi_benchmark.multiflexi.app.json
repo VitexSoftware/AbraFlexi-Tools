@@ -1,6 +1,6 @@
 {
-  "$schema": "https://raw.githubusercontent.com/VitexSoftware/php-vitexsoftware-multiflexi-core/refs/heads/main/multiflexi.app.schema.json",
-  "schemaVersion": "3.2.1",
+  "$schema": "https://raw.githubusercontent.com/VitexSoftware/php-vitexsoftware-multiflexi-core/refs/heads/main/schema/application.json",
+  "schemaVersion": "3.3.0",
   "uuid": "49ae4677-757b-40dc-b437-989fa372c898",
   "name": {
     "en": "AbraFlexi Benchmark",
@@ -45,7 +45,7 @@
       "category": "API"
     },
     "ABRAFLEXI_URL": {
-      "type": "string",
+      "type": "url",
       "description": {
         "en": "AbraFlexi Server URI",
         "cs": "AbraFlexi Server URI"
@@ -62,7 +62,7 @@
       },
       "defval": 10,
       "required": false,
-      "category": "API"
+      "category": "Behavior"
     },
     "ABRAFLEXI_BENCHMARK_DELAY": {
       "type": "integer",
@@ -72,7 +72,7 @@
       },
       "defval": 5,
       "required": false,
-      "category": "API"
+      "category": "Behavior"
     },
     "EASE_LOGGER": {
       "type": "string",

@@ -1,7 +1,6 @@
 {
-  "$schema": "https://raw.githubusercontent.com/VitexSoftware/php-vitexsoftware-multiflexi-core/refs/heads/main/multiflexi.app.schema.json",
-  "schemaVersion": "3.2.1",
-  "ociimage": "",
+  "$schema": "https://raw.githubusercontent.com/VitexSoftware/php-vitexsoftware-multiflexi-core/refs/heads/main/schema/application.json",
+  "schemaVersion": "3.3.0",
   "uuid": "a5aad62a-f574-4732-8483-30f4187e3054",
   "name": {
     "en": "AbraFlexi Copy",
@@ -47,7 +46,7 @@
       "category": "API"
     },
     "ABRAFLEXI_URL": {
-      "type": "string",
+      "type": "url",
       "description": {
         "en": "AbraFlexi Server URI",
         "cs": "AbraFlexi Server URI"
@@ -57,7 +56,7 @@
       "category": "API"
     },
     "SOURCE_ABRAFLEXI": {
-      "type": "string",
+      "type": "url",
       "description": {
         "en": "Uri to reach data to copy",
         "cs": "Uri to reach data to copy"
@@ -77,7 +76,7 @@
       "category": "API"
     },
     "BACKUP_DIRECTORY": {
-      "type": "string",
+      "type": "file-path",
       "description": {
         "en": "path to directory where temporary file is stored",
         "cs": "path to directory where temporary file is stored"

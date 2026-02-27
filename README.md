@@ -152,17 +152,37 @@ create 10 fake address
 Benchmark
 ---------
 
+Count time of several operations speed upon given company/database.
+The benchmark always prepares required test records (bank account, cash register, pricelist) before running.
+
 Options:
 
- * -p   - prepare database for test
- * -c   - num of cycles
- * -s   - sleep x seconds after each operation
+ * -c   - number of cycles
+ * -d   - delay in seconds between each operation
+ * -o   - output file path (default: RESULT_FILE env or stdout)
+ * -e   - path to .env configuration file
+ * -v   - show version and exit
 
 ```shell
-abraflexi-benchmark -p -c 10 -d 10
+abraflexi-benchmark -c 10 -d 1
 ```
 
-Count time of several operations speed upon given company/database.
+The JSON report output conforms to the [MultiFlexi report schema](https://raw.githubusercontent.com/VitexSoftware/php-vitexsoftware-multiflexi-core/refs/heads/main/schema/report.json):
+
+```json
+{
+    "producer": "abraflexi-benchmark",
+    "status": "success",
+    "timestamp": "2026-02-27T15:44:59+01:00",
+    "message": "Benchmark completed: 10 cycles with 1s delay",
+    "metrics": {
+        "pass_10_address_read": "0.123",
+        "pass_10_address_write": "0.456",
+        "cycles": 10,
+        "delay": 1
+    }
+}
+```
 
 ![Result](benchmark-result.png?raw=true)
 
