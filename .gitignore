@@ -11,3 +11,5 @@
 /debian/multiflexi-abraflexi-tools.debhelper.log
 /debian/multiflexi-abraflexi-tools.substvars
 /vendor/
+.phpunit.cache/
+
