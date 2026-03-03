@@ -20,7 +20,9 @@
     },
     "require": {
         "spojenet/flexibee": "dev-main",
-        "fzaninotto/faker": "*"
+        "fzaninotto/faker": "*",
+        "vitexsoftware/multiflexi-mail": "dev-main",
+        "vitexsoftware/multiflexi-raiffeisenbank": "dev-main"
     },
     "config": {
         "allow-plugins": {

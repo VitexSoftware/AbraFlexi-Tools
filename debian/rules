@@ -1,7 +1,35 @@
 #!/usr/bin/make -f
 
 %:
-	dh $@
+	dh $@ --with phpcomposer
+
+override_dh_auto_build:
+	# Generate custom Debian autoloader for application
+	cat > debian/autoload.php <<'AUTOLOADER'
+	<?php
+	// Debian autoloader for abraflexi-tools
+	// Load dependency autoloaders
+	require_once '/usr/share/php/AbraFlexi/autoload.php';
+	
+	// PSR-4 autoloader for application classes
+	spl_autoload_register(function ($$class) {
+	    $$prefixes = [
+	        'AbraFlexi\\Tools\\' => '/usr/share/abraflexi-tools/',
+	    ];
+	    foreach ($$prefixes as $$prefix => $$baseDir) {
+	        $$len = strlen($$prefix);
+	        if (strncmp($$prefix, $$class, $$len) !== 0) {
+	            continue;
+	        }
+	        $$relativeClass = substr($$class, $$len);
+	        $$file = $$baseDir . str_replace('\\', '/', $$relativeClass) . '.php';
+	        if (file_exists($$file)) {
+	            require $$file;
+	            return;
+	        }
+	    }
+	});
+	AUTOLOADER
 
 override_dh_install:
 	dh_install
@@ -15,8 +43,11 @@ override_dh_install:
 	sed -i '/require/c\require  "/usr/share/abraflexi-tools/fbwhwipe.php";' debian/abraflexi-tools/usr/bin/fbwhwipe
 	sed -i '/require/c\require  "/usr/share/abraflexi-tools/benchmark.php";' debian/abraflexi-tools/usr/bin/abraflexi-benchmark
 	sed -i '/require/c\require  "/usr/share/abraflexi-tools/fakeAddress.php";' debian/abraflexi-tools/usr/bin/abraflexi-fake-address
-	sed -i '/dirname(__DIR__)/c require_once "\/var\/lib\/composer\/abraflexi-tools\/autoload.php";' debian/abraflexi-tools/usr/share/abraflexi-tools/*
-	sed -i "/realpath/c\$$loaderPath = \"/var/lib/composer/abraflexi-tools/autoload.php\";" debian/abraflexi-tools/usr/share/abraflexi-tools/*
+	# Install Debian autoloader
+	install -D -m 0644 debian/autoload.php debian/abraflexi-tools/usr/share/php/abraflexi-tools/autoload.php
+	# Fix entry points to use Debian autoloader
+	sed -i '/dirname(__DIR__)/c require_once "/usr/share/php/abraflexi-tools/autoload.php";' debian/abraflexi-tools/usr/share/abraflexi-tools/*
+	sed -i "/realpath/c\$$loaderPath = \"/usr/share/php/abraflexi-tools/autoload.php\";" debian/abraflexi-tools/usr/share/abraflexi-tools/*
 	mkdir -p debian/multiflexi-abraflexi-tools/usr/lib/abraflexi-tools/multiflexi/
 	jq '.version = "'`dpkg-parsechangelog | sed -n 's/^Version: //p'| sed 's/~.*//'`'"'  multiflexi/abraflexi_benchmark.multiflexi.app.json |sponge  debian/multiflexi-abraflexi-tools/usr/lib/abraflexi-tools/multiflexi/abraflexi_benchmark.multiflexi.app.json
 	jq '.version = "'`dpkg-parsechangelog | sed -n 's/^Version: //p'| sed 's/~.*//'`'"'  multiflexi/abraflexi_copy.multiflexi.app.json      |sponge  debian/multiflexi-abraflexi-tools/usr/lib/abraflexi-tools/multiflexi/abraflexi_copy.multiflexi.app.json

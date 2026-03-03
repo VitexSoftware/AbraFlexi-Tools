@@ -14,9 +14,6 @@
     "bin/fbput",
     "bin/fbcp"
   ],
-  "config": {
-    "vendor-dir": "/var/lib/abraflexi-tools"
-  },
   "repositories": [
     {
       "type": "path",
