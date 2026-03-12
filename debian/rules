@@ -3,34 +3,6 @@
 %:
 	dh $@ --with phpcomposer
 
-override_dh_auto_build:
-	# Generate custom Debian autoloader for application
-	cat > debian/autoload.php <<'AUTOLOADER'
-	<?php
-	// Debian autoloader for abraflexi-tools
-	// Load dependency autoloaders
-	require_once '/usr/share/php/AbraFlexi/autoload.php';
-	
-	// PSR-4 autoloader for application classes
-	spl_autoload_register(function ($$class) {
-	    $$prefixes = [
-	        'AbraFlexi\\Tools\\' => '/usr/share/abraflexi-tools/',
-	    ];
-	    foreach ($$prefixes as $$prefix => $$baseDir) {
-	        $$len = strlen($$prefix);
-	        if (strncmp($$prefix, $$class, $$len) !== 0) {
-	            continue;
-	        }
-	        $$relativeClass = substr($$class, $$len);
-	        $$file = $$baseDir . str_replace('\\', '/', $$relativeClass) . '.php';
-	        if (file_exists($$file)) {
-	            require $$file;
-	            return;
-	        }
-	    }
-	});
-	AUTOLOADER
-
 override_dh_install:
 	dh_install
 	jq '.version = "'`dpkg-parsechangelog | sed -n 's/^Version: //p'| sed 's/~.*//'`'"'  debian/conf/composer.json |sponge debian/conf/composer.json
