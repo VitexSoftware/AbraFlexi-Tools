@@ -25,5 +25,5 @@
  * IN THE SOFTWARE.
  */
 
-require dirname(__DIR__) . '/src/fakePaid.php';
+require '/usr/share/abraflexi-tools/fakePaid.php';
 

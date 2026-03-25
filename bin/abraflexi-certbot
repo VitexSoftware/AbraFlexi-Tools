@@ -25,4 +25,4 @@
  * IN THE SOFTWARE.
  */
 
-require dirname(__DIR__) . '/src/certupdate.php';
+require '/usr/share/abraflexi-tools/certupdate.php';

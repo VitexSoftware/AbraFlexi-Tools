@@ -25,4 +25,4 @@
  * IN THE SOFTWARE.
  */
 
-require dirname(__DIR__) . '/src/fbget.php';
+require '/usr/share/abraflexi-tools/fbget.php';
