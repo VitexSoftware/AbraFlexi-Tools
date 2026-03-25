@@ -187,14 +187,95 @@ The JSON report output conforms to the [MultiFlexi report schema](https://raw.gi
 ![Result](benchmark-result.png?raw=true)
 
 
-Certificate Updater
---------------------
+## Certificate Updater
 
-Generate or renew HTTPS certificate
+Generate or renew HTTPS certificate for AbraFlexi server.
 
-```shell
+```
 abraflexi-certbot
 ```
+
+The tool reads AbraFlexi connection details from the standard config file
+(`/etc/abraflexi/client.json`) and uploads the Let's Encrypt certificate
+via the AbraFlexi REST API endpoint `/certificate.json`.
+
+### Prerequisites
+
+The certificate must be obtained and renewed by [Certbot](https://certbot.eff.org/)
+(Let's Encrypt). The tool expects the certificate files to be present in
+`/etc/letsencrypt/live/<domain>/`.
+
+### ⚠️ Required: Force RSA key type in Certbot
+
+**AbraFlexi only supports RSA private keys.** Since 2024, Let's Encrypt issues
+ECDSA (EC) keys by default. Uploading an EC certificate results in the error:
+
+```
+BCECPrivateKey cannot be cast to RSAPrivateCrtKey
+```
+
+You must explicitly configure Certbot to use an RSA key for the certificate
+used by AbraFlexi.
+
+**Edit the renewal configuration file** for your domain:
+
+```
+/etc/letsencrypt/renewal/<your-domain>.conf
+```
+
+Add or update the following lines in the `[renewalparams]` section:
+
+```ini
+[renewalparams]
+key_type = rsa
+rsa_key_size = 4096
+```
+
+**Example** (`/etc/letsencrypt/renewal/abraflexi.example.com.conf`):
+
+```ini
+# renew_before_expiry = 30 days
+version = 2.9.0
+archive_dir = /etc/letsencrypt/archive/abraflexi.example.com
+cert = /etc/letsencrypt/live/abraflexi.example.com/cert.pem
+privkey = /etc/letsencrypt/live/abraflexi.example.com/privkey.pem
+chain = /etc/letsencrypt/live/abraflexi.example.com/chain.pem
+fullchain = /etc/letsencrypt/live/abraflexi.example.com/fullchain.pem
+
+[renewalparams]
+authenticator = standalone
+key_type = rsa
+rsa_key_size = 4096
+```
+
+After editing the file, force a renewal to immediately generate an RSA certificate:
+
+```bash
+certbot renew --cert-name <your-domain> --force-renewal
+```
+
+Verify the key type before running `abraflexi-certbot`:
+
+```bash
+openssl pkey -in /etc/letsencrypt/live/<your-domain>/privkey.pem -text -noout | head -3
+# Expected output: RSA Private-Key (not EC Private-Key)
+```
+
+### Automatic renewal via deploy hook
+
+To automatically upload the certificate to AbraFlexi after each renewal,
+create a deploy hook at `/etc/letsencrypt/renewal-hooks/deploy/abraflexi.sh`:
+
+```bash
+#!/bin/bash
+abraflexi-certbot
+```
+
+```bash
+chmod +x /etc/letsencrypt/renewal-hooks/deploy/abraflexi.sh
+```
+
+Certbot will execute this script automatically after every successful renewal.
 
 
 ## MultiFlexi
