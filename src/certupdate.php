@@ -29,8 +29,8 @@ $certificateName = parse_url(\Ease\Shared::cfg('ABRAFLEXI_URL'), \PHP_URL_HOST);
 
 system('certbot '.$certificateName.' --noninteractive');
 
-// convert key to PKCS#1 format
-system('openssl rsa -in /etc/letsencrypt/live/'.$certificateName.'/privkey.pem -out le-rsaprivkey.pem');
+// convert key to PKCS#1 format (supports both RSA and ECDSA)
+system('openssl pkey -in /etc/letsencrypt/live/'.$certificateName.'/privkey.pem -out le-rsaprivkey.pem');
 
 // download DST Root CA X3 certificate from internet
 $leRootCA = file_get_contents('https://ssl-tools.net/certificates/dac9024f54d8f6df94935fb1732638ca6ad77c13.pem');
