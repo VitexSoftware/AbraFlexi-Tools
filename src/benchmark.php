@@ -119,6 +119,10 @@ class benchmark extends RW
      */
     public function timerValue($startEnd): string
     {
+        if (empty($startEnd['start']) || empty($startEnd['end'])) {
+            return 'N/A';
+        }
+
         $time_start = explode(' ', $startEnd['start']);
         $time_end = explode(' ', $startEnd['end']);
 
@@ -165,7 +169,7 @@ class benchmark extends RW
         $yesterday->modify('-1 day');
 
         $bdata = [
-            'kod' => 'Benchmark:'.time(),
+            'kod' => 'BM:'.uniqid(),
             'banka' => $this->banka,
             'typPohybuK' => 'typPohybu.prijem',
             'popis' => 'AbraFlexi Benchmark record',
@@ -236,7 +240,7 @@ class benchmark extends RW
     {
         $yesterday = new \AbraFlexi\Date();
         $yesterday->modify('-1 day');
-        $testCode = 'TEST_'.time();
+        $testCode = 'TEST_'.uniqid();
 
         $idata = [
             'kod' => $testCode,
@@ -468,8 +472,8 @@ class benchmark extends RW
         foreach ($this->benchmark as $passId => $pass) {
             foreach (array_keys($pass) as $testName) {
                 $key = str_replace(' ', '_', strtolower($testName));
-                $metrics["pass_{$passId}_{$key}_read"] = $this->timerValue($this->benchmark[$passId][$testName]['read']);
-                $metrics["pass_{$passId}_{$key}_write"] = $this->timerValue($this->benchmark[$passId][$testName]['write']);
+                $metrics["pass_{$passId}_{$key}_read"] = $this->timerValue($this->benchmark[$passId][$testName]['read'] ?? null);
+                $metrics["pass_{$passId}_{$key}_write"] = $this->timerValue($this->benchmark[$passId][$testName]['write'] ?? null);
             }
         }
 
