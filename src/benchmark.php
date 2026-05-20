@@ -75,6 +75,15 @@ class benchmark extends RW
     private string $version = '1.1';
     private Pokladna $cash;
 
+    /**
+     * ISO 3166-1 alpha-2 codes absent from standard AbraFlexi country lists
+     * (overseas territories, unrecognised states, uninhabited islands).
+     */
+    private array $countryCodeBlacklist = [
+        'AQ', 'BQ', 'BV', 'CW', 'EH', 'GF', 'GP', 'HM', 'IO',
+        'MQ', 'PM', 'RE', 'SS', 'SX', 'TF', 'UM', 'XK', 'YT',
+    ];
+
     public function __construct($init = null, $options = [])
     {
         parent::__construct($init, $options);
@@ -137,18 +146,21 @@ class benchmark extends RW
     public function createAddress()
     {
         $faker = Factory::create();
+        $blacklist = $this->countryCodeBlacklist;
+        do {
+            $countryCode = $faker->countryCode;
+        } while (\in_array($countryCode, $blacklist, true));
+
         $checker = new Adresar();
-        $checker->setData(
-            [
-                'popis' => $faker->userName,
-                'email' => $faker->email,
-                'nazev' => $faker->firstName.' '.$faker->lastName,
-                'mesto' => $faker->city,
-                'ulice' => $faker->streetName,
-                'tel' => $faker->phoneNumber,
-                'stat' => Functions2::code($faker->countryCode),
-            ],
-        );
+        $checker->setData([
+            'popis' => $faker->userName,
+            'email' => $faker->email,
+            'nazev' => $faker->firstName.' '.$faker->lastName,
+            'mesto' => $faker->city,
+            'ulice' => $faker->streetName,
+            'tel' => $faker->phoneNumber,
+            'stat' => Functions2::code($countryCode),
+        ],);
 
         $this->timerStart('Address', 'write');
         $checker->insertToAbraFlexi();
@@ -177,8 +189,13 @@ class benchmark extends RW
             'specSym' => Functions::randomNumber(111, 999),
             'bezPolozek' => true,
             'datVyst' => $yesterday,
-            'typDokl' => Functions2::code('STANDARD'),
         ];
+
+        $bankDocType = Shared::cfg('ABRAFLEXI_BANK_DOCTYPE', 'BENCHMARK');
+
+        if (!empty($bankDocType)) {
+            $bdata['typDokl'] = Functions2::code($bankDocType);
+        }
 
         $checker = new Banka($bdata);
         $this->timerStart('Bank Move', true);
@@ -197,7 +214,7 @@ class benchmark extends RW
         $this->timerStart('Cash Move', true);
         $cashMove = [
             'cisDosle' => time(),
-            'kod' => Functions2::code('CASH_'.time()),
+            'kod' => 'CASH_'.uniqid(),
             'typDokl' => $this->cashType,
             'pokladna' => $this->cash,
             'polozkyDokladu' => [
@@ -224,7 +241,7 @@ class benchmark extends RW
         $checker = new Cenik();
         $this->timerStart('Pricelist Item', true);
         $pricelistItem = [
-            'kod' => Functions2::code('PRICELIST_'.time()),
+            'kod' => 'PL_'.uniqid(),
             'nazev' => (string) time(),
         ];
         $checker->insertToAbraFlexi($pricelistItem);

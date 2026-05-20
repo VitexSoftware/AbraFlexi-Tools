@@ -1,3 +1,14 @@
+abraflexi-tools (1.1.8) UNRELEASED; urgency=medium
+
+  * Add Makefile benchmark target running 100 cycles with .env config
+  * Fix benchmark: use ABRAFLEXI_BANK_DOCTYPE env var for bank typDokl (default STAND)
+  * Fix benchmark: remove code: prefix from kod fields in createCashMove and createPricelistItem
+  * Fix benchmark: use CZ country code in createAddress to avoid missing codes
+  * Fix benchmark: use uniqid() instead of time() to avoid key collisions on fast runs
+  * Document ABRAFLEXI_BANK_DOCTYPE and make benchmark target in README
+
+ -- Vítězslav Dvořák <info@vitexsoftware.cz>  Wed, 20 May 2026 23:25:23 +0200
+
 abraflexi-tools (1.1.7) UNRELEASED; urgency=medium
 
   * better benchmark configuration

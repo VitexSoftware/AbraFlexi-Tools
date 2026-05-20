@@ -167,6 +167,23 @@ Options:
 abraflexi-benchmark -c 10 -d 1
 ```
 
+The quickest way to run the benchmark against the instance configured in `.env`:
+
+```shell
+make benchmark
+```
+
+### Environment variables
+
+| Variable | Default | Description |
+|---|---|---|
+| `ABRAFLEXI_URL` | — | AbraFlexi server URL |
+| `ABRAFLEXI_LOGIN` | — | Login username |
+| `ABRAFLEXI_PASSWORD` | — | Login password |
+| `ABRAFLEXI_COMPANY` | — | Company code |
+| `ABRAFLEXI_BANK` | `BANKOVNÍ ÚČET` | Bank account code used for bank-move tests |
+| `ABRAFLEXI_BANK_DOCTYPE` | `STAND` | Bank document type code (`typDokl`); must exist in the target company |
+
 The JSON report output conforms to the [MultiFlexi report schema](https://raw.githubusercontent.com/VitexSoftware/php-vitexsoftware-multiflexi-core/refs/heads/main/schema/report.json):
 
 ```json

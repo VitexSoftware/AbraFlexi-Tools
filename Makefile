@@ -27,6 +27,19 @@ deb: ## Build debian package
 	debuild -us -uc
 	
 
+WEBHOOK_URL ?= http://vyvojar.spoje.net:1880/abraflexi-benchmark
+BENCHMARK_RESULT ?= /tmp/abraflexi-benchmark-result.json
+
+.PHONY: benchmark
+benchmark: ## Run AbraFlexi benchmark against server configured in .env
+	php src/benchmark.php -c 100 -e .env -o $(BENCHMARK_RESULT)
+	@if [ -n "$(WEBHOOK_URL)" ] && [ -f "$(BENCHMARK_RESULT)" ]; then \
+		jq '{winstrom: {"@globalVersion": "1", "changes": [. + {"@evidence": "benchmark", "@operation": "run", "@timestamp": .timestamp}]}}' \
+			$(BENCHMARK_RESULT) \
+		| curl -s -X POST -H "Content-Type: application/json" -d @- "$(WEBHOOK_URL)" \
+		&& echo "Benchmark result sent to $(WEBHOOK_URL)"; \
+	fi
+
 .PHONY: validate-multiflexi-app
 validate-multiflexi-app: ## Validates the multiflexi JSON
 	@if [ -d multiflexi ]; then \
