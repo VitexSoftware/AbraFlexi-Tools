@@ -1,6 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/VitexSoftware/php-vitexsoftware-multiflexi-core/refs/heads/main/schema/application.json",
-  "schemaVersion": "3.3.0",
+  "schemaVersion": "3.4.0",
   "uuid": "49ae4677-757b-40dc-b437-989fa372c898",
   "name": {
     "en": "AbraFlexi Benchmark",
@@ -16,6 +16,13 @@
   ],
   "homepage": "https://github.com/VitexSoftware/AbraFlexi-Tools",
   "executable": "abraflexi-benchmark",
+  "events": {
+    "emits": {
+      "metrics.collected": {
+        "description": "Monitoring metrics were collected"
+      }
+    }
+  },
   "environment": {
     "ABRAFLEXI_COMPANY": {
       "type": "string",
