@@ -204,6 +204,77 @@ The JSON report output conforms to the [MultiFlexi report schema](https://raw.gi
 ![Result](benchmark-result.png?raw=true)
 
 
+## Payment Simulator
+
+Simulates realistic customer payment behaviour in AbraFlexi bank evidence.
+Intended for continuous integration testing of the reminder and matcher pipeline
+on a test company without affecting real customers.
+
+```shell
+abraflexi-payment-simulator
+```
+
+### Customer profiles
+
+Assign one of the following AbraFlexi labels to a customer to control their simulated behaviour:
+
+| Label | Behaviour |
+|---|---|
+| `SIM_REGULAR` | Pays the exact invoice amount every run (default when no label set) |
+| `SIM_LATE_DOUBLE` | Skips one cycle; pays all outstanding invoices when ≥ 2 are unpaid |
+| `SIM_OVER_PAYER` | Pays 1–50 CZK more than owed (creates overpayment) |
+| `SIM_UNDER_PAYER` | Pays 1–50 CZK less than owed (leaves a remainder) |
+| `SIM_TYPO_VARSYM` | Pays the correct amount but with a mangled variable symbol (one digit missing or extra) |
+| `SIM_NON_PAYER` | Never pays (triggers reminder escalation → `NEPLATIC` → `ODPOJENO`) |
+
+### Environment variables
+
+| Variable | Default | Description |
+|---|---|---|
+| `ABRAFLEXI_URL` | — | AbraFlexi server URL |
+| `ABRAFLEXI_LOGIN` | — | Login username |
+| `ABRAFLEXI_PASSWORD` | — | Login password |
+| `ABRAFLEXI_COMPANY` | — | Company code |
+| `ABRAFLEXI_BANK` | — | Bank account code for simulated payments (**required**) |
+| `ABRAFLEXI_BANK_DOCTYPE` | `STANDARD` | Document type code (`typDokl`) |
+| `RESULT_FILE` | `php://stdout` | Path to write JSON result report |
+| `EASE_LOGGER` | `console\|syslog` | Log output target |
+
+### JSON output
+
+```json
+{
+    "exitcode": 0,
+    "status": "success",
+    "timestamp": "2026-06-24T10:00:00+02:00",
+    "message": "Created: 4 payments, Skipped: 1 (NON_PAYER/LATE), Errors: 0",
+    "metrics": { "created": 4, "skipped": 1, "errors": 0 },
+    "payments": [
+        { "invoice": "FV-2026-0042", "profile": "REGULAR", "amount": 1200.0, "varSym": "20260042", "action": "payment_created" },
+        { "invoice": "FV-2026-0043", "profile": "TYPO_VARSYM", "amount": 800.0, "varSym": "2026043", "action": "payment_created" },
+        { "invoice": "FV-2026-0044", "profile": "NON_PAYER", "action": "skipped" }
+    ]
+}
+```
+
+### MultiFlexi runtemplate
+
+Register the app in MultiFlexi and create an hourly runtemplate via the CLI:
+
+```shell
+# Register the app (done once after package installation)
+multiflexi-cli app:import multiflexi/payment_simulator.multiflexi.app.json
+
+# Create the runtemplate (replace company slug and config values)
+multiflexi-cli run-template:create \
+  --name "Payment Simulator – spoje_net_s_r_o_" \
+  --app_uuid "55dcc221-b5d0-4656-95e6-e8b5e41ca92a" \
+  --company "spoje_net_s_r_o_" \
+  --cron "0 * * * *" \
+  --active true \
+  --config ABRAFLEXI_BANK=RB1328660
+```
+
 ## Certificate Updater
 
 Generate or renew HTTPS certificate for AbraFlexi server.
