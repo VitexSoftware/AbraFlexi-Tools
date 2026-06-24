@@ -42,13 +42,11 @@ foreach ($nulovePolozky as $idx => $polozka) {
     $bankRecord->setDataValue('typDokl', \AbraFlexi\Functions::code('STANDARD'));
     $bankRecord->setDataValue('sumCelkem', $randomAmount);
     $bankRecord->setDataValue('sumOsv', $randomAmount);
-    $bankRecord->addArrayToBranch(
-        [
-            'typPolozkyK' => 'typPolozky.ucetni',
-            'doklInt' => \AbraFlexi\Functions::code($polozka['kod']),
-            'sumCelkem' => $randomAmount,
-        ],
-    );
+    $bankRecord->addArrayToBranch([
+        'typPolozkyK' => 'typPolozky.ucetni',
+        'doklInt' => \AbraFlexi\Functions::code($polozka['kod']),
+        'sumCelkem' => $randomAmount,
+    ],);
 
     try {
         $response = $bankRecord->insertToAbraFlexi();

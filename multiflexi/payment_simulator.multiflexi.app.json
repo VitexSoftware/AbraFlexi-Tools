@@ -1,0 +1,123 @@
+{
+  "$schema": "https://raw.githubusercontent.com/VitexSoftware/php-vitexsoftware-multiflexi-core/refs/heads/main/schema/application.json",
+  "schemaVersion": "3.4.0",
+  "uuid": "55dcc221-b5d0-4656-95e6-e8b5e41ca92a",
+  "name": {
+    "en": "Payment Simulator",
+    "cs": "Simulátor plateb"
+  },
+  "description": {
+    "en": "Simulates realistic customer payment behaviour in AbraFlexi bank evidence. Customers are assigned profiles via AbraFlexi labels (SIM_REGULAR, SIM_LATE_DOUBLE, SIM_OVER_PAYER, SIM_UNDER_PAYER, SIM_TYPO_VARSYM, SIM_NON_PAYER). Intended for continuous integration testing of the reminder and matching pipeline.",
+    "cs": "Simuluje realistické platební chování zákazníků v evidenci banka AbraFlexi. Zákazníkům jsou přiřazeny profily pomocí štítků AbraFlexi (SIM_REGULAR, SIM_LATE_DOUBLE, SIM_OVER_PAYER, SIM_UNDER_PAYER, SIM_TYPO_VARSYM, SIM_NON_PAYER). Určeno pro průběžné testování pipeline upomínání a párování."
+  },
+  "tags": [
+    "AbraFlexi",
+    "Testing",
+    "Simulation",
+    "CI"
+  ],
+  "requirements": [
+    "AbraFlexi"
+  ],
+  "homepage": "https://github.com/VitexSoftware/AbraFlexi-Tools",
+  "executable": "abraflexi-payment-simulator",
+  "events": {
+    "emits": {
+      "bank.payment.created": {
+        "description": "A simulated bank payment record was created in AbraFlexi"
+      }
+    }
+  },
+  "environment": {
+    "ABRAFLEXI_URL": {
+      "type": "url",
+      "description": {
+        "en": "AbraFlexi Server URI",
+        "cs": "URI AbraFlexi serveru"
+      },
+      "defval": "https://demo.flexibee.eu:5434",
+      "required": true,
+      "category": "API"
+    },
+    "ABRAFLEXI_LOGIN": {
+      "type": "string",
+      "description": {
+        "en": "AbraFlexi Login",
+        "cs": "AbraFlexi Login"
+      },
+      "defval": "winstrom",
+      "required": true,
+      "category": "API"
+    },
+    "ABRAFLEXI_PASSWORD": {
+      "type": "password",
+      "description": {
+        "en": "AbraFlexi password",
+        "cs": "AbraFlexi heslo"
+      },
+      "defval": "winstrom",
+      "required": true,
+      "category": "API"
+    },
+    "ABRAFLEXI_COMPANY": {
+      "type": "string",
+      "description": {
+        "en": "AbraFlexi Company",
+        "cs": "AbraFlexi Společnost"
+      },
+      "defval": "demo_de",
+      "required": true,
+      "category": "API"
+    },
+    "ABRAFLEXI_BANK": {
+      "type": "string",
+      "description": {
+        "en": "AbraFlexi bank account code used for simulated payments",
+        "cs": "Kód bankovního účtu v AbraFlexi pro simulované platby"
+      },
+      "defval": "",
+      "required": true,
+      "category": "API"
+    },
+    "ABRAFLEXI_BANK_DOCTYPE": {
+      "type": "string",
+      "description": {
+        "en": "Document type code for bank records (default: STANDARD)",
+        "cs": "Kód typu dokladu pro záznamy v bance (výchozí: STANDARD)"
+      },
+      "defval": "STANDARD",
+      "required": false,
+      "category": "API"
+    },
+    "RESULT_FILE": {
+      "type": "file-path",
+      "description": {
+        "en": "Path to write JSON result report (default: php://stdout)",
+        "cs": "Cesta pro zápis JSON výsledku (výchozí: php://stdout)"
+      },
+      "defval": "php://stdout",
+      "required": false,
+      "category": "Behavior"
+    },
+    "EASE_LOGGER": {
+      "type": "string",
+      "description": {
+        "en": "Log output target (console, syslog, mail)",
+        "cs": "Cíl výstupu logů (console, syslog, mail)"
+      },
+      "defval": "console|syslog",
+      "required": false,
+      "category": "Behavior"
+    },
+    "DEBUG": {
+      "type": "bool",
+      "description": {
+        "en": "Enable debug mode",
+        "cs": "Zapnout režim ladění"
+      },
+      "defval": "False",
+      "required": false,
+      "category": "Behavior"
+    }
+  }
+}

@@ -29,7 +29,7 @@ class BenchmarkReportTest extends TestCase
      */
     public function testReportContainsRequiredFields(): void
     {
-        $report = $this->createSampleReport();
+        $report = self::createSampleReport();
 
         $this->assertArrayHasKey('producer', $report, 'Report must contain "producer"');
         $this->assertArrayHasKey('status', $report, 'Report must contain "status"');
@@ -41,7 +41,7 @@ class BenchmarkReportTest extends TestCase
      */
     public function testProducerIsString(): void
     {
-        $report = $this->createSampleReport();
+        $report = self::createSampleReport();
 
         $this->assertIsString($report['producer']);
         $this->assertNotEmpty($report['producer']);
@@ -53,10 +53,10 @@ class BenchmarkReportTest extends TestCase
      */
     public function testStatusIsValidEnum(): void
     {
-        $report = $this->createSampleReport();
+        $report = self::createSampleReport();
         $this->assertContains($report['status'], ['success', 'error', 'warning']);
 
-        $errorReport = $this->createSampleReport('error', 'Something went wrong');
+        $errorReport = self::createSampleReport('error', 'Something went wrong');
         $this->assertSame('error', $errorReport['status']);
     }
 
@@ -65,7 +65,7 @@ class BenchmarkReportTest extends TestCase
      */
     public function testTimestampIsIso8601(): void
     {
-        $report = $this->createSampleReport();
+        $report = self::createSampleReport();
 
         $this->assertIsString($report['timestamp']);
         $parsed = \DateTimeImmutable::createFromFormat(\DATE_ATOM, $report['timestamp']);
@@ -77,7 +77,7 @@ class BenchmarkReportTest extends TestCase
      */
     public function testMessageIsString(): void
     {
-        $report = $this->createSampleReport();
+        $report = self::createSampleReport();
         $this->assertArrayHasKey('message', $report);
         $this->assertIsString($report['message']);
         $this->assertNotEmpty($report['message']);
@@ -88,7 +88,7 @@ class BenchmarkReportTest extends TestCase
      */
     public function testMetricsContainsValidTypes(): void
     {
-        $report = $this->createSampleReport();
+        $report = self::createSampleReport();
 
         $this->assertArrayHasKey('metrics', $report);
         $this->assertIsArray($report['metrics']);
@@ -107,7 +107,7 @@ class BenchmarkReportTest extends TestCase
      */
     public function testMetricsIncludesCyclesAndDelay(): void
     {
-        $report = $this->createSampleReport();
+        $report = self::createSampleReport();
 
         $this->assertArrayHasKey('cycles', $report['metrics']);
         $this->assertArrayHasKey('delay', $report['metrics']);
@@ -121,7 +121,7 @@ class BenchmarkReportTest extends TestCase
     public function testErrorReportContainsMessage(): void
     {
         $errorMessage = 'Connection to AbraFlexi failed';
-        $report = $this->createSampleReport('error', $errorMessage);
+        $report = self::createSampleReport('error', $errorMessage);
 
         $this->assertSame('error', $report['status']);
         $this->assertSame($errorMessage, $report['message']);
@@ -132,7 +132,7 @@ class BenchmarkReportTest extends TestCase
      */
     public function testReportWithBenchmarkDataIncludesTimingMetrics(): void
     {
-        $report = $this->createSampleReportWithData();
+        $report = self::createSampleReportWithData();
 
         $this->assertArrayHasKey('pass_1_address_read', $report['metrics']);
         $this->assertArrayHasKey('pass_1_address_write', $report['metrics']);
@@ -143,7 +143,7 @@ class BenchmarkReportTest extends TestCase
      *
      * Since benchmark class requires AbraFlexi connection, we simulate the output.
      */
-    private function createSampleReport(string $status = 'success', string $message = ''): array
+    private static function createSampleReport(string $status = 'success', string $message = ''): array
     {
         $metrics = [];
         $metrics['cycles'] = 0;
@@ -165,7 +165,7 @@ class BenchmarkReportTest extends TestCase
     /**
      * Create a sample report with simulated benchmark timing data.
      */
-    private function createSampleReportWithData(): array
+    private static function createSampleReportWithData(): array
     {
         $metrics = [
             'pass_1_address_read' => '0.123',

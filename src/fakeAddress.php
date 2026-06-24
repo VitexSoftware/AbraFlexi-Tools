@@ -49,17 +49,15 @@ $faker = Faker\Factory::create();
 
 for ($index = 0; $index < $iterations; ++$index) {
     $addresser->dataReset();
-    $addresser->setData(
-        [
-            'popis' => $faker->userName,
-            'email' => $faker->email,
-            'nazev' => $faker->firstName.' '.$faker->lastName,
-            'mesto' => $faker->city,
-            'ulice' => $faker->streetName,
-            'tel' => $faker->phoneNumber,
-            'stat' => \AbraFlexi\RO::code($faker->countryCode),
-        ],
-    );
+    $addresser->setData([
+        'popis' => $faker->userName,
+        'email' => $faker->email,
+        'nazev' => $faker->firstName.' '.$faker->lastName,
+        'mesto' => $faker->city,
+        'ulice' => $faker->streetName,
+        'tel' => $faker->phoneNumber,
+        'stat' => \AbraFlexi\RO::code($faker->countryCode),
+    ],);
     $newAddr = $addresser->insertToAbraFlexi();
     $addresser->addStatusMessage('#'.$index.'/'.$iterations.': '.$addresser->getRecordIdent().': '.$addresser->getDataValue('nazev'), ($addresser->lastResponseCode === 201) ? 'success' : 'error');
 }

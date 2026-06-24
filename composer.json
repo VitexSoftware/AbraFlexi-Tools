@@ -10,7 +10,7 @@
             "email": "info@vitexsoftware.cz"
         }
     ],
-    "bin": ["bin/fbget", "bin/fbput", "bin/fbcp"],
+    "bin": ["bin/fbget", "bin/fbput", "bin/fbcp", "bin/abraflexi-payment-simulator"],
     "require-dev": {
         "phpunit/phpunit": "*",
         "phpstan/phpstan": "*",
