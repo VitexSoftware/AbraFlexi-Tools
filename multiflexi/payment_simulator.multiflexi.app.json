@@ -7,8 +7,8 @@
     "cs": "Simulátor plateb"
   },
   "description": {
-    "en": "Simulates realistic customer payment behaviour in AbraFlexi bank evidence. Customers are assigned profiles via AbraFlexi labels (SIM_REGULAR, SIM_LATE_DOUBLE, SIM_OVER_PAYER, SIM_UNDER_PAYER, SIM_TYPO_VARSYM, SIM_NON_PAYER). Intended for continuous integration testing of the reminder and matching pipeline.",
-    "cs": "Simuluje realistické platební chování zákazníků v evidenci banka AbraFlexi. Zákazníkům jsou přiřazeny profily pomocí štítků AbraFlexi (SIM_REGULAR, SIM_LATE_DOUBLE, SIM_OVER_PAYER, SIM_UNDER_PAYER, SIM_TYPO_VARSYM, SIM_NON_PAYER). Určeno pro průběžné testování pipeline upomínání a párování."
+    "en": "Simulates customer payment behaviour in AbraFlexi bank evidence. Profiles via labels: SIM_REGULAR, SIM_LATE_DOUBLE, SIM_OVER_PAYER, SIM_UNDER_PAYER, SIM_TYPO_VARSYM, SIM_NON_PAYER. For CI testing of reminder and matching pipeline.",
+    "cs": "Simuluje platební chování zákazníků v evidenci banka AbraFlexi. Profily přes štítky: SIM_REGULAR, SIM_LATE_DOUBLE, SIM_OVER_PAYER, SIM_UNDER_PAYER, SIM_TYPO_VARSYM, SIM_NON_PAYER. Pro CI testování pipeline upomínání a párování."
   },
   "tags": [
     "AbraFlexi",
