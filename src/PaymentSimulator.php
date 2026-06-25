@@ -129,7 +129,7 @@ function mutateVarSym(string $varSym): string
 // 5. Create bank records
 // ------------------------------------------------------------------
 $banker = new Banka();
-$bankCode = \AbraFlexi\Functions::code(Shared::cfg('ABRAFLEXI_BANK'));
+$bankCode = \AbraFlexi\Code::ensure(Shared::cfg('ABRAFLEXI_BANK'));
 $bankDocType = Shared::cfg('ABRAFLEXI_BANK_DOCTYPE', 'STANDARD');
 
 foreach ($byCustomer as $firma => $invoices) {

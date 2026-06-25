@@ -37,14 +37,14 @@ echo "Nalezeno {$count} bankovních pohybů s nulovou hodnotou:\n";
 
 foreach ($nulovePolozky as $idx => $polozka) {
     $randomAmount = mt_rand(1, 1000); // Náhodná částka 1-1000
-    $bankRecord = new Banka(\AbraFlexi\Functions::code($polozka['kod']), ['autoload' => false]);
-    $bankRecord->setDataValue('id', \AbraFlexi\Functions::code($polozka['kod']));
-    $bankRecord->setDataValue('typDokl', \AbraFlexi\Functions::code('STANDARD'));
+    $bankRecord = new Banka(\AbraFlexi\Code::ensure($polozka['kod']), ['autoload' => false]);
+    $bankRecord->setDataValue('id', \AbraFlexi\Code::ensure($polozka['kod']));
+    $bankRecord->setDataValue('typDokl', \AbraFlexi\Code::ensure('STANDARD'));
     $bankRecord->setDataValue('sumCelkem', $randomAmount);
     $bankRecord->setDataValue('sumOsv', $randomAmount);
     $bankRecord->addArrayToBranch([
         'typPolozkyK' => 'typPolozky.ucetni',
-        'doklInt' => \AbraFlexi\Functions::code($polozka['kod']),
+        'doklInt' => \AbraFlexi\Code::ensure($polozka['kod']),
         'sumCelkem' => $randomAmount,
     ],);
 

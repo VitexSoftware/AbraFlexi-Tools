@@ -42,7 +42,7 @@ foreach ($fakturyData as $idx => $faktura) {
     if ($zbyvaUhradit > 0) {
         $bankaData = [
             'kod' => 'FP'.$faktura['id'].\Ease\Functions::randomString(),
-            'banka' => \AbraFlexi\Functions::code(\Ease\Shared::cfg('ABRAFLEXI_BANK')),
+            'banka' => \AbraFlexi\Code::ensure(\Ease\Shared::cfg('ABRAFLEXI_BANK')),
             'typPohybuK' => 'typPohybu.prijem',
             'popis' => 'Automatická úhrada faktury '.($faktura['kod'] ?? ''),
             'varSym' => $faktura['varSym'] ?? $faktura['id'],
