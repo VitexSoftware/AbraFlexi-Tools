@@ -20,6 +20,7 @@ override_dh_install:
 	# Fix entry points to use Debian autoloader
 	sed -i '/dirname(__DIR__)/c require_once "/usr/share/php/abraflexi-tools/autoload.php";' debian/abraflexi-tools/usr/share/abraflexi-tools/*
 	sed -i "/realpath/c\$$loaderPath = \"/usr/share/php/abraflexi-tools/autoload.php\";" debian/abraflexi-tools/usr/share/abraflexi-tools/*
+	sed -i -e 's/\.\.\/.env//g' debian/abraflexi-tools/usr/share/abraflexi-tools/*.php
 	mkdir -p debian/multiflexi-abraflexi-tools/usr/lib/abraflexi-tools/multiflexi/
 	jq '.version = "'`dpkg-parsechangelog | sed -n 's/^Version: //p'| sed 's/~.*//'`'"'  multiflexi/abraflexi_benchmark.multiflexi.app.json |sponge  debian/multiflexi-abraflexi-tools/usr/lib/abraflexi-tools/multiflexi/abraflexi_benchmark.multiflexi.app.json
 	jq '.version = "'`dpkg-parsechangelog | sed -n 's/^Version: //p'| sed 's/~.*//'`'"'  multiflexi/abraflexi_copy.multiflexi.app.json      |sponge  debian/multiflexi-abraflexi-tools/usr/lib/abraflexi-tools/multiflexi/abraflexi_copy.multiflexi.app.json
