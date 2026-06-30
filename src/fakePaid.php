@@ -49,7 +49,7 @@ foreach ($fakturyData as $idx => $faktura) {
             'bezPolozek' => true,
             'datVyst' => date('Y-m-d'),
             'typDokl' => 'code:STANDARD',
-            'sumCastka' => $zbyvaUhradit,
+            'sumOsv' => $zbyvaUhradit,
             'doklad' => 'fv:'.$faktura['id'],
         ];
 

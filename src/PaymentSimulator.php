@@ -196,7 +196,7 @@ foreach ($byCustomer as $firma => $invoices) {
             'bezPolozek' => true,
             'datVyst' => date('Y-m-d'),
             'typDokl' => 'code:'.$bankDocType,
-            'sumCastka' => $amount,
+            'sumOsv' => $amount,
         ];
 
         // TYPO_VARSYM: no doklad link and no firma — payment must be unidentifiable by matcher
