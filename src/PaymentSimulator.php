@@ -34,7 +34,7 @@ use Ease\Shared;
 
 Shared::init(
     ['ABRAFLEXI_URL', 'ABRAFLEXI_LOGIN', 'ABRAFLEXI_PASSWORD', 'ABRAFLEXI_COMPANY', 'ABRAFLEXI_BANK'],
-    \dirname(__DIR__).'/.env',
+    '../.env',
 );
 
 $report = [
@@ -65,8 +65,11 @@ if (empty($rawInvoices)) {
 $byCustomer = [];
 
 foreach ($rawInvoices as $inv) {
-    $firma = $inv['firma'] ?? 'UNKNOWN';
-    $byCustomer[$firma][] = $inv;
+    if (empty($inv['firma'])) {
+        continue;
+    }
+
+    $byCustomer[(string) $inv['firma']][] = $inv;
 }
 
 // ------------------------------------------------------------------
@@ -196,12 +199,9 @@ foreach ($byCustomer as $firma => $invoices) {
             'sumCastka' => $amount,
         ];
 
-        // Only link via doklad when varsym is correct (TYPO_VARSYM must rely on matcher)
+        // TYPO_VARSYM: no doklad link and no firma — payment must be unidentifiable by matcher
         if ($profile !== 'TYPO_VARSYM') {
             $bankaData['doklad'] = 'fv:'.$inv['id'];
-        }
-
-        if (!empty($inv['firma'])) {
             $bankaData['firma'] = $inv['firma'];
         }
 

@@ -90,7 +90,7 @@
       "category": "API"
     },
     "RESULT_FILE": {
-      "type": "file-path",
+      "type": "string",
       "description": {
         "en": "Path to write JSON result report (default: php://stdout)",
         "cs": "Cesta pro zápis JSON výsledku (výchozí: php://stdout)"
