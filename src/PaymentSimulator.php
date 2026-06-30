@@ -241,6 +241,12 @@ if ($report['exitcode'] !== 0) {
 }
 
 $resultFile = Shared::cfg('RESULT_FILE', 'php://stdout');
-file_put_contents($resultFile, json_encode($report, \JSON_PRETTY_PRINT | \JSON_UNESCAPED_UNICODE));
+$json = json_encode($report, \JSON_PRETTY_PRINT | \JSON_UNESCAPED_UNICODE);
+
+if ($resultFile === 'php://stdout' || $resultFile === '') {
+    echo $json.\PHP_EOL;
+} else {
+    file_put_contents($resultFile, $json);
+}
 
 exit($report['exitcode']);
