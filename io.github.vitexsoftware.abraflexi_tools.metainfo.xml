@@ -4,13 +4,17 @@
   
     <name>AbraFlexi Tools</name>
     <summary>several AbraFlexi relates utilites</summary>
-  
+    <summary xml:lang="cs">Sada nástrojů souvisejících s AbraFlexi</summary>
+
     <metadata_license>MIT</metadata_license>
     <project_license>MIT</project_license>
-  
+
     <description>
     <p>
       Set of tools providing the interact with Abra Flexi on command line
+    </p>
+    <p xml:lang="cs">
+      Sada nástrojů pro práci s AbraFlexi z příkazové řádky
     </p>
   </description>
   
