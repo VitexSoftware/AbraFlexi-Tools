@@ -1,5 +1,6 @@
 README.md			usr/share/abraflexi-tools/
 src/*.php                       usr/share/abraflexi-tools/
+src/Payment/*.php               usr/share/abraflexi-tools/Payment/
 bin/*		                usr/bin/
 debian/conf/composer.json       usr/lib/abraflexi-tools
 abraflexitools.svg		usr/share/icons/hicolor/scalable/apps/

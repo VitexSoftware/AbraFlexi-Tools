@@ -24,6 +24,11 @@
         "vitexsoftware/multiflexi-mail": "dev-main",
         "vitexsoftware/multiflexi-raiffeisenbank": "dev-main"
     },
+    "autoload": {
+        "psr-4": {
+            "AbraFlexi\\Tools\\": "src/"
+        }
+    },
     "config": {
         "allow-plugins": {
             "ergebnis/composer-normalize": true

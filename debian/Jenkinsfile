@@ -50,7 +50,11 @@ distributions.each { distro ->
         def artifacts = []
         def buildVer = ''
 
+        // /var/lib/jenkins is shared over NFS by the nodes (Jenkins, boys) that lock a workspace
+        // separately: two branches of one build could get the same directory and clobber each
+        // other's checkout (AccessDeniedException on .git). Own directory per branch.
         node {
+            ws('branches/' + env.JOB_NAME.replace('/', '_') + '_' + distroCode + '_' + env.BUILD_NUMBER) {
             ansiColor('xterm') {
                 stage('Checkout ' + distroName) {
                     sh 'sudo chown -R jenkins:jenkins . 2>/dev/null || true'
@@ -165,6 +169,9 @@ distributions.each { distro ->
                         '''
                     }
                 }
+            }
+            // branch done: leave no checkout behind (root-owned files from the container too)
+            sh 'sudo rm -rf "$WORKSPACE"/* "$WORKSPACE"/.[!.]* 2>/dev/null || true'
             }
         }
     }
