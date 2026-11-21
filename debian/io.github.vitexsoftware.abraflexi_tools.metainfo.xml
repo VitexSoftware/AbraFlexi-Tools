@@ -5,9 +5,13 @@
   <project_license>MIT</project_license>
   <name>abraflexi-tools</name>
   <summary>commandline AbraFlexi tools</summary>
+  <summary xml:lang="cs">Nástroje AbraFlexi pro příkazovou řádku</summary>
   <description>
     <p>
       Set of tools allowning interact with Abra Flexi on command line Use MultiFlexi as launcher for AbraFlexi tools
+    </p>
+    <p xml:lang="cs">
+      Sada nástrojů pro práci s AbraFlexi z příkazové řádky. Jako spouštěč nástrojů AbraFlexi lze použít MultiFlexi.
     </p>
   </description>
   <categories>
