@@ -18,20 +18,44 @@ require \dirname(__DIR__).'/vendor/autoload.php';
 \define('EASE_APPNAME', 'AbraFlexi Certificate Updater');
 \define('EASE_LOGGER', 'syslog|console');
 
-if (empty(\Ease\Shared::cfg('ABRAFLEXI_URL'))) {
-    echo "Please set up AbraFlexi client configuration environment: \n\n";
-    echo "ABRAFLEXI_URL=https://demo.abraflexi.eu:5434\n";
-    echo "ABRAFLEXI_PASSWORD=winstrom\n";
-    echo "ABRAFLEXI_LOGIN=winstrom\n";
+try {
+    $url = \Ease\Shared::cfg('ABRAFLEXI_URL');
+    $certificateName = \is_string($url) ? parse_url($url, \PHP_URL_HOST) : null;
+    if (!\is_string($certificateName) || !preg_match('/\A[a-zA-Z0-9.-]+\z/', $certificateName)) {
+        throw new RuntimeException('Set ABRAFLEXI_URL to a valid server URL.');
+    }
+
+    $directory = '/etc/letsencrypt/live/'.$certificateName;
+    $chain = file_get_contents($directory.'/fullchain.pem');
+    $trustedCertificates = file_get_contents('/etc/ssl/certs/ca-certificates.crt');
+    if ($chain === false || $trustedCertificates === false) {
+        throw new RuntimeException('Cannot read the certificate chain or system CA bundle.');
+    }
+
+    $process = proc_open(
+        ['openssl', 'rsa', '-traditional', '-in', $directory.'/privkey.pem'],
+        [0 => ['pipe', 'r'], 1 => ['pipe', 'w'], 2 => ['pipe', 'w']],
+        $pipes,
+    );
+    if (!\is_resource($process)) {
+        throw new RuntimeException('Cannot start openssl.');
+    }
+    fclose($pipes[0]);
+    $privateKey = stream_get_contents($pipes[1]);
+    $error = stream_get_contents($pipes[2]);
+    fclose($pipes[1]);
+    fclose($pipes[2]);
+    if (proc_close($process) !== 0 || $privateKey === false) {
+        throw new RuntimeException('Cannot convert the RSA private key: '.$error);
+    }
+
+    $bundle = \AbraFlexi\Tools\CertificateBundle::create($chain, $privateKey, $trustedCertificates);
+    $uploader = new \AbraFlexi\Root();
+    if (!$uploader->uploadCertificate($bundle)) {
+        throw new RuntimeException('AbraFlexi rejected the certificate upload.');
+    }
+    $uploader->addStatusMessage(_('New certificate upload'), 'success');
+} catch (\Throwable $exception) {
+    fwrite(STDERR, $exception->getMessage()."\n");
+    exit(1);
 }
-
-$certificateName = parse_url(\Ease\Shared::cfg('ABRAFLEXI_URL'), \PHP_URL_HOST);
-
-// convert key to PKCS#1 format (supports both RSA and ECDSA)
-system('openssl pkey -in /etc/letsencrypt/live/'.$certificateName.'/privkey.pem -out le-rsaprivkey.pem');
-
-// combine all the certificates into final le-abraflexi.pem (fullchain.pem already contains the full chain)
-$leAbraFlexi = file_get_contents('/etc/letsencrypt/live/'.$certificateName.'/fullchain.pem').file_get_contents('le-rsaprivkey.pem');
-
-$uploader = new \AbraFlexi\Root();
-$uploader->addStatusMessage(_('New certificate upload'), $uploader->uploadCertificate($leAbraFlexi) ? 'success' : 'error');

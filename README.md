@@ -295,6 +295,10 @@ The certificate must be obtained and renewed by [Certbot](https://certbot.eff.or
 (Let's Encrypt). The tool expects the certificate files to be present in
 `/etc/letsencrypt/live/<domain>/`.
 
+The updater appends the matching trusted root CA from the system CA bundle,
+which AbraFlexi requires, and does not write the private key to the working
+directory. It exits with an error if the chain, RSA key, or upload is invalid.
+
 ### ⚠️ Required: Force RSA key type in Certbot
 
 **AbraFlexi only supports RSA private keys.** Since 2024, Let's Encrypt issues
